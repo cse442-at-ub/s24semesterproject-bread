@@ -5,12 +5,12 @@ function HomePage() {
   const [password, setPassword] = useState('');
 
   const handleSignup = () => {
-    // Add your sign up logic here
+    
     console.log('Signing up with:', email, password);
   };
 
   const handleLogin = () => {
-    // Add your login logic here
+    
     console.log('Logging in with:', email, password);
   };
 
