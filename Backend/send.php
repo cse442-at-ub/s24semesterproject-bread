@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
         $mail->Username = 'swu.dlg.23.4@gmail.com'; // Change you your email
-        $mail->Password = 'zevaxgnaqvjzzgyp'; // Change to your google app password
+        $mail->Password = ''; // Change to your google app password
         $mail->SMTPSecure = 'ssl';
         $mail->Port = 465;
         $mail->setFrom('swu.dlg.23.4@gmail.com'); // Change you your email
