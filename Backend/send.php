@@ -1,16 +1,4 @@
 <?php
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-
-require 'phpmailer/src/Exception.php';
-require 'phpmailer/src/PHPMailer.php';
-require 'phpmailer/src/SMTP.php';
-
 // Database connection
 $db = new mysqli('oceanus.cse.buffalo.edu', 'swu65', '50411773', 'cse442_2024_spring_team_ac_db'); // Change to fit database
 
@@ -40,22 +28,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bind_param("sss", $email, $subject, $message);
         $stmt->execute();
 
-        // Send email
-        $mail = new PHPMailer(true);
-        $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';
-        $mail->SMTPAuth = true;
-        $mail->Username = 'swu.dlg.23.4@gmail.com'; // Change you your email
-        $mail->Password = ''; // Change to your google app password
-        $mail->SMTPSecure = 'ssl';
-        $mail->Port = 465;
-        $mail->setFrom('swu.dlg.23.4@gmail.com'); // Change you your email
-        $mail->addAddress($email);
-        $mail->isHTML(true);
-        $mail->Subject = $subject;
-        $mail->Body = $message;
+        // Recipient email address
+        $to = $email;
 
-        if ($mail->send()) {
+        // Additional headers
+        $headers = 'From: insight@buffalo.edu' . "\r\n" .
+            'Reply-To: insight@buffalo.edu' . "\r\n" .
+            'X-Mailer: PHP/' . phpversion();
+
+        // Send the email
+        if (mail($to, $subject, $message, $headers)) {
             http_response_code(200);
             echo json_encode(["message" => "Email sent successfully"]);
         } else {
