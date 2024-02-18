@@ -1,0 +1,39 @@
+/* src/webpages/login/Login.css */
+.login-form {
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .login-form h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .login-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .login-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: blue;
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .login-form p {
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .login-form a {
+    color: blue;
+  }
+
+  
