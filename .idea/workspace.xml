@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="98b959e9-c10e-4dc1-bdf6-bd9d65a61d04" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/removeuser/index.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/removeuser/remove.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/sendemail/send.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/sendemail/send.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/sendmessage/message.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/sendmessage/message.php" afterDir="false" />
-    </list>
+    <list default="true" id="98b959e9-c10e-4dc1-bdf6-bd9d65a61d04" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,6 +28,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "sprint2-62-backend-LogoutPhpScript",
     "last_opened_file_path": "C:/Users/Ninja/OneDrive/Documents/GitHub/s24semesterproject-bread/backend"
   }
 }]]></component>
