@@ -22,42 +22,54 @@ function getDbConnection() {
 function checkLogin($username, $password) {
     $conn = getDbConnection();
     // Prepare SQL statement to prevent SQL injection
-    $stmt = $conn->prepare("SELECT id, password FROM users WHERE username = ?");
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    $selectStmt = $conn->prepare("SELECT id, password FROM users WHERE username = ?");
+    $selectStmt->bind_param("s", $username);
+    $selectStmt->execute();
+    $result = $selectStmt->get_result();
     
     if ($row = $result->fetch_assoc()) {
         // Verify password
         if (password_verify($password, $row['password'])) {
-            // Password is correct, generate session ID and save it
+            // Password is correct, generate session ID
             $sessionID = bin2hex(random_bytes(25)); // Generate a unique session ID
             $userID = $row['id'];
-
-            // Insert session into database
-            $stmt = $conn->prepare("INSERT INTO sessions (sessionID, username, userID) VALUES (?, ?, ?)");
-            $stmt->bind_param("ssi", $sessionID, $username, $userID);
-            if ($stmt->execute()) {
-                http_response_code(200);
-                echo json_encode(["username" => $username, "sessionID" => $sessionID, "userID" => $userID]);
+        
+            // Insert session into the 'sessions' table
+            $insertStmt = $conn->prepare("INSERT INTO sessions (sessionID, username, userID) VALUES (?, ?, ?)");
+            $insertStmt->bind_param("ssi", $sessionID, $username, $userID);
+            if ($insertStmt->execute()) {
+                // Update the 'users' table with the new session ID for the authenticated user
+                $updateStmt = $conn->prepare("UPDATE users SET sessionID = ? WHERE id = ?");
+                $updateStmt->bind_param("si", $sessionID, $userID);
+                if ($updateStmt->execute()) {
+                    // Success: both session saved and users table updated
+                    http_response_code(200);
+                    echo json_encode(["username" => $username, "sessionID" => $sessionID, "userID" => $userID]);
+                } else {
+                    // Handle error if updating users table fails
+                    http_response_code(500);
+                    echo json_encode(["message" => "Failed to update user session"]);
+                }
+                $updateStmt->close();
             } else {
                 http_response_code(500);
                 echo json_encode(["message" => "Failed to create session"]);
             }
+            $insertStmt->close();
         } else {
             // Password is incorrect
             http_response_code(401);
             echo json_encode(["message" => "Invalid credentials"]);
-        }
+        }        
+        $selectStmt->close();
     } else {
         // No user found
         http_response_code(404);
         echo json_encode(["message" => "User not found"]);
     }
-
-    $stmt->close();
     $conn->close();
 }
+
 
 // Check if the request is POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
