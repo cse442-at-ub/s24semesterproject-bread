@@ -4,12 +4,14 @@
 
     // Check if the request is a POST request
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        if (isset($_POST["username"]) && isset($_POST["password"])) {
-            $username = $_POST["username"];
-            $password = $_POST["password"];
+        $data = json_decode(file_get_contents('php://input'), true);
+        if (isset($data["username"]) && isset($data["sessionId"]) && isset($data["userID"])) {
+            $post_username = $data["username"]; // Use a different variable name here
+            $sessionId = $data["sessionId"];
+            $userID = $data["userID"];
 
             // Create connection
-            $conn = new mysqli($servername, $username, $password, $dbname);
+            $conn = new mysqli($servername, $username, $password, $dbname); // Now, $username is the username for the database connection
 
             // Check connection
             if ($conn->connect_error) {
@@ -19,47 +21,44 @@
             }
 
             // Prepare SQL statements
-            $stmtUser = $conn->prepare("SELECT * FROM users WHERE username = ? AND password = ?");
-            $stmtSession = $conn->prepare("SELECT * FROM sessions WHERE id = ? AND user_id = ?");
+            $stmtUser = $conn->prepare("SELECT * FROM users WHERE username = ? AND userID = ?");
+            $stmtSession = $conn->prepare("SELECT * FROM sessions WHERE sessionId = ? AND userID = ?");
 
             // Bind parameters and execute statements
-            $stmtUser->bind_param("ss", $username, $password);
+            $stmtUser->bind_param("si", $post_username, $userID); // Use $post_username here
             $stmtUser->execute();
             $userResult = $stmtUser->get_result();
 
             if ($userResult->num_rows > 0) {
-                $user = $userResult->fetch_assoc();
-                $userID = $user['id'];
-                $sessionID = $user['sessionID'];
-
-                $stmtSession->bind_param("si", $sessionID, $userID);
+                $stmtSession->bind_param("si", $sessionId, $userID);
                 $stmtSession->execute();
+                $sessionResult = $stmtSession->get_result();
 
                 // Check if user and session are valid
-                if($stmtSession->rowCount() > 0) {
+                if($sessionResult->num_rows > 0) {
                     // Prepare delete statements
-                    $stmtDeleteUser = $conn->prepare("DELETE FROM users WHERE id = ?");
-                    $stmtDeleteSession = $conn->prepare("DELETE FROM sessions WHERE id = ?");
+                    $stmtDeleteUser = $conn->prepare("DELETE FROM users WHERE userID = ?");
+                    $stmtDeleteSession = $conn->prepare("DELETE FROM sessions WHERE sessionId = ?");
 
                     // Execute delete statements
                     $stmtDeleteUser->bind_param("i", $userID);
                     $stmtDeleteUser->execute();
 
-                    $stmtDeleteSession->bind_param("s", $sessionID);
+                    $stmtDeleteSession->bind_param("s", $sessionId);
                     $stmtDeleteSession->execute();
 
                     // Return success response
                     http_response_code(200);
-                    echo json_encode(['status' => 'success', 'message' => 'Account deleted successfully']);
+                    echo json_encode(['status' => 'success', 'message' => 'Account and session deleted successfully']);
                 } else {
                     // Return error response
                     http_response_code(400);
-                    echo json_encode(['status' => 'error', 'message' => 'Invalid sessionID']);
+                    echo json_encode(['status' => 'error', 'message' => 'Invalid sessionId']);
                 }
             } else {
                 // Return error response
                 http_response_code(400);
-                echo json_encode(['status' => 'error', 'message' => 'Invalid username or password']);
+                echo json_encode(['status' => 'error', 'message' => 'Invalid username or userID']);
             }
         } else {
             http_response_code(400); // Bad request
