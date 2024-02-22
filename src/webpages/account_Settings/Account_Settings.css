@@ -1,0 +1,66 @@
+/* src/webpages/account_Settings/Account_Settings.css */
+
+.header-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%; /* Change to 100% for responsiveness */
+    max-width: 1728px; /* Maximum width */
+    height: 85px;
+    padding: 0 10px; /* Adjusted horizontal padding */
+    background-color: #005bbb;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0; /* Ensures it stretches to the right edge */
+    margin: auto; /* Centers the header bar if the screen is wider */
+    padding-left:10px;
+    
+}
+.menu-icon {
+  height: 50px; /* Or any size that suits your design */
+  width: auto; /* Maintain the aspect ratio */
+  margin-left: 0px; /* Adjust as needed to position more to the left */
+  margin-right: 20px; /* Optional: if you want some space to the right of the icon */
+
+}
+
+.account-settings-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    margin: 120px auto; /* This centers the form on the page and moves it down */
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.account-settings-form input {
+    margin-bottom: 20px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.account-settings-form button {
+    padding: 10px;
+    background-color: #005bbb;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.account-settings-form button:hover {
+    background-color: #005bbb;
+}
+
+.header-bar img {
+  max-height: 70px; /* Make sure the logo's height does not exceed the header bar's height */
+  width: auto; /* Adjust width automatically */
+  margin-right: 20px;
+}
