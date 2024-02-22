@@ -19,6 +19,7 @@ const HeaderBar = () => {
         <img src={MenuIcon_White} alt="Menu" className="menu-icon" onClick={handleMenuClick} /> {/* Add onClick event */}
       </div>
     );
+    
 };
 
 // This is the main component for the search functionality
