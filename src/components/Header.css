@@ -1,0 +1,18 @@
+/* Header.css */
+
+.logo {
+    font-family: 'Crimson Text';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    color: #282A3A; 
+  }
+  
+
+@media screen and (max-width: 768px) {
+    .header {
+      display: none;
+    }
+  }
+  
+  
