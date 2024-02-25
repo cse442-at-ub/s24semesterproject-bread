@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/CSE442-542/2024-Spring/cse-442ac/Login/static/css/main.b1cd5fd1.css",
+    "main.js": "/CSE442-542/2024-Spring/cse-442ac/Login/static/js/main.abfaf50b.js",
+    "static/js/592.cdfb3421.chunk.js": "/CSE442-542/2024-Spring/cse-442ac/Login/static/js/592.cdfb3421.chunk.js",
+    "static/media/eye.webp": "/CSE442-542/2024-Spring/cse-442ac/Login/static/media/eye.35f27e60d02de8bb0480.webp",
+    "index.html": "/CSE442-542/2024-Spring/cse-442ac/Login/index.html",
+    "main.b1cd5fd1.css.map": "/CSE442-542/2024-Spring/cse-442ac/Login/static/css/main.b1cd5fd1.css.map",
+    "main.abfaf50b.js.map": "/CSE442-542/2024-Spring/cse-442ac/Login/static/js/main.abfaf50b.js.map",
+    "592.cdfb3421.chunk.js.map": "/CSE442-542/2024-Spring/cse-442ac/Login/static/js/592.cdfb3421.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b1cd5fd1.css",
+    "static/js/main.abfaf50b.js"
+  ]
+}
