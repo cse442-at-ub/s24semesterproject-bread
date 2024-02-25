@@ -1,9 +1,10 @@
-// Assuming the file path might be changed to src/webpages/accountSettings/AccountSettings.js
+// src/webpages/accountSettings/AccountSettings.js
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Account_Settings.css'; // Make sure this file is renamed to AccountSettings.css if the component is renamed
 import Logo from "/Users/jiewen/Documents/GitHub/s24semesterproject-bread/src/images/Logo.png";
 import MenuIcon_White from "/Users/jiewen/Documents/GitHub/s24semesterproject-bread/src/images/menu(white).png";
+
 
 const AccountSettings = () => {
     const navigate = useNavigate();
