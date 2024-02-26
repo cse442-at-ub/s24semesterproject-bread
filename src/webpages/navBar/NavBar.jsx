@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './NavBar.css'; // Ensure this CSS file is properly linked
 import Logo from "../../images/Logo.png";
 import MenuIcon from "../../images/menu(white).png"; // Verify the path to your image
@@ -45,10 +46,18 @@ function NavBar() {
                     zIndex: 1, // Ensure it's above other content
                 }}>
                     <ul style={{ listStyle: 'none', padding: 0 }}>
-                        <li style={{marginBottom: '0.5rem'}}>Home</li>
+                        <li style={{marginBottom: '0.5rem'}}>
+                            <Link to="/homepage" style={{ color: '#005bbb', textDecoration: 'none' }}>
+                                    Homepage
+                                </Link>
+                        </li>
                         <li style={{marginBottom: '0.5rem'}}>Messages</li>
                         <li style={{marginBottom: '0.5rem'}}>Saved</li>
-                        <li style={{marginBottom: '0.5rem'}}>Account Settings</li>
+                        <li style={{marginBottom: '0.5rem'}}>
+                            <Link to="/accountSettings" style={{ color: '#005bbb', textDecoration: 'none' }}>
+                                    Account Settings
+                                </Link>
+                        </li>
                         <li style={{marginBottom: '0.5rem'}}>Logout</li>
                     </ul>
                 </div>
