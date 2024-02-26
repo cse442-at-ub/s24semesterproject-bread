@@ -11,6 +11,7 @@ const Home = () => {
   };
 
   return (
+    
     <div className="home-page">
       <h1>InSight</h1>
       <h2>Know your professor with InSight!</h2>
