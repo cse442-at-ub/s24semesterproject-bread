@@ -2,12 +2,9 @@
 
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-//require_once '../db_config.php';
+require_once '../db_config.php';
 
-$servername = "oceanus.cse.buffalo.edu";
-$username = "iallahbu";
-$password = "50344145";
-$dbname = "cse442_2024_spring_team_ac_db";
+
 
 function getDbConnection() {
     global $servername, $username, $password, $dbname;
