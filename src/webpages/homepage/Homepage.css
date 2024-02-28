@@ -1,3 +1,4 @@
+
 .text-container{
   display: flex;
   justify-content: center;
@@ -10,12 +11,12 @@
   font-size: 45pt;
   font-weight: 400;
   font-family: "Crimson text";
-
 }
 
 .search-container {
   display: flex;
   justify-content: center;
+
  /*  margin-top: 35vh;  Adjust this to bring the search bar lower relative to the intro text */
 }
 
@@ -37,9 +38,11 @@
   border-left: none; /* Seamless integration with the input field */
   border-radius: 0 15px 15px 0; /* Rounded corners on the right side */
   cursor: pointer;
+
 }
 
 .search-button img {
   width: 30px; /* Adjust based on the size of your icon */
   height: auto;
+
 }
