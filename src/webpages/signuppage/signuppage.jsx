@@ -1,8 +1,8 @@
 // App.js
 
 import React from 'react';
-import './Signup.css';
-import Main from './Signupcomponents/Main';
+import './signuppage.css';
+import Main from '../../components/Signupcomponents/Main';
 
 function Signup() {
   return (

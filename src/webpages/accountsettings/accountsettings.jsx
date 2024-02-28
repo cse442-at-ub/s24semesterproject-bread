@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import NavBar from '../navBar/NavBar';
-import './Account_Settings.css'; // Ensure this path is correct
+import './accountsettings.css'; // Ensure this path is correct
 import defaultProfilePic from "../../images/eye.png";
 
 const AccountSettingsPage = () => {

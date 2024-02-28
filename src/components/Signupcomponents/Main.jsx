@@ -7,7 +7,7 @@ import eyeLogo from './eye.webp';
 function Main() {
 
   const handleSignIn = () => {
-    window.location.href = "https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/Login/";
+    window.location.href = "/loginpage/";
   };
 
   return (
@@ -44,7 +44,7 @@ function Main() {
     <button className="primary" type="button" onClick={handleSignIn}>Sign Up</button>
   </form>
   <div className="signup-link">
-  <p className="link">Already on InSight? <a href="https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/Login/" className="link">Sign In</a></p>
+  <p className="link">Already on InSight? <a href="/loginpage/" className="link">Login</a></p>
   </div>
 
 </main>

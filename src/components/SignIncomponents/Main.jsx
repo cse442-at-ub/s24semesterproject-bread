@@ -37,7 +37,7 @@ function Main() {
         {errorMessage && <p className="error">{errorMessage}</p>}
       </form>
       <div className="signup-link">
-        <p className="link">New to Insight? <a href="https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/Signup/" className="link">Sign Up</a></p>
+        <p className="link">New to Insight? <a href="/signuppage/" className="link">Sign Up</a></p>
       </div>
     </main>
     </div>

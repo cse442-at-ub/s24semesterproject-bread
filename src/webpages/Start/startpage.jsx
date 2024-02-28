@@ -1,5 +1,5 @@
 import React from 'react';
-import './Start.css';
+import './startpage.css';
 import NavBar from '../navBar/preNavBar';
 import Banner from '../../components/Startcomponents/Banner';
 import Testimonials from '../../components/Startcomponents/Testimonials';

@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
-import Signin from './webpages/Login/Login';
-import Signup from './webpages/Signup/Signup';
-import Start from './webpages/Start/Start'; // Import the Start component
-import Homepage from './webpages/homepage/Homepage';
-import AccountSettings from './webpages/account_Settings/Account_Settings';
+import LogInPage from './webpages/loginpage/loginpage';
+import SignUpPage from './webpages/signuppage/signuppage';
+import StartPage from './webpages/Start/startpage'; // Import the Start component
+import Homepage from './webpages/homepage/homepage';
+import AccountSettings from './webpages/accountsettings/accountsettings';
 
 
 function App() {
@@ -13,11 +13,11 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          <Route path="/signin" element={<Signin />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/start" element={<Start />} /> 
+          <Route path="/loginpage" element={<LogInPage />} />
+          <Route path="/signuppage" element={<SignUpPage />} />
+          <Route path="/" element={<StartPage />} /> 
           <Route path="/Homepage" element={<Homepage />} /> 
-          <Route path="/accountSettings" element={<AccountSettings />} />
+          <Route path="/accountsettings" element={<AccountSettings />} />
         </Routes>
       </div>
     </Router>
