@@ -1,0 +1,462 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to bottom, #005BBB, #FFFFFF);
+  background-attachment: fixed; 
+}
+
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  width: 407px;
+  height: 600px;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  margin-top: 30px; 
+}
+
+.title-container {
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
+}
+
+.title {
+  font-family: 'Crimson Text';
+  line-height: 52px;
+  text-align: center;
+  color: #000000;
+  margin-top: 20px; 
+  font-style: normal;
+  font-size: 65px; 
+  line-height: 100%;
+  letter-spacing: -0.01em;
+  color: #282A3A;
+  font-weight: 450;
+}
+
+.logo {
+  width: 15%; 
+  margin-left: 5px; 
+  display: inline-block;
+  margin-top: -35px; 
+}
+
+.separator {
+  border: none;
+  border-top: 1px solid #000; 
+  margin: -30px 0;
+}
+
+.subtitle {
+  font-family: 'Crimson Text';
+  font-size: 26px;
+  line-height: 48px;
+  font-weight: 450;
+  text-align: center;
+  font-style: normal;
+  color: #000000;
+  margin-bottom: 20px; 
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 300px;
+  height: 50px;
+  margin-bottom: 20px;
+}
+
+.label {
+  font-family: 'Crimson Text';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #000000;
+}
+
+.textfield {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  align-self: center;
+}
+
+.forgot-password {
+  margin-bottom: 10px;
+}
+
+.link {
+  font-family: 'Crimson Text';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
+  color: #000000;
+}
+.space {
+  margin-bottom: 50px; 
+}
+.extra-space {
+  margin-bottom: 20px; 
+}
+.primary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 320px;
+  height: 32px;
+  background: #005BBB;
+  border-radius: 8px;
+  font-family: 'Crimson Text';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  color: #fff;
+  margin-bottom: 20px; 
+  border: none;
+
+}
+
+
+
+@media screen and (max-width: 1200px) {/*V1*/
+
+
+  .container {
+    max-width: 60%;/*-5%*/
+    max-height: 80%;
+    margin-top: 45px; 
+  }
+
+  .title {
+    font-size: 60px; 
+    /* margin-top: 20px;  */
+  }
+  
+  .logo {
+    width: 13.5%;
+    margin-top: -30px; 
+  }
+
+  .separator {
+    margin: -15px 0; 
+  }
+  .space{
+    margin-bottom: 30px;
+
+  }
+  
+  .subtitle {
+    font-size: 22px;
+    margin-bottom: 20px; 
+  }
+
+  .input {
+    max-width: 100%;
+  }
+
+  .label{
+    font-size: 14px;
+  }
+
+  .primary{
+    font-size: 17.5px;
+    margin-top: -15px; 
+    max-width: 100%;
+    max-height: 100%;
+    margin-bottom: 0px; 
+  }
+
+  .link{
+    font-size: 16.5px;
+  }
+}
+
+
+@media screen and (max-width: 900px) {/*V1*/
+
+
+  .container {
+    max-width: 60%;
+    max-height: 80%;
+    margin-top: 35px; 
+  }
+
+  .title {
+    font-size: 55px; 
+  }
+  
+  .logo {
+    width: 12%;
+    margin-top: -25px; 
+  }
+
+  .separator {
+    margin: -18px 0; 
+  }
+  .space{
+    margin-bottom: 25px;
+
+  }
+  
+  .subtitle {
+    font-size: 20px;
+    margin-bottom: 20px; 
+  }
+
+  .input {
+    max-width: 100%;
+  }
+
+  .label{
+    font-size: 14px;
+  }
+
+  .primary{
+    font-size: 17.5px;
+    margin-top: -15px; 
+    max-width: 100%;
+    max-height: 100%;
+    margin-bottom: 0px; 
+  }
+
+  .link{
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 650px) {/*V1*/
+  .title {
+    font-size: 45px; 
+  }
+  .logo {
+    width: 11%;
+    margin-top: -15px; 
+  }
+}
+
+@media screen and (max-height: 700px) {/*V1*/
+
+
+  .container {
+    max-height: 75%;
+    margin-top: 45px; 
+  }
+
+  .title {
+    font-size: 60px; 
+    /* margin-top: 20px;  */
+  }
+  
+  .logo {
+    width: 13.5%;
+    margin-top: -30px; 
+  }
+
+  .separator {
+    margin: -15px 0; 
+  }
+  .space{
+    margin-bottom: 30px;
+
+  }
+  
+  .subtitle {
+    font-size: 22px;
+    margin-bottom: 20px; 
+  }
+
+  .input {
+    max-width: 100%;
+  }
+
+  .label{
+    font-size: 14px;
+  }
+
+  .primary{
+    font-size: 17.5px;
+    margin-top: -15px; 
+    max-width: 100%;
+    max-height: 100%;
+    margin-bottom: 0px; 
+  }
+
+  .link{
+    font-size: 16.5px;
+  }
+}
+
+@media screen and (max-height: 625px) {/*V1*/
+
+
+  .container {
+    max-height: 75%;
+    margin-top: 25px; 
+  }
+
+  .title {
+    font-size: 50px; 
+    /* margin-top: 20px;  */
+  }
+  
+  .logo {
+    width: 12%;
+    margin-top: -20px; 
+  }
+
+  .separator {
+    margin: -20px 0; 
+  }
+  .space{
+    margin-bottom: 20px;
+
+  }
+  
+  .subtitle {
+    font-size: 20px;
+    margin-bottom: 20px; 
+  }
+
+  .input {
+    max-height: 80%;
+  }
+
+  .label{
+    font-size: 14px;
+  }
+
+  .primary{
+    font-size: 15px;
+    margin-top: -15px; 
+    max-width: 100%;
+    max-height: 100%;
+    margin-bottom: 0px; 
+  }
+
+  .link{
+    font-size: 15.75px;
+  }
+}
+
+@media screen and (max-height: 585px) {/*V1*/
+
+
+  .container {
+    max-height: 75%;
+    margin-top: 20px; 
+  }
+
+  .title {
+    font-size: 42.5px; 
+    /* margin-top: 20px;  */
+  }
+  
+  .logo {
+    width: 10%;
+    margin-top: -12.5px; 
+  }
+
+  .separator {
+    margin: -25px 0; 
+  }
+  .space{
+    margin-bottom: 30px;
+
+  }
+  
+  .subtitle {
+    font-size: 18px;
+    margin-bottom: 20px; 
+  }
+
+  .input {
+    max-height: 60%;
+  }
+
+  .label{
+    font-size: 14px;
+  }
+
+  .primary{
+    font-size: 12.5px;
+    margin-top: -15px; 
+    max-width: 100%;
+    max-height: 100%;
+    margin-bottom: 0px; 
+  }
+
+  .link{
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-height: 550px) {/*V1*/
+
+
+  .container {
+    max-height: 75%;
+    margin-top: 15px; 
+  }
+
+  .title {
+    font-size: 40px; 
+     margin-top: 10px;  
+  }
+  
+  .logo {
+    width: 8%;
+    margin-top: -20px; 
+  }
+
+  .separator {
+    margin: -20px 0; 
+  }
+  .space{
+    margin-bottom: 20px;
+
+  }
+  
+  .subtitle {
+    font-size: 18px;
+    margin-bottom: 0px; 
+  }
+
+  .input {
+    max-height: 60%;
+  }
+
+  .label{
+    font-size: 14px;
+  }
+
+  .primary{
+    font-size: 12.5px;
+    margin-top: -15px; 
+    max-width: 100%;
+    max-height: 100%;
+    margin-bottom: 0px; 
+  }
+
+  .link{
+    font-size: 15px;
+  }
+}
+
