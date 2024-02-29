@@ -1,0 +1,38 @@
+/* ProfessorCard.css */
+.professor-card {
+    margin-top: 10vh;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    width: 300px; /* Adjust based on your layout */
+    background-color: #f9f9f9;
+    display: flex;
+}
+
+.professor-info h2 {
+    margin: 0;
+    color: #333;
+    font-size: 24px;
+}
+
+.professor-info p {
+    margin: 5px 0;
+    color: #666;
+    font-size: 18px;
+}
+
+.professor-stats {
+    margin-top: 20px;
+    background-color: #eef;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+}
+
+.professor-stats span {
+    display: block; /* Makes each stat appear on its own line */
+    color: #0056b3;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
