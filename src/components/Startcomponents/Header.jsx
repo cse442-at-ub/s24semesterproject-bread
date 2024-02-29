@@ -38,7 +38,7 @@ function Header() {
 
 
                 {/* Sign Up */}
-                <a href="https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/Signup/" style={{
+                <a href="/signuppage/" style={{
                     position: 'absolute',
                     width: '8%',
                     height: '6%',
@@ -69,7 +69,7 @@ function Header() {
                 </a>
 
                 {/* Sign Up */}
-                <a href="https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/Login/" style={{
+                <a href="/signuppage" style={{
                     position: 'absolute',
                     fontFamily: 'Crimson Text',
                     width: '8%',
