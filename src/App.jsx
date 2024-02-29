@@ -7,6 +7,7 @@ import Home from './webpages/home/Home';
 import Homepage from './webpages/homepage/Homepage';
 import AccountSettings from './webpages/account_Settings/Account_Settings';
 import QuizPage from './webpages/quizPage/QuizPage';
+
 const App = () => {
   return (
     <Router>
