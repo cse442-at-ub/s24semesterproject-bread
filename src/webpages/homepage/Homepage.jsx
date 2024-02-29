@@ -1,7 +1,7 @@
 import React from 'react';
 import NavBar from '../navBar/NavBar';
 import SearchIcon from '../../images/search_icon.png';
-import './homepage.css'; // Make sure the path is correct based on your project structure
+import './Homepage.css'; 
 
 const Homepage = () => {
   return (

@@ -4,8 +4,8 @@ import './App.css';
 import LogInPage from './webpages/loginpage/loginpage';
 import SignUpPage from './webpages/signuppage/signuppage';
 import StartPage from './webpages/startpage/startpage'; // Import the Start component
-import Homepage from './webpages/homepage/homepage';
 import AccountSettings from './webpages/accountsettings/accountsettings';
+import Homepage from './webpages/homepage/Homepage';
 
 
 function App() {
