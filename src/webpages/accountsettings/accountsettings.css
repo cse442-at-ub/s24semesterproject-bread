@@ -22,6 +22,29 @@
 
 }
 
+.delete-account-container {
+    margin-top: 20px; /* Adjust spacing as needed */
+    display: flex;
+    justify-content: center; /* Center the button in the container */
+}
+
+.delete-account-button {
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: none;
+    background-color: #ff4d4d; /* A red color to indicate a destructive action */
+    color: white;
+    font-size: 14px;
+    font-family: "Crimison text";
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 40vh;
+}
+
+.delete-account-button:hover {
+    background-color: #cc0000; /* Darker shade for hover effect */
+}
+
 .right-side {
     flex: 10; /* Adjust based on your layout needs */
     margin-top: 10vh ;
