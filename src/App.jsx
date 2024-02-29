@@ -5,7 +5,7 @@ import LogInPage from './webpages/loginpage/loginpage';
 import SignUpPage from './webpages/signuppage/signuppage';
 import StartPage from './webpages/startpage/startpage'; // Import the Start component
 import AccountSettings from './webpages/accountsettings/accountsettings';
-import Homepage from './webpages/homepage/Homepage';
+import Homepage from './webpages/homepage/homepage';
 
 
 function App() {
