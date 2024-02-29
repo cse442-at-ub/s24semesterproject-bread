@@ -51,7 +51,7 @@ function NavBar() {
                         <li style={{marginBottom: '0.5rem'}}>Messages</li>
                         <li style={{marginBottom: '0.5rem'}}>Saved</li>
                         <li style={{marginBottom: '0.5rem'}}>
-                            <Link to="/accountSettings" style={{ color: '#005bbb', textDecoration: 'none' }}>
+                            <Link to="/accountsettings" style={{ color: '#005bbb', textDecoration: 'none' }}>
                                 Account Settings
                             </Link>
                         </li>
