@@ -48,7 +48,11 @@ function NavBar() {
                                 Homepage
                             </Link>
                         </li>
-                        <li style={{marginBottom: '0.5rem'}}>Messages</li>
+                        <li style={{marginBottom: '0.5rem'}}>
+                            <Link to="/quizPage" style={{ color: '#005bbb', textDecoration: 'none' }}>
+                                Personality Quiz
+                            </Link>
+                        </li>
                         <li style={{marginBottom: '0.5rem'}}>Saved</li>
                         <li style={{marginBottom: '0.5rem'}}>
                             <Link to="/accountSettings" style={{ color: '#005bbb', textDecoration: 'none' }}>
