@@ -1,0 +1,116 @@
+/* AccountSettingsPage.css */
+.profile-pic-container {
+    margin-top: 10vh ;
+    margin-left:5vh;
+}
+.main-container {
+    display: flex;
+    flex-direction: row; /* Change to row for a side-by-side layout */
+    align-items: stretch; /* Ensure children stretch to fill the container */
+    height: 100vh; /* Optional: make the container fill the viewport height */
+}
+
+.left-side {
+    background-color: #D4D4D4;
+    flex: 3; /* Take up half of the space */
+    flex-direction: column; /* This ensures vertical stacking */
+    align-items: flex-start; /* Align items to the start of the flex container */
+    justify-content: flex-start; /* Align items to the top */
+    justify-content: center; /* Center children horizontally */
+    padding: 1rem;
+    width: 50%;
+
+}
+
+.right-side {
+    flex: 10; /* Adjust based on your layout needs */
+    margin-top: 10vh ;
+
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 20px; /* Space between fields */
+}
+
+.text-area {
+    width: 100%; /* Ensure it fills the container */
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    resize: vertical; /* Allow vertical resizing */
+}
+
+.divider {
+    border: 0;
+    height: 1px;
+    background: #000;
+    margin: 20px 0; /* Space above and below the line */
+}
+
+
+.profile-image {
+    height: 200px; /* Adjusted back to your initial size or as needed */
+    width: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+
+.field-container {
+    margin-top: 10vh ;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between fields */
+    margin-top: 20px; /* Space below the profile picture */
+}
+
+.text-field {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc; /* Light grey border */
+    font-size: 16px; /* Adjust based on preference */
+    font-family: "Crimison text";
+    font-weight:400;
+    flex-grow: 1;
+    margin-left: 10px; /* Optional: Adds some space between the label and the field */
+
+
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end; /* Aligns the child (button) to the right */
+    padding-top: 10px; /* Adds some space above the button */
+    height: 40px;
+}
+
+.save-button {
+    padding: 8px 12px; /* Adjust padding to make the button smaller */
+    border-radius: 5px;
+    border: none;
+    background-color: #005bbb; /* Example background color */
+    color: white;
+    font-size: 14px; /* Adjust font size as needed */
+    font-family: "Crimison text";
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.save-button:hover {
+    background-color: #003f7f; /* Darker shade for hover effect */
+}
+.field-label {
+    font-family: "Crimison text";
+    font-weight: 400;
+    white-space: nowrap;
+    /* Adjust label styling as needed */
+}
+.field-group {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adjust space between label and input */
+    width: 100%;
+
+    
+}

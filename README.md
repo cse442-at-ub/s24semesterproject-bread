@@ -72,3 +72,18 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 =======
 [![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-7f7980b617ed060a017424585567c406b6ee15c891e84e1186181d67ecf80aa0.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=13599473)
 
+### File Locations
+
+Backend Files will live in the backend/ file
+=======
+Frontend Files will be located in /src
+=======
+App.jsx in src/ will route different pages if new webpages are added please make sure you add them there
+=======
+Web templates will live in src/webpages/ for file organization purposes please create a file for the jsx and css files
+=======
+images will live in the src/images/ folder please place your images in here and make sure you link the files correctly
+=======
+web components will live in the src/components folder
+=======
+any documentation will live in documentations/ folder
