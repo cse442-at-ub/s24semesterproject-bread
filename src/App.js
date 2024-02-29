@@ -6,6 +6,7 @@ import Login from './webpages/login/Login';
 import Home from './webpages/home/Home';
 import Homepage from './webpages/homepage/Homepage';
 import AccountSettings from './webpages/account_Settings/Account_Settings';
+import QuizPage from './webpages/quizPage/QuizPage';
 const App = () => {
   return (
     <Router>
@@ -15,6 +16,9 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path='/homepage' element={<Homepage/>}/>
         <Route path="/accountSettings" element={<AccountSettings />} />
+        <Route path="/quizPage" element={<QuizPage />} />
+
+
         {/* Add more routes as needed */}
       </Routes>
     </Router>
