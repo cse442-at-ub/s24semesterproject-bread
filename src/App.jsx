@@ -1,20 +1,21 @@
 // src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import SignUp from './webpages/signup/SignUp';
-import Login from './webpages/login/Login';
-import Home from './webpages/home/Home';
-import Homepage from './webpages/homepage/Homepage';
-import AccountSettings from './webpages/account_Settings/Account_Settings';
-import QuizPage from './webpages/quizPage/QuizPage';
+import LogInPage from './webpages/loginpage/loginpage';
+import SignUpPage from './webpages/signuppage/signuppage';
+import AccountSettings from './webpages/accountsettings/accountsettings';
+import Homepage from './webpages/homepage/homepage';
+import QuizPage from './webpages/quizPage/quizpage';
+import StartPage from './webpages/startpage/startpage'; // Import the Start component
+
 
 const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Home />} />
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/login" element={<LogInPage />} />
+        <Route path="/" element={<StartPage />} />
         <Route path='/homepage' element={<Homepage/>}/>
         <Route path="/accountSettings" element={<AccountSettings />} />
         <Route path="/quizPage" element={<QuizPage />} />
