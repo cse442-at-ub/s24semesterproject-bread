@@ -63,7 +63,9 @@ function checkLogin($username, $password) {
         if (password_verify($password, $row['password'])) {
             $sessionID = bin2hex(random_bytes(25));
             $userID = $row['userID'];
-        
+            $_SESSION['user_id'] = $row['userID']; // Store user_id in PHP session
+            $_SESSION['username'] = $username; // Optional, store username if needed
+         
             // Insert session into the 'sessions' table
             $insertStmt = $conn->prepare("INSERT INTO sessions (sessionID, username, userID) VALUES (?, ?, ?)");
             $insertStmt->bind_param("ssi", $sessionID, $username, $userID);
