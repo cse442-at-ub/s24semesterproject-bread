@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Review.css';
 import Main from '../../components/Reviewcomponents/PCReview';
 import AlternateMain from '../../components/Reviewcomponents/MReview';
+import NavBar from '../navBar/NavBar';
 
 function App() {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
@@ -18,6 +19,7 @@ function App() {
 
   return (
     <div className="App">
+      <NavBar/>
       {screenWidth <= 540 ? <AlternateMain /> : <Main />}
     </div>
   );
