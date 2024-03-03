@@ -1,9 +1,9 @@
 // Main.js
 import React, { useState } from 'react';
-import './Main.css'; 
+import './signin.css'; 
 import eyeLogo from './Logo.png';
-import signIn from '../../LoginLink';
-import { handleEmailChange, handlePasswordChange, handleSignIn } from '../../Reject';
+import signIn from '../../SigninLink';
+import { handleEmailChange, handlePasswordChange, handleSignIn } from '../../SigninReject';
 
 function Main() {
   const [email, setEmail] = useState('');

@@ -1,6 +1,6 @@
 import React from 'react';
 import './signin.css';
-import Main from '../../components/SignIncomponents/Main';
+import Main from '../../components/SignIncomponents/signin';
 import NavBar from '../navBar/preNavBar';
 
 function Login() {
