@@ -1,7 +1,7 @@
 // Main.js
 import React, { useState } from 'react';
 import './Main.css'; 
-import eyeLogo from './eye.webp';
+import eyeLogo from './Logo.png';
 import signIn from '../../LoginLink';
 import { handleEmailChange, handlePasswordChange, handleSignIn } from '../../Reject';
 
@@ -15,7 +15,7 @@ function Main() {
     <main className="container">
 
       <div className="title-container">
-        <h2 className="title">InSight</h2> <img className="logo" src={eyeLogo} alt="Logo" />
+      <img className="title" src={eyeLogo} alt="Logo" />
       </div>
       <hr className="separator" />
       <div className="space"></div>
