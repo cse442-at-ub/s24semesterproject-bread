@@ -18,6 +18,7 @@ function App() {
 
   return (
     <div className="App">
+
       {screenWidth <= 540 ? <AlternateMain /> : <Main />}
     </div>
   );
