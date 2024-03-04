@@ -1,0 +1,68 @@
+/* Quiz.css */
+.body {
+  background: linear-gradient(to bottom, #005bbb, #ffffff); /* Apply gradient background to entire page */
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  width: 100vw; /* Ensure body covers full viewport width */
+}
+.quiz-container {
+    width: 50%;
+    margin: auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+  }
+  
+  .question-block {
+    margin-top: 10vh;
+    margin-bottom: 20px;
+  }
+  
+  .question {
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .options button {
+    display: block; /* Make buttons display vertically */
+    margin-bottom: 5px; /* Add space between buttons */
+    padding: 5px 10px;
+    width: 100%; /* Extend button width to full container width */
+    text-align: left; /* Align text to the left */
+  }
+  
+  .options button.selected {
+    background-color: #4CAF50; /* Change color to indicate selection */
+    color: white;
+  }
+  .submit-btn {
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .result {
+    margin-top: 20px;
+    font-size: 20px;
+    color: green;
+    font-family: 'Crimison Text';
+  }
+  
+
+/* RESULT TABLE CSS */
+
+.customTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.customTable th, .customTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    font-family: 'Crimison Text';
+}
+
+.customTable th {
+    background-color: #f2f2f2;
+}

@@ -1,63 +1,62 @@
-/* AReview.css */
-
-.main-container {
+.m-re-main-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 50px;
+    background-color: #F3F4F8;
 }
 
-.avatar-section {
+.m-re-avatar-section {
     margin-bottom: 20px;
+    margin-top: 20vw;
 }
 
-.avatar {
+.m-re-avatar {
     border-radius: 50%;
 }
 
-.form-section {
-    width: 70%;
+.m-re-form-section {
+    position: relative;
     border: 1px solid rgba(0, 0, 0, 0);
-    border-radius: 10px;
+    width: 70%;
     padding: 20px;
     margin-bottom: 20px;
 }
 
-.form-row {
+.m-re-form-row {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
-    background-color: #ffffff; 
+    background-color: #ffffff;
     border-radius: 10px;
-
 }
 
-.styled-label {
+.m-re-styled-label {
     margin-right: 10px;
     font-size: 20px;
     font-weight: bold;
-
-
+    flex: 0 0 auto;
+    top: 5%;
+    background-color: #ffffff;
 }
 
-.input-field {
+.m-re-input-field {
     flex: 1;
     height: 40px;
     padding: 0 10px;
     font-size: 16px;
     border: 1px solid rgba(0, 0, 0, 0.3);
     border-radius: 5px;
+
 }
 
-.review-section {
-    width: 70%;
-    text-align: center;
+.m-re-review-section {
+    position: relative;
+    margin-top: 75px;
     display: flex;
     justify-content: center;
-    
 }
 
-.review-textarea {
+.m-re-review-textarea {
     width: 100%;
     height: 150px;
     margin-bottom: 20px;
@@ -65,9 +64,10 @@
     font-size: 16px;
     border: 1px solid rgba(0, 0, 0, 0.3);
     border-radius: 5px;
+
 }
 
-.submit-button {
+.m-re-submit-button {
     width: 200px;
     height: 50px;
     background-color: #005BBB;
@@ -77,4 +77,93 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.m-re-form-container {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    width: 70%;
+    margin-bottom: 30px;
+    background-color: #ffffff;
+}
+
+.m-re-course-form {
+    position: relative;
+}
+
+.m-re-write-review-section {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.m-re-input-container {
+    flex: 1;
+}
+
+.m-re-avatar-rating-section {
+    position: absolute;
+    height: 200px;
+    width: 27%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.m-re-form-row label {
+    margin-right: 10px;
+    font-family: 'Crimson Text';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+}
+
+.m-re-form-row input {
+    flex: 1;
+    height: 65%;
+    width: 90%;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0);
+    font-family: 'Crimson Text';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    
+}
+.m-re-review-section {
+background-color: #F3F4F8;
+}
+.m-re-review-section textarea {
+    
+    width: 97%;
+    height: 200px;
+    margin-top: 5px;
+    margin-left: 10px;
+    padding: 10px;
+    font-size: 18px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    
+}
+
+.m-re-review-section button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 200px;
+    height: 50px;
+    background: #005BBB;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0);
+    font-family: 'Crimson Text';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    color: #FFFFFF;
+    cursor: pointer;
+
 }
