@@ -1,0 +1,123 @@
+.bg {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #005BBB, #fff);
+}
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  width: 407px;
+  height: 600px;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+}
+
+
+.title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center; 
+}
+
+.title {
+  font-family: 'Crimson Text';
+  text-align: center;
+  margin-top: 20px; 
+  line-height: 100%;
+  color: #000;
+  width: calc(11.25vw + 11.25vh);
+  height: calc(3vw + 3vh);
+  margin-bottom: calc(1.25vw + 1.25vh);
+}
+
+.separator {
+  border: none;
+  border-top: 1px solid #000; 
+}
+
+.subtitle {
+  font-family: 'Crimson Text';
+  font-size: calc(1.25vw + 1.25vh);
+  text-align: center;
+  font-style: normal;
+  color: #000000;
+  margin-bottom: calc(0vw + 0vh);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 300px;
+  height: 50px;
+  margin-bottom: 20px;
+  
+}
+
+.label {
+
+  font-family: 'Crimson Text';
+  font-style: normal;
+  font-weight: 600;
+  font-size: calc(0.8vw + 0.8vh);
+  line-height: calc(1vw + 1vh);
+  color: #000000;
+}
+
+.textfield {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  align-self: center;
+  font-size: calc(0.8vw + 0.8vh);
+}
+
+.forgot-password {
+  margin-bottom: 10px;
+}
+
+.link {
+  font-family: 'Crimson Text';
+  font-style: normal;
+  font-weight: 400;
+  font-size: calc(0.8vw + 0.6vh);
+  line-height: 24px;
+  text-align: center;
+  color: #000000;
+}
+/* .space {
+  margin-bottom:calc(0vw + vh);
+} */
+.extra-space {
+  margin-bottom: calc(0vw + 1.25vh);
+}
+.primary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc(15.8vw + 15.8vh);
+  height: calc(1.8vw + 1.8vh);
+  background: #005BBB;
+  border-radius: 8px;
+  font-family: 'Crimson Text';
+  font-style: normal;
+  font-weight: 400;
+  font-size: calc(0.9vw + .9vh);
+  line-height: 24px;
+  color: #fff;
+  margin-bottom: 20px; 
+  border: none
+}
