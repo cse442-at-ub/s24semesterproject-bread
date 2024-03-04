@@ -39,24 +39,24 @@ const ProfessorSearchPage = () => {
 
   const ProfessorSearchResult = ({ name, photoUrl, courses, nextSemesterCourses, department }) => {
     return (
-      <div className="professor-search-result">
-        <div className="left-section">
-          <img src={photoUrl} alt={name} className="professor-photo" />
+      <div className="search-professor-search-result">
+        <div className="search-left-section">
+          <img src={photoUrl} alt={name} className="search-professor-photo" />
         </div>
-        <div className="right-section">
-          <h2 className="professor-name">{name}</h2>
-          <div className="info-section">
-            <p className="professor-department">Department: {department}</p>
-            <div className="courses-section">
-              <div className="courses-taught">
-                <h3 className="courses-header">Teaching courses presently:</h3>
-                <p className="courses-list">
+        <div className="search-right-section">
+          <h2 className="search-professor-name">{name}</h2>
+          <div className="search-info-section">
+            <p className="search-professor-department">Department: {department}</p>
+            <div className="search-courses-section">
+              <div className="search-courses-taught">
+                <h3 className="search-courses-header">Teaching courses presently:</h3>
+                <p className="search-courses-list">
                   {courses.join('; ')}
                 </p>
               </div>
-              <div className="next-semester-courses">
-                <h3 className="courses-header">Next semester courses:</h3>
-                <p className="courses-list">
+              <div className="search-next-semester-courses">
+                <h3 className="search-courses-header">Next semester courses:</h3>
+                <p className="search-courses-list">
                   {nextSemesterCourses.join('; ')}
                 </p>
               </div>
@@ -68,17 +68,17 @@ const ProfessorSearchPage = () => {
   };
 
   return (
-    <div className="app">
-      <p className="intro-text">I want to get to know ...</p>
+    <div className="search-app"style={{ }}>
+      <p className="search-intro-text">I want to get to know ...</p>
       <div className="search-container">
         <input
           type="text"
           placeholder="Enter a Professor"
           value={query}
           onChange={handleChange}
-          className="search-input"
+          className="search-search-input"
         />
-        <button onClick={handleSubmit} className="search-button">
+        <button onClick={handleSubmit} className="search-search-button">
           <img src={SearchIcon} alt="Search" />
         </button>
       </div>

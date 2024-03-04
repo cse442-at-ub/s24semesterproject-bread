@@ -11,6 +11,8 @@ import Professors from "./webpages/professorPage/professorPage";
 import ProfessorPage from './webpages/professorPage/professorPage' // Adjust the import path as necessary
 import QuizPage from './webpages/quizPage/QuizPage';
 import Review from './webpages/Review/Review';
+import Search from './webpages/searchresult/searchresult';
+
 
 function App() {
   return (
@@ -21,11 +23,12 @@ function App() {
           <Route path="/signuppage" element={<SignUpPage />} />
           <Route path="/" element={<StartPage />} /> 
           <Route path="/review" element={<Review />} /> 
-          <Route path="/Homepage" element={<Homepage />} /> 
+          <Route path="/homepage" element={<Homepage />} /> 
           <Route path="/accountsettings" element={<AccountSettings />} />
           <Route path="/professorPage" element={<ProfessorPage />} /> {/* Example static professor page */}
           <Route path="/quizPage" element={<QuizPage />} />
           <Route path="/professor/:name" element={<ProfessorPage />} /> {/* Dynamic professor page */}
+          <Route path="/search" element={<Search />} /> 
         </Routes>
       </div>
     </Router>
@@ -34,3 +37,4 @@ function App() {
 
 
 export default App;
+
