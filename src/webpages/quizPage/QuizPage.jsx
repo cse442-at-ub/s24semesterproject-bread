@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import NavBar from '../navBar/NavBar';
+import { useNavigate } from 'react-router-dom'; // Import useHistory
 import './QuizPage.css'; // Make sure this CSS file includes styles for your table
 import questions from './questions.jsx';
 
@@ -8,9 +8,12 @@ const Quiz = () => {
   const [result, setResult] = useState('');
   const [showTable, setShowTable] = useState(false); // State to control table visibility
 
+  const navigate = useNavigate(); // Use the useNavigate hook
+
   const addToProfile = () => {
     localStorage.setItem('quizResult', result);
     alert('Result added to profile!');
+    navigate('/homepage'); // Navigate to homepage
   };
   // Questions array remains the same...
 
