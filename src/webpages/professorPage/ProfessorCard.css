@@ -2,6 +2,7 @@
 body {
     padding-top: 10vh; /* Adjust this value based on the actual height of your NavBar */
     margin-left: 20vh;
+    margin-right: 5vh;
 }
 
 /* ProfessorCard.css */
@@ -82,4 +83,25 @@ body {
 .review-header {
     margin-bottom: 10px; /* Adds space between the header and the review content */
 }
+
+.sort-button-container {
+    display:flex; /* Center the button horizontally */
+    margin: 20px 0; /* Add some space around the container */
+}
+
+.sort-button {
+    padding: 10px 20px;
+    background-color: #005fff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600pt;
+    justify-content: right;
+}
+
+.sort-button:hover {
+    background-color: #0056b3;
+}
+
 

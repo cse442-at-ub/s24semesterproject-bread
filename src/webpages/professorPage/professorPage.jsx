@@ -6,6 +6,11 @@ import professorInfo from './professorInfo'; // Assuming this is imported
 import defaultPic from "../../images/defaultPic.png"; // Adjust the path as necessary
 
 const ProfessorCard = () => {
+    const handleSort = () => {
+        // Implement your sorting logic here
+        console.log('Sorting...');
+    };
+
     return (
         <div>
             <NavBar/>
@@ -19,6 +24,11 @@ const ProfessorCard = () => {
                     <span>{professorInfo.rating}/5</span>
                 </div>
             </div>
+            <div className="sort-button-container">
+                <button onClick={handleSort} className="sort-button">Sort by</button>
+            </div>
+
+            
             {/* Review components are rendered here, below professor information */}
             <div className="reviews">
                 {professorInfo.reviews && professorInfo.reviews.map((review, index) => (
@@ -37,3 +47,24 @@ const ProfessorCard = () => {
 };
 
 export default ProfessorCard;
+
+
+/*            
+    const [reviews, setReviews] = useState(professorInfo.reviews);
+
+    const sortReviews = (sortBy) => {
+      const sortedReviews = [...reviews].sort((a, b) => {
+        if (sortBy === "rating") {
+          return b.rating - a.rating; // For descending order
+        } else if (sortBy === "author") {
+          return a.author.localeCompare(b.author); // For alphabetical order
+        }
+        return 0;
+      });
+  
+      setReviews(sortedReviews);
+    };
+<div className='sort-button-container'>
+                <button className='sort-button' onClick={() => sortReviews("rating")}>Sort by Rating</button>
+                <button className='sort-button' onClick={() => sortReviews("author")}>Sort by Author</button> 
+            </div> */
