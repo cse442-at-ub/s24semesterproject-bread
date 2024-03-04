@@ -1,0 +1,107 @@
+/* Adjust the top margin to create space for the NavBar */
+.professor-main {
+    padding-top: 10vh; /* Adjust this value based on the actual height of your NavBar */
+    margin-left: 20vh;
+    margin-right: 5vh;
+}
+
+/* ProfessorCard.css */
+.professor-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background-color: #ffffff;
+    margin-bottom: 20px; /* Space between cards or to the next content */
+
+    width: 80%;
+}
+
+.professor-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.professor-info h2, .professor-info p, .professor-rating span {
+    margin: 0;
+    padding: 0;
+    
+}
+
+.professor-info h2 {
+    color: #333;
+    font-size: 35px;
+}
+
+.professor-info p {
+    color: #666;
+    font-size: 25px;
+}
+
+.professor-rating span {
+    font-size:50pt;
+    color: #000000;
+    font-weight: 500px;
+}
+.review {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background-color: #ffffff;
+    margin-bottom: 20px; /* Increased space between cards or to the next content */
+    width: 80%;
+}
+
+.review h4 {
+    margin: 0;
+    color: #333;
+    
+}
+
+.review p {
+    color: #666;
+    font-size: 16px;
+
+}
+
+.review span {
+    display: block;
+    margin-top: 10px;
+    color: #0056b3;
+    font-weight: bold;
+
+}
+.review-header {
+    margin-bottom: 10px; /* Adds space between the header and the review content */
+}
+
+.sort-button-container {
+    display:flex; /* Center the button horizontally */
+    margin: 20px 0; /* Add some space around the container */
+}
+
+.sort-button {
+    padding: 10px 20px;
+    background-color: #005fff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600pt;
+    justify-content: right;
+}
+
+.sort-button:hover {
+    background-color: #0056b3;
+}
+
+

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import NavBar from '../navBar/NavBar';
-import './accountsettings.css'; // Ensure this path is correct
+import './Account_Settings.css'; // Ensure this path is correct
 import defaultProfilePic from "../../images/eye.png";
-import Modal from "./modal.jsx"
+
 const AccountSettingsPage = () => {
     const [profilePic, setProfilePic] = useState(null);
     const [major, setMajor] = useState('');
@@ -20,20 +20,6 @@ const AccountSettingsPage = () => {
             setProfilePic(fileUrl);
         }
     };
-
-    const [isModalOpen, setIsModalOpen] = useState(false);
-
-    const handleDeleteAccount = () => {
-        setIsModalOpen(true);
-    };
-
-    const handleConfirmDelete = () => {
-        setIsModalOpen(false);
-        console.log('Account deleted'); // Replace with actual deletion logic
-    };
-
-    const quizResult = localStorage.getItem('quizResult') || 'No quiz result yet';
-
 
     return (
         <div className="main-container">
@@ -66,18 +52,7 @@ const AccountSettingsPage = () => {
                         onChange={(e) => setGraduationYear(e.target.value)}
                         className="text-field"
                     />
-                    <label  className="text-field">Quiz Result: {quizResult}</label>
                 </div>
-                <div className="delete-account-container">
-                    <button className="delete-account-button" onClick={handleDeleteAccount}>
-                        Delete Account
-                    </button>
-                </div>
-                <Modal
-                isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-                onConfirm={handleConfirmDelete}
-            />
             </div>
             <div className="right-side">
                 <div className='field-group'>

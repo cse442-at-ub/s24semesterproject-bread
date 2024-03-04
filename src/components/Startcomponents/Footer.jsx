@@ -4,7 +4,7 @@ function Footer() {
   return (
     <footer className="footer" style={{ position: 'relative' }}>
       <p>&copy; 2024 My Website. All Rights Reserved.</p>
-      <a href="https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/Signup/" style={{ textDecoration: 'none' }}>
+      <a href="/signuppage/" style={{ textDecoration: 'none' }}>
         <button style={{
           position: 'absolute',
           width: '392px',

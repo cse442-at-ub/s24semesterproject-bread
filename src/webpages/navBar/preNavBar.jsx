@@ -29,7 +29,7 @@ function NavBar() {
             textDecoration: 'none',
             marginRight: '20px', // Adjust the spacing between links as needed
           }}>Help</a>
-          <a href="/loginpage" style={{
+          <a href="/signinpage" style={{
             color: '#FFFFFF',
             fontFamily: 'Crimson Text',
             fontStyle: 'normal',
@@ -38,7 +38,7 @@ function NavBar() {
             textDecoration: 'none',
             marginRight: '20px', // Adjust the spacing between links as needed
 
-          }}>Log In</a>
+          }}>Sign In</a>
           <a href="/signuppage" style={{
             background: '#FFFFFF',
             color: '#000000',
