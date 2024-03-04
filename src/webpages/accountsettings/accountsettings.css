@@ -38,7 +38,7 @@
     font-family: "Crimison text";
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-top: 40vh;
+    margin-top: 30vh;
 }
 
 .delete-account-button:hover {
@@ -86,6 +86,7 @@
     flex-direction: column;
     gap: 10px; /* Space between fields */
     margin-top: 20px; /* Space below the profile picture */
+    margin-bottom: 1vh;
 }
 
 .text-field {
@@ -135,5 +136,4 @@
     gap: 10px; /* Adjust space between label and input */
     width: 100%;
 
-    
 }
