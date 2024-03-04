@@ -12,7 +12,7 @@ const ProfessorCard = () => {
     };
 
     return (
-        <div>
+        <div className='professor-main '>
             <NavBar/>
             <div className="professor-card">
                 <img src={professorInfo.profilePicture || defaultPic} alt="Professor" className="professor-img" />
