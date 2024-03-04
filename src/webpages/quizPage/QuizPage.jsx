@@ -71,7 +71,7 @@ const Table = () => (
 
 
   return (
-    <div className='body'>
+    <div className='main'>
       <div className="quiz-container">
         <NavBar />
         {questions.map((q, index) => (
