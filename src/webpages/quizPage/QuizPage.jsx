@@ -8,6 +8,10 @@ const Quiz = () => {
   const [result, setResult] = useState('');
   const [showTable, setShowTable] = useState(false); // State to control table visibility
 
+  const addToProfile = () => {
+    localStorage.setItem('quizResult', result);
+    alert('Result added to profile!');
+  };
   // Questions array remains the same...
 
   const handleSelectOption = (questionIndex, option) => {
@@ -19,9 +23,10 @@ const Quiz = () => {
     Object.values(answers).forEach(answer => counts[answer]++);
     const maxCount = Math.max(...Object.values(counts));
     const topCategories = Object.keys(counts).filter(key => counts[key] === maxCount);
-    setResult(`Your best match: ${topCategories.join(' and ')}`);
+    setResult(topCategories.join(' and ')); // Set result to only the top category letters
     setShowTable(true); // Show the table when results are calculated
   };
+  
 
 // Simple Table Component with Custom CSS Class
 const Table = () => (
@@ -71,9 +76,10 @@ const Table = () => (
 
 
   return (
-    <div className='main'>
+    <div className='quiz-main'>
       <div className="quiz-container">
-        <NavBar />
+        <div className="quiz-header">Lets find your type of professor!</div>
+
         {questions.map((q, index) => (
           <div key={index} className="question-block">
             <div className="question">{q.question}</div>
@@ -91,6 +97,7 @@ const Table = () => (
           </div>
         ))}
         <button className="submit-btn" onClick={calculateResult}>Submit</button>
+        <button className="submit-btn" onClick={addToProfile}>Add to Profile</button>
         {result && <div className="result">{result}</div>}
         {showTable && (
           <>

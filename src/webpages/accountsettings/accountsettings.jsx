@@ -32,6 +32,9 @@ const AccountSettingsPage = () => {
         console.log('Account deleted'); // Replace with actual deletion logic
     };
 
+    const quizResult = localStorage.getItem('quizResult') || 'No quiz result yet';
+
+
     return (
         <div className="main-container">
             <NavBar />
@@ -63,6 +66,7 @@ const AccountSettingsPage = () => {
                         onChange={(e) => setGraduationYear(e.target.value)}
                         className="text-field"
                     />
+                    <label  className="text-field">Quiz Result: {quizResult}</label>
                 </div>
                 <div className="delete-account-container">
                     <button className="delete-account-button" onClick={handleDeleteAccount}>
