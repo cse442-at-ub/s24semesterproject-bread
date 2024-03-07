@@ -1,9 +1,8 @@
 /* Quiz.css */
-.body {
+.quiz-main {
   background: linear-gradient(to bottom, #005bbb, #ffffff); /* Apply gradient background to entire page */
   margin: 0; /* Remove default margin */
   padding: 0; /* Remove default padding */
-  width: 100vw; /* Ensure body covers full viewport width */
 }
 .quiz-container {
     width: 50%;
@@ -14,8 +13,13 @@
   }
   
   .question-block {
-    margin-top: 10vh;
     margin-bottom: 20px;
+  }
+
+  .quiz-header {
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 40px;
   }
   
   .question {
@@ -38,6 +42,7 @@
   .submit-btn {
     padding: 10px 20px;
     cursor: pointer;
+    margin:10px;
   }
   
   .result {

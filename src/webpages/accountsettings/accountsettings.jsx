@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import NavBar from '../navBar/NavBar';
 import './accountsettings.css'; // Ensure this path is correct
 import defaultProfilePic from "../../images/eye.png";
-import Modal from "./modal.jsx"
+import { useNavigate } from 'react-router-dom';
+
 const AccountSettingsPage = () => {
     const [profilePic, setProfilePic] = useState(null);
     const [major, setMajor] = useState('');
@@ -11,7 +12,8 @@ const AccountSettingsPage = () => {
     const [coursesTaken, setCoursesTaken] = useState('');
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
-
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const quizResult = localStorage.getItem('quizResult') || 'No quiz result yet';
 
     const handleProfilePicChange = (event) => {
         const file = event.target.files[0];
@@ -21,15 +23,38 @@ const AccountSettingsPage = () => {
         }
     };
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
-
     const handleDeleteAccount = () => {
         setIsModalOpen(true);
     };
 
+
+    
+    const navigate = useNavigate(); // Initialize useNavigate
+
+
+
     const handleConfirmDelete = () => {
         setIsModalOpen(false);
         console.log('Account deleted'); // Replace with actual deletion logic
+        navigate('/signuppage'); // Navigate to the sign-up page
+    };
+
+
+    // Simple Modal Component
+    const SimpleModal = ({ isOpen, onClose, onConfirm }) => {
+        if (!isOpen) return null;
+
+        return (
+            <div className="modal-overlay">
+                <div className="modal-content">
+                    <h2>Are you sure you want to delete your account?</h2>
+                    <div className="modal-actions">
+                        <button onClick={onConfirm} className="modal-button confirm">Yes</button>
+                        <button onClick={onClose} className="modal-button cancel">No</button>
+                    </div>
+                </div>
+            </div>
+        );
     };
 
     return (
@@ -39,6 +64,7 @@ const AccountSettingsPage = () => {
                 <div className="profile-pic-container">
                     <label htmlFor="profile-upload" style={{ cursor: 'pointer' }}>
                         <img src={profilePic || defaultProfilePic} alt="Profile" className="profile-image" />
+                        <div className="upload-text">Upload a picture</div>
                         <input
                             id="profile-upload"
                             type="file"
@@ -63,18 +89,20 @@ const AccountSettingsPage = () => {
                         onChange={(e) => setGraduationYear(e.target.value)}
                         className="text-field"
                     />
+                    <label  className="text-field">Quiz Result: {quizResult}</label>
                 </div>
                 <div className="delete-account-container">
                     <button className="delete-account-button" onClick={handleDeleteAccount}>
                         Delete Account
                     </button>
                 </div>
-                <Modal
-                isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-                onConfirm={handleConfirmDelete}
-            />
+                
             </div>
+        <SimpleModal
+                    isOpen={isModalOpen}
+                    onClose={() => setIsModalOpen(false)}
+                    onConfirm={handleConfirmDelete}
+                />
             <div className="right-side">
                 <div className='field-group'>
                     <label className="field-label">Name:</label>
@@ -116,6 +144,17 @@ const AccountSettingsPage = () => {
                     <input
                         type="password"
                         placeholder="New Password"
+                        value={newPassword}
+                        onChange={(e) => setNewPassword(e.target.value)}
+                        className="text-field"
+                    />
+                </div>
+
+                <div className='field-group'>
+                    <label className="field-label">Confirm New Password:</label>
+                    <input
+                        type="password"
+                        placeholder="Confirm New Password"
                         value={newPassword}
                         onChange={(e) => setNewPassword(e.target.value)}
                         className="text-field"
