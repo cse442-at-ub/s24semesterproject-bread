@@ -86,7 +86,8 @@
 
 .sort-button-container {
     display:flex; /* Center the button horizontally */
-    margin: 20px 0; /* Add some space around the container */
+    margin-bottom: 20px; /* Add some space around the container */
+    
 }
 
 .sort-button {
@@ -98,6 +99,8 @@
     cursor: pointer;
     font-weight: 600pt;
     justify-content: right;
+    margin-right: 20px;
+    
 }
 
 .sort-button:hover {
