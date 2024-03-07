@@ -107,4 +107,27 @@
     background-color: #0056b3;
 }
 
+.write-review-container {
+    text-align: center; /* Center the button horizontally */
+    margin-top: 20px; /* Add some space above the container */
+    margin-bottom: 20px; /* Add some space below the container for better spacing */
+}
+
+.write-review-button {
+    background-color: #007bff; /* A blue color; adjust as needed */
+    color: white; /* White text color */
+    border: none; /* No border */
+    padding: 10px 20px; /* Top and bottom padding of 10px, left and right padding of 20px */
+    font-size: 16px; /* Set the font size; adjust as needed */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: background-color 0.3s; /* Smooth transition for background color change on hover */
+}
+
+.write-review-button:hover {
+    background-color: #0056b3; /* Darker shade of blue on hover; adjust as needed */
+}
+
+
+
 

@@ -34,6 +34,11 @@ const ProfessorCard = () => {
         );
     };
 
+    const handleWriteReview = () => {
+        alert("This function will be implemented later");
+    };
+
+
     return (
         <div className='professor-main'>
             <NavBar/>
@@ -64,6 +69,11 @@ const ProfessorCard = () => {
                         course={review.course}
                     />
                 ))}
+            </div>
+
+            {/* Write a review button */}
+            <div className="write-review-container">
+                <button className="write-review-button" onClick={handleWriteReview}>Write a Review</button>
             </div>
         </div>
     );
