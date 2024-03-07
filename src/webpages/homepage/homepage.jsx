@@ -13,6 +13,12 @@ const Homepage = () => {
     navigate(`/professor/${searchTerm}`);
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   return (
     <div>
       <NavBar />
@@ -28,6 +34,7 @@ const Homepage = () => {
             placeholder="Enter a Professor"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyDown={handleKeyDown} // Add this line
           />
           <button className="search-button" onClick={handleSearch}>
             <img src={SearchIcon} alt="Search" />
