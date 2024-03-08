@@ -1,8 +1,7 @@
 <?php
-
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-// Include the database configuration file
+header('X-Content-Type-Options: nosniff');
 require_once '../db_config.php';
 
 function getDbConnection() {
@@ -11,7 +10,7 @@ function getDbConnection() {
 
     if ($conn->connect_error) {
         http_response_code(500);
-        echo json_encode(["message" => "Failed to connect to database: " . $conn->connect_error]);
+        echo json_encode(["message" => "Failed to connect to the database: " . $conn->connect_error]);
         exit;
     }
     return $conn;
@@ -71,6 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         http_response_code(400);
         echo json_encode(["message" => "Invalid request, action, email, and password required"]);
     }
+
     exit;
 }
 ?>
