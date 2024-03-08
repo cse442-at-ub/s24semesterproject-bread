@@ -1,0 +1,66 @@
+.App {
+
+  text-align: center;
+  background-color: #ffffff; 
+}
+
+.header {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+}
+
+.banner {
+  background-color: #fff;
+  padding: -100px;
+}
+
+.features {
+  background-color: #fff;
+  padding: 50px;
+  height: 80px;
+}
+
+.testimonials {
+  background-color: #fff;
+  padding: 30px;
+  height: 450px;
+}
+
+
+.help-button {
+  background-color: #FFFFFF;
+  color: #000000;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.header {
+  background-color: #005bbb;
+  color: #000000;
+  padding: 0px;
+}
+
+.header-content {
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+}
+
+.header-content div {
+  display: flex; 
+  align-items: center;
+}
+
+.content {
+  margin-top: 100px; /* Adjust this value based on your header's height */
+}
+
+
+@media only screen and (max-width: 768px) {
+  .banner-content h2 {
+    font-size: 60px; 
+  }
+}
