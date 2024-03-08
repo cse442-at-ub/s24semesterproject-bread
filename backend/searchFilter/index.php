@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Search for Professors or Classes</title>
+    <style>
+        .result-item {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+    </style>
 </head>
 <body>
 <h2>Search for Professors or Classes</h2>
@@ -29,23 +36,34 @@ document.addEventListener("DOMContentLoaded", function() {
         const filter = document.getElementById("filter").value;
 
         fetch(`searchFilter.php?query=${encodeURIComponent(query)}&filter=${encodeURIComponent(filter)}`)
-            .then(response => response.json()) // Assuming searcFilter.php returns JSON
+            .then(response => response.json())
             .then(data => {
                 const resultsContainer = document.getElementById("searchResults");
                 resultsContainer.innerHTML = ''; // Clear previous results
 
                 if (data.length > 0) {
-                    const list = document.createElement('ul');
                     data.forEach(item => {
-                        const li = document.createElement('li');
-                        if(filter === 'classes') {
-                            li.textContent = `${item.class_title} by ${item.professor_name}`;
+                        const div = document.createElement('div');
+                        div.className = 'result-item';
+
+                        if(filter === 'professors') {
+                            // Create a more detailed display for professor information
+                            div.innerHTML = `<strong>${item.professors}</strong><br>
+                                             Department: ${item.department}<br>
+                                             Education: ${item.education}<br>
+                                             Research: ${item.research}<br>
+                                             Email: ${item.email}<br>
+                                             Office: ${item.office}<br>
+                                             Phone: ${item.phone}<br>
+                                             Classes: ${item.classes}<br>
+                                             Difficulty: ${item.difficulty}, Helpfulness: ${item.helpfulness}, Clarity: ${item.clarity}, Feedback Quality: ${item['Feedback Quality']}, Accessibility: ${item.accessibility}`;
                         } else {
-                            li.textContent = item.professors;
+                            // Assuming you'd adjust to handle class-specific information similarly
+                            div.textContent = `${item.class_title} by ${item.professor_name}`;
                         }
-                        list.appendChild(li);
+
+                        resultsContainer.appendChild(div);
                     });
-                    resultsContainer.appendChild(list);
                 } else {
                     resultsContainer.textContent = 'No results found.';
                 }
