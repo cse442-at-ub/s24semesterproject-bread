@@ -13,7 +13,7 @@ const professorInfo = {
             term: "FALL2023"
         },
         {
-            author: "apple",
+            author: "pears",
             content: "The course was well-structured, but I found office hours to be more helpful than lectures.",
             rating: 5,
             course: "CSE115",
