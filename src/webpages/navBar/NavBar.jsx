@@ -8,47 +8,54 @@ function NavBar() {
 
     const toggleMenu = () => {
         setIsMenuVisible(!isMenuVisible);
+        console.log("Menu visibility toggled:", isMenuVisible); // Debug: Check menu toggle
     };
 
     const handleLogout = async () => {
-        const logoutUrl = '../../../backend/logout/logout.php'; // Update with your actual URL
+        console.log("Initiating logout process"); // Debug: Initiate logout
+        const logoutUrl = '/backend/logout/logout.php'; // Update with your actual URL
 
-        // Retrieve session data from local storage
-        const email = localStorage.getItem('email');
-        const sessionID = localStorage.getItem('sessionID');
-        const userID = localStorage.getItem('userID');
+        // Retrieve session data from session storage
+        const email = sessionStorage.getItem('email');
+        const sessionID = sessionStorage.getItem('sessionID');
+        const userID = sessionStorage.getItem('userID');
+        console.log("Retrieved session data:", { email, sessionID, userID }); // Debug: Check retrieved session data
 
         if (email && sessionID && userID) {
+            console.log("Session data exists. Proceeding with logout."); // Debug: Session data check
             try {
+                
                 const response = await fetch(logoutUrl, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ email, sessionID, userID }),
+                    body: JSON.stringify({ email: email, sessionID: sessionID, userID: userID, action: 'logout'}),
                 });
-
+                console.log("Raw response:", response); 
                 const data = await response.json(); // Assuming your logout.php returns JSON
+                console.log("Logout response:", data); // Debug: Check logout response
 
                 if (response.ok) {
-                    console.log(data.message);
-                    // Clear session data from local storage
-                    localStorage.removeItem('email');
-                    localStorage.removeItem('sessionID');
-                    localStorage.removeItem('userID');
+                    console.log("Logout successful:", data.message); // Debug: Successful logout
+                    // Clear session data from session storage
+                    sessionStorage.removeItem('email');
+                    sessionStorage.removeItem('sessionID');
+                    sessionStorage.removeItem('userID');
                     // Redirect the user or update the UI as needed
                     window.location.href = '/signinpage'; // Use window.location.href for redirection
                 } else {
-                    console.error(data.message);
+                    console.error("Logout failed with response:", data.message); // Debug: Failed logout response
                 }
             } catch (error) {
-                console.error('Logout error:', error);
+                console.error('Logout error caught:', error); // Debug: Catch logout error
             }
         } else {
-            console.log("No active session found. Redirecting to login page.");
+            console.log("No active session found. Redirecting to login page."); // Debug: No session data
             window.location.href = '/signinpage'; // Use window.location.href for redirection
         }
     };
+
 
     return (
         <nav style={{
@@ -95,7 +102,7 @@ function NavBar() {
                             </a>
                         </li>
                         <li style={{marginBottom: '0.5rem'}}>
-                            <button onClick={handleLogout} style={{ color: '#005bbb', backgroundColor: 'transparent', border: 'none', cursor: 'pointer', textDecoration: 'underline' }}>
+                            <button onClick={handleLogout} style={{ color: '#005bbb', backgroundColor: 'transparent', border: 'none', cursor: 'pointer' }}>
                                 Logout
                             </button>
                         </li>

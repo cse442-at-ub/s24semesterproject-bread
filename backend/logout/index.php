@@ -11,7 +11,7 @@
 
                 // Gather data from the form
                 var formData = {
-                    username: $('#username').val(),
+                    email: $('#email').val(),
                     sessionID: $('#sessionID').val(),
                     userID: parseInt($('#userID').val())
                 };
@@ -38,8 +38,8 @@
 <h2>Sign Out Test Form</h2>
 
 <form id="signOutForm">
-    <label for="username">Username:</label><br>
-    <input type="text" id="username" name="username" required><br>
+    <label for="email">Email:</label><br>
+    <input type="text" id="email" name="email" required><br>
     <label for="sessionID">Session ID:</label><br>
     <input type="text" id="sessionID" name="sessionID" required><br>
     <label for="userID">User ID:</label><br>
