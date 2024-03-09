@@ -1,0 +1,54 @@
+.search-professor-search-result {
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 30px;
+  margin-bottom: 20px;
+  display: flex;
+}
+
+.search-left-section {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.search-right-section {
+  flex: 2;
+}
+
+.search-professor-photo {
+  width: calc(10vw + 10vh);
+  height: calc(10vw + 10vh);
+  border-radius: 50%;
+}
+
+.search-professor-name {
+  margin: 0;
+  font-family: "Crimison text";
+  font-size: calc(1.25vw + 1.25vh);
+  color: #000;
+}
+
+.search-professor-department {
+  margin: 0;
+  font-family: "Crimison text";
+  font-size: calc(1.125vw + 1.125vh);
+  color: #000;
+}
+
+.search-courses-section {
+  margin-top: 10px;
+}
+
+.search-courses-header {
+  margin: 0;
+  font-size: calc(1.125vw + 1.125vh);
+  color: #000;
+}
+
+.search-courses-list {
+  margin: 0;
+  color: #000;
+  font-family: "Crimison text";
+  font-size: calc(1.125vw + 1.125vh);
+}

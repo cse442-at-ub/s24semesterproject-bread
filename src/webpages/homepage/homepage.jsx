@@ -1,16 +1,28 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Updated import
+import { useNavigate } from 'react-router-dom';
 import NavBar from '../navBar/NavBar';
 import SearchIcon from '../../images/search_icon.png';
-import './homepage.css'; // Ensure this path is correct
+import './homepage.css';
 
 const Homepage = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const navigate = useNavigate(); // Updated to useNavigate
+  const [filter, setFilter] = useState('professors'); // Default filter by professors
+  const [searchError, setSearchError] = useState('');
+  const navigate = useNavigate();
 
   const handleSearch = () => {
-    // Use navigate to change the URL
-    navigate(`/professor/${searchTerm}`);
+    if (searchTerm.trim() !== '') {
+      fetch(`https://cors-anywhere.herokuapp.com/https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/backend/searchFilter/searchFilter.php?query=${encodeURIComponent(searchTerm)}&filter=${filter}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.length > 0) {
+            navigate('/search', { state: { professors: data } });
+          } else {
+            setSearchError('No results found.');
+          }
+        })
+        .catch(error => console.error('Error fetching search results:', error));
+    }
   };
 
   return (
@@ -29,10 +41,19 @@ const Homepage = () => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
+          <select
+            className="filter-select"
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
+          >
+            <option value="professors">Filter by Professor</option>
+            <option value="classes">Filter by Class</option>
+          </select>
           <button className="search-button" onClick={handleSearch}>
             <img src={SearchIcon} alt="Search" />
           </button>
         </div>
+        {searchError && <p>{searchError}</p>}
       </div>
     </div>
   );
