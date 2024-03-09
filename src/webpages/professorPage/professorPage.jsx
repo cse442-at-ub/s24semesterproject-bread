@@ -1,24 +1,60 @@
-import React, { useState } from 'react'; // Import useState
-import './ProfessorCard.css'; // Make sure this CSS file is correctly linked
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import './ProfessorCard.css';
 import NavBar from '../navBar/NavBar';
-import professorInfo from './professorInfo'; // Assuming this is imported
-import defaultPic from "../../images/defaultPic.png"; // Adjust the path as necessary
+import defaultPic from "../../images/defaultPic.png";
 
 const ProfessorCard = () => {
-    // Initialize reviews state with professorInfo.reviews
-    const [reviews, setReviews] = useState(professorInfo.reviews);
+    const { name } = useParams();
+    const [professorInfo, setProfessorInfo] = useState({
+        name: '',
+        department: '',
+        profilePicture: '',
+        rating: 0,
+        reviews: []
+    });
+
+    const [reviews, setReviews] = useState([]);
+
+    useEffect(() => {
+        // Simulated fetch request based on professor name
+        fetchProfessorInfo(name);
+    }, [name]);
+
+    useEffect(() => {
+        console.log("Professor Name:", professorInfo.name);
+        console.log("Professor Department:", professorInfo.department);
+        setReviews(professorInfo.reviews); // Update reviews state with professorInfo.reviews
+    }, [professorInfo]);
+
+    const fetchProfessorInfo = (professorName) => {
+        // Simulated fetch request
+        setTimeout(() => {
+            // Replace with actual fetch request to retrieve professor info based on name
+            setProfessorInfo({
+                name: professorName,
+                department: 'Computer Science', // Example department
+                profilePicture: '', // Example profile picture
+                rating: 4.5, // Example rating
+                reviews: [ // Example reviews
+                    { author: "John Doe", content: "Great professor!", rating: 5, term: "Fall 2023", course: "CS101" },
+                    { author: "Jane Smith", content: "Very knowledgeable", rating: 4, term: "Spring 2022", course: "CS202" }
+                ]
+            });
+        }, 1000); // Simulate loading delay
+    };
 
     const sortReviews = (sortBy) => {
-      const sortedReviews = [...reviews].sort((a, b) => {
-        if (sortBy === "rating") {
-          return b.rating - a.rating; // For descending order
-        } else if (sortBy === "author") {
-          return a.author.localeCompare(b.author); // For alphabetical order
-        }
-        return 0;
-      });
-  
-      setReviews(sortedReviews);
+        const sortedReviews = [...reviews].sort((a, b) => {
+            if (sortBy === "rating") {
+                return b.rating - a.rating; // For descending order
+            } else if (sortBy === "author") {
+                return a.author.localeCompare(b.author); // For alphabetical order
+            }
+            return 0;
+        });
+
+        setReviews(sortedReviews);
     };
 
     const Review = ({ author, content, rating, term, course }) => {
@@ -37,7 +73,6 @@ const ProfessorCard = () => {
     const handleWriteReview = () => {
         alert("This function will be implemented later");
     };
-
 
     return (
         <div className='professor-main'>
