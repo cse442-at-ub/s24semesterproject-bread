@@ -1,0 +1,52 @@
+.search-app {
+  position: absolute;
+  top: 5%;
+  width: 100%;
+  height: auto;
+}
+
+.search-text-container{
+  display: flex;
+  justify-content: center;
+  margin-top: 20vh;
+}
+.search-intro-text {
+  margin-bottom: 10px; /* Keeps a small space between the text and the search bar */
+  font-size: 1.5em;
+  color: #000000;
+  font-size: calc(2.75vw + 2.75vh);
+  font-weight: 400;
+  font-family: "Crimson text";
+}
+
+.search-search-container {
+  display: flex;
+  justify-content: center;
+}
+
+.search-search-input {
+  width: 70%; /* Adjust based on your preference */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 15px 0 0 15px; /* More rounded corners on the left side */
+  outline: none;
+  font-weight: 400;
+  font-family: "Crimison text";
+  font-size: 20pt;
+}
+
+.search-search-button {
+  padding: 10px;
+  background: white;
+  border: 1px solid #ccc;
+  border-left: none; /* Seamless integration with the input field */
+  border-radius: 0 15px 15px 0; /* Rounded corners on the right side */
+  cursor: pointer;
+
+}
+
+.search-search-button img {
+  width: 30px; /* Adjust based on the size of your icon */
+  height: auto;
+
+}
