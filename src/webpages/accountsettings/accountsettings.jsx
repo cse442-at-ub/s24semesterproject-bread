@@ -33,11 +33,45 @@ const AccountSettingsPage = () => {
 
 
 
+
     const handleConfirmDelete = () => {
-        setIsModalOpen(false);
-        console.log('Account deleted'); // Replace with actual deletion logic
-        navigate('/signuppage'); // Navigate to the sign-up page
+        const data = {
+            username: "bread", // Replace with actual username
+            sessionId: "3c380d31e9884482d33368b425d04d648cf2197a1b1863fe17", // Replace with actual session ID
+            userID: "52", // Replace with actual user ID
+        };
+
+        // Use your backend endpoint URL
+        const backendUrl = 'https://cors-anywhere.herokuapp.com/https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/backend/removeuser/remove.php';
+
+        fetch(backendUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Origin': 'https://www-student.cse.buffalo.edu' // Add origin header
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to delete account');
+            }
+            return response.json();
+        })
+        .then(() => {
+            alert('Account successfully deleted'); // Inform the user
+            navigate('/signuppage'); // Navigate to the sign-up page or login page
+        })
+        .catch(error => {
+            console.error('Delete account error:', error);
+            alert('Failed to delete account. Please try again.');
+        });
+
+        setIsModalOpen(false); // Close the modal after attempting to delete the account
     };
+
+    // Your existing component code...
+
 
 
     // Simple Modal Component
