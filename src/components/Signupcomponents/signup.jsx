@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import './signup.css'; 
 import eyeLogo from './Logo.png';
 import signUp from '../../SignUpLink.jsx';
+import { Link,useNavigate } from 'react-router-dom';
 
 function Main() {
+  const navigate= useNavigate();
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -25,7 +27,8 @@ function Main() {
       console.log('Response data:', responseData);
 
       if (responseData.includes("User registered successfully") || responseData.includes("Email sent successfully")) {
-        window.location.href = "/signinpage/";
+        // Use relative path for navigation
+        navigate('/signinpage');
       } else {
         alert(responseData);
       }
@@ -33,10 +36,6 @@ function Main() {
       console.error('Error:', error);
       alert("The user name is already been used.");
     }
-  };
-
-  const handleSignIn = () => {
-    window.location.href = "/signinpage/";
   };
 
   return (
@@ -71,7 +70,7 @@ function Main() {
           </form>
           <div className="signup-link">
             <div className="link-container">
-              <p className="link">Already on InSight? <a href="/signinpage/" className="link" onClick={handleSignIn}>Sign In</a></p>
+              <p className="link">Already on InSight? <Link to="/signinpage" className="link">Sign In</Link></p>
             </div>
           </div>
         </main>

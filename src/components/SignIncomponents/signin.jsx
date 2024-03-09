@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import './signin.css'; 
 import eyeLogo from './Logo.png';
-
+import { Link,useNavigate } from 'react-router-dom';
 function Main() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const navigate= useNavigate();
   const handleLogin = () => {
     // Check if the email ends with 'buffalo.edu'
     if (!email.endsWith('buffalo.edu')) {
@@ -19,7 +20,7 @@ function Main() {
       password: password
     };
 
-    fetch('https://cors-anywhere.herokuapp.com/https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/backend/login/login.php', {
+    fetch('https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/backend/login/login.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -38,7 +39,7 @@ function Main() {
       // Check if the response contains expected data
       if (data.email && data.sessionID && data.userID) {
         // Redirect to '/home' page
-        window.location.href = '/homepage/';
+        navigate('/homepage');
       } else {
         // Handle unexpected response
         throw new Error('Invalid response data');
@@ -78,7 +79,7 @@ function Main() {
             <button className="primary" type="button" onClick={handleLogin}>Sign In</button>
           </form>
           <div className="signup-link">
-            <p className="link">New to Insight? <a href="/signuppage/" className="link">Sign Up</a></p>
+            <p className="link">New to Insight? <Link to="/signuppage" className="link">Sign Up</Link></p>
           </div>
         </main>
       </div>
