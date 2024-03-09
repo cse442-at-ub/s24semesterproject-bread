@@ -7,6 +7,12 @@ function Main() {
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
+    // Check if the email ends with 'buffalo.edu'
+    if (!email.endsWith('buffalo.edu')) {
+      alert('Please use an email ending with buffalo.edu');
+      return;
+    }
+
     const data = {
       action: 'login',
       email: email,
@@ -16,7 +22,8 @@ function Main() {
     fetch('https://cors-anywhere.herokuapp.com/https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/backend/login/login.php', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Origin': 'https://www-student.cse.buffalo.edu' // Add origin header
       },
       body: JSON.stringify(data)
     })
@@ -40,8 +47,10 @@ function Main() {
     .catch(error => {
       // Handle login error
       console.error('Login error:', error);
+      // Show error message in a popup
+      alert('Please check your email and password input');
     });
-  }    
+  };
 
   return (
     <div className="main-container">
