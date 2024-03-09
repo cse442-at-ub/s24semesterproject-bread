@@ -1,5 +1,5 @@
-
-import React from 'react';
+import React from "react";
+import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import LogInPage from './webpages/signinpage/signin';
@@ -13,10 +13,11 @@ import QuizPage from './webpages/quizPage/QuizPage';
 import Review from './webpages/Review/Review';
 import Search from './webpages/searchresult/searchresult';
 
+const baseUrl = "/CSE442-542/2024-Spring/cse-442ac/";
 
 function App() {
   return (
-    <Router>
+    <Router basename={baseUrl}>
       <div className="App">
         <Routes>
           <Route path="/signinpage" element={<LogInPage />} />
@@ -35,6 +36,10 @@ function App() {
   );
 }
 
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
 
 export default App;
-
