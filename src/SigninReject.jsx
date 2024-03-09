@@ -18,7 +18,7 @@ export const handleSignIn = async (email, password, signIn) => {
           const data = await signIn(email, password);
           // If sign in is successful, redirect to the homepage
           if (data.username && data.sessionID && data.userID) {
-              window.location.href = "https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/Homepage/";
+              window.location.href = "/homepage/";
           } else {
               // If sign in fails, show error message
               alert('Please check your email and password');

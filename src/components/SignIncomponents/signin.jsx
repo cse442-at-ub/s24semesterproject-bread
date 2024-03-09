@@ -23,17 +23,20 @@ function Main() {
       <form className="form">
         <div className="input">
           <label className="label">Email</label>
-          <input className="textfield" type="email" value={email} onChange={(e) => handleEmailChange(e.target.value, setEmail)} placeholder="Enter your email" />
+          <input className="textfield" type="email" value={email} onChange={(e) => 
+            handleEmailChange(e.target.value, setEmail)} placeholder="Enter your email" />
         </div>
         <div className="input">
           <label className="label">Password</label>
-          <input className="textfield" type="password" value={password} onChange={(e) => handlePasswordChange(e.target.value, setPassword)} placeholder="Enter your password" />
+          <input className="textfield" type="password" value={password} onChange={(e) => 
+            handlePasswordChange(e.target.value, setPassword)} placeholder="Enter your password" />
         </div>
         <div className="forgot-password">
           <a href="#" className="link"></a>
         </div>
         <div className="extra-space"></div>
-        <button className="primary" type="button" onClick={() => handleSignIn(email, password, signIn, setErrorMessage)}>Sign In</button>
+        <button className="primary" type="button" onClick={() => 
+          handleSignIn(email, password, signIn, setErrorMessage)}>Sign In</button>
         {errorMessage && <p className="error">{errorMessage}</p>}
       </form>
       <div className="signup-link">
