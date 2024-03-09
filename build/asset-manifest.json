@@ -1,22 +1,21 @@
 {
   "files": {
-    "main.css": "/static/css/main.ba3bef56.css",
-    "main.js": "/static/js/main.77491c13.js",
-    "static/js/592.e84755cb.chunk.js": "/static/js/592.e84755cb.chunk.js",
-    "static/media/Comment.png": "/static/media/Comment.71238cf648e7e2a17b52.png",
-    "static/media/Like.png": "/static/media/Like.27c3e172c6deaa9974d7.png",
-    "static/media/Teach.png": "/static/media/Teach.d4dde0292c7633109d1f.png",
-    "static/media/eye.png": "/static/media/eye.e18ebf3f5ff2fd461bde.png",
-    "static/media/Logo.png": "/static/media/Logo.ebb82cb946c22fe6b0b2.png",
-    "static/media/search_icon.png": "/static/media/search_icon.c4081629a0f090578d58.png",
-    "static/media/eye.webp": "/static/media/eye.35f27e60d02de8bb0480.webp",
-    "index.html": "/index.html",
-    "main.ba3bef56.css.map": "/static/css/main.ba3bef56.css.map",
-    "main.77491c13.js.map": "/static/js/main.77491c13.js.map",
-    "592.e84755cb.chunk.js.map": "/static/js/592.e84755cb.chunk.js.map"
+    "main.css": "/CSE442-542/2024-Spring/cse-442ac/static/css/main.e47b53be.css",
+    "main.js": "/CSE442-542/2024-Spring/cse-442ac/static/js/main.73ed8f1c.js",
+    "static/media/Comment.png": "/CSE442-542/2024-Spring/cse-442ac/static/media/Comment.71238cf648e7e2a17b52.png",
+    "static/media/Like.png": "/CSE442-542/2024-Spring/cse-442ac/static/media/Like.27c3e172c6deaa9974d7.png",
+    "static/media/Teach.png": "/CSE442-542/2024-Spring/cse-442ac/static/media/Teach.d4dde0292c7633109d1f.png",
+    "static/media/Logo.png": "/CSE442-542/2024-Spring/cse-442ac/static/media/Logo.ebb82cb946c22fe6b0b2.png",
+    "static/media/Unknown.jpeg": "/CSE442-542/2024-Spring/cse-442ac/static/media/Unknown.02ed966c3fda1f970747.jpeg",
+    "static/media/eye.png": "/CSE442-542/2024-Spring/cse-442ac/static/media/eye.e18ebf3f5ff2fd461bde.png",
+    "static/media/search_icon.png": "/CSE442-542/2024-Spring/cse-442ac/static/media/search_icon.c4081629a0f090578d58.png",
+    "static/media/defaultPic.png": "/CSE442-542/2024-Spring/cse-442ac/static/media/defaultPic.867978d9a80136f33711.png",
+    "index.html": "/CSE442-542/2024-Spring/cse-442ac/index.html",
+    "main.e47b53be.css.map": "/CSE442-542/2024-Spring/cse-442ac/static/css/main.e47b53be.css.map",
+    "main.73ed8f1c.js.map": "/CSE442-542/2024-Spring/cse-442ac/static/js/main.73ed8f1c.js.map"
   },
   "entrypoints": [
-    "static/css/main.ba3bef56.css",
-    "static/js/main.77491c13.js"
+    "static/css/main.e47b53be.css",
+    "static/js/main.73ed8f1c.js"
   ]
 }
