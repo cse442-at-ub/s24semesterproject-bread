@@ -13,7 +13,7 @@ function NavBar() {
 
     const handleLogout = async () => {
         console.log("Initiating logout process"); // Debug: Initiate logout
-        const logoutUrl = '/backend/logout/logout.php'; // Update with your actual URL
+        const logoutUrl = 'https://cors-anywhere.herokuapp.com/corsdemo/https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/backend/logout/logout.php'; // Update with your actual URL
 
         // Retrieve session data from session storage
         const email = sessionStorage.getItem('email');
