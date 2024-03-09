@@ -20,11 +20,11 @@ function Main() {
       password: password
     };
 
-    fetch('https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/backend/login/login.php', {
+    fetch('https://cors-anywhere.herokuapp.com/https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/backend/login/login.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Origin': 'https://www-student.cse.buffalo.edu' // Add origin header
+        'Origin': 'https://www-student.cse.buffalo.edu/' // Add origin header
       },
       body: JSON.stringify(data)
     })
@@ -38,6 +38,7 @@ function Main() {
     .then(data => {
       // Check if the response contains expected data
       if (data.email && data.sessionID && data.userID) {
+        localStorage.setItem('userData', JSON.stringify(data));
         // Redirect to '/home' page
         navigate('/homepage');
       } else {
