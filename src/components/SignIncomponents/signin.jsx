@@ -27,7 +27,7 @@ function Main() {
         'Origin': 'https://www-student.cse.buffalo.edu/' // Add origin header
       },
       body: JSON.stringify(data)
-    })
+    })    
     .then(response => {
       if (response.ok) {
         return response.json();
