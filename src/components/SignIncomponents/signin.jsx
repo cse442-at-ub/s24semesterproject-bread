@@ -27,7 +27,7 @@ function Main() {
         'Origin': 'https://www-student.cse.buffalo.edu' // Add origin header
       },
       body: JSON.stringify(data)
-    })
+    })    
     .then(response => {
       if (response.ok) {
         return response.json();
@@ -38,6 +38,7 @@ function Main() {
     .then(data => {
       // Check if the response contains expected data
       if (data.email && data.sessionID && data.userID) {
+        localStorage.setItem('userData', JSON.stringify(data));
         // Redirect to '/home' page
         navigate('/homepage');
       } else {
