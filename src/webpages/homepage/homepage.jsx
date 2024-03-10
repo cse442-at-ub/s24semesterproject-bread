@@ -12,8 +12,13 @@ const Homepage = () => {
 
   const handleSearch = () => {
     if (searchTerm.trim() !== '') {
-      fetch(`https://cors-anywhere.herokuapp.com/https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/backend/searchFilter/searchFilter.php?query=${encodeURIComponent(searchTerm)}&filter=${filter}`)
-        .then(response => response.json())
+      fetch(`https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/backend/searchFilter/searchFilter.php?query=${encodeURIComponent(searchTerm)}&filter=${filter}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
         .then(data => {
           if (data.length > 0) {
             navigate('/search', { state: { professors: data } });
@@ -21,7 +26,10 @@ const Homepage = () => {
             setSearchError('No results found.');
           }
         })
-        .catch(error => console.error('Error fetching search results:', error));
+        .catch(error => {
+          console.error('Error fetching search results:', error);
+          setSearchError('Error fetching search results.');
+        });
     }
   };
 
