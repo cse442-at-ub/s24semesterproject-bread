@@ -1,16 +1,15 @@
 import React from 'react';
-
+import {Link} from 'react-router-dom';
+import './Footer.css';
 function Footer() {
   return (
     <footer className="footer" style={{ position: 'relative' }}>
-      <p>&copy; 2024 My Website. All Rights Reserved.</p>
-      <a href="/signuppage/" style={{ textDecoration: 'none' }}>
+      <Link to="/signuppage/" style={{ textDecoration: 'none' }}>
         <button style={{
-          position: 'absolute',
-          width: '392px',
-          height: '63px',
+          position: 'relative',
+          width: 'calc(27.9vw + 27.9vh)',
+          height: 'calc(4.5vw + 4.5vh)',
           left: '50%',
-          top: '50%',
           transform: 'translate(-50%, -50%)',
           background: '#005BBB',
           borderRadius: '15.5633px',
@@ -19,7 +18,7 @@ function Footer() {
           fontFamily: 'Crimson Text',
           fontStyle: 'normal',
           fontWeight: '600',
-          fontSize: '35px', /* Adjust font size */
+          fontSize: 'calc(2.5vw + 2.5vh)', /* Adjust font size */
           lineHeight: '63px', /* Adjust line height */
           display: 'flex',
           alignItems: 'center',
@@ -28,10 +27,11 @@ function Footer() {
         }}>
           Sign up now!
         </button>
-      </a>
+      </Link>
     </footer>
   );
 }
+
 
 export default Footer;
 

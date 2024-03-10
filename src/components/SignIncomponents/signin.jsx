@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import './signin.css'; 
 import eyeLogo from './Logo.png';
-
+import { Link,useNavigate } from 'react-router-dom';
 function Main() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const navigate= useNavigate();
   const handleLogin = () => {
     // Check if the email ends with 'buffalo.edu'
     if (!email.endsWith('buffalo.edu')) {
@@ -23,10 +24,10 @@ function Main() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Origin': 'https://www-student.cse.buffalo.edu' // Add origin header
+        'Origin': 'https://www-student.cse.buffalo.edu/' // Add origin header
       },
       body: JSON.stringify(data)
-    })
+    })    
     .then(response => {
       if (response.ok) {
         return response.json();
@@ -37,8 +38,9 @@ function Main() {
     .then(data => {
       // Check if the response contains expected data
       if (data.email && data.sessionID && data.userID) {
+        localStorage.setItem('userData', JSON.stringify(data));
         // Redirect to '/home' page
-        window.location.href = '/homepage/';
+        navigate('/homepage');
       } else {
         // Handle unexpected response
         throw new Error('Invalid response data');
@@ -78,7 +80,7 @@ function Main() {
             <button className="primary" type="button" onClick={handleLogin}>Sign In</button>
           </form>
           <div className="signup-link">
-            <p className="link">New to Insight? <a href="/signuppage/" className="link">Sign Up</a></p>
+            <p className="link">New to Insight? <Link to="/signuppage" className="link">Sign Up</Link></p>
           </div>
         </main>
       </div>
