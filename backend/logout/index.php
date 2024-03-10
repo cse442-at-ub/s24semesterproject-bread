@@ -2,50 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sign Out Form</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#signOutForm').submit(function(e) {
-                e.preventDefault(); // Prevent the default form submission behavior
-
-                // Gather data from the form
-                var formData = {
-                    email: $('#email').val(),
-                    sessionID: $('#sessionID').val(),
-                    userID: parseInt($('#userID').val())
-                };
-
-                // Send the data as JSON
-                $.ajax({
-                    type: 'POST',
-                    url: 'logout.php', // Update to the path of your sign-out PHP script
-                    contentType: 'application/json',
-                    data: JSON.stringify(formData),
-                    success: function(response) {
-                        alert('Sign out successful: ' + JSON.stringify(response));
-                    },
-                    error: function(xhr, status, error) {
-                        alert('Error signing out: ' + xhr.responseText);
-                    }
-                });
-            });
-        });
-    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout Form</title>
 </head>
 <body>
+    <h2>Logout Form</h2>
+    <!-- Display form for user input -->
+    <form method="POST">
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div>
+            <label for="sessionID">Session ID:</label>
+            <input type="text" id="sessionID" name="sessionID" required>
+        </div>
+        <div>
+            <label for="userID">User ID:</label>
+            <input type="number" id="userID" name="userID" required>
+        </div>
+        <button type="submit" name="logout" value="true">Log Out</button>
+    </form>
 
-<h2>Sign Out Test Form</h2>
+    <?php
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
+        // Assuming these are the correct variables to receive.
+        $email = $_POST['email'];
+        $sessionID = $_POST['sessionID'];
+        $userID = $_POST['userID'];
 
-<form id="signOutForm">
-    <label for="email">Email:</label><br>
-    <input type="text" id="email" name="email" required><br>
-    <label for="sessionID">Session ID:</label><br>
-    <input type="text" id="sessionID" name="sessionID" required><br>
-    <label for="userID">User ID:</label><br>
-    <input type="number" id="userID" name="userID" required><br><br>
-    <input type="submit" value="Sign Out">
-</form>
+        // Here, instead of calling the function directly as in the previous example,
+        // you should process the logout logic, possibly redirecting to or including the logout.php script.
+        // For the sake of this example, let's assume logout.php handles the logic based on POST data directly.
 
+        // Redirect to the logout.php script with POST data.
+        // Note: This is a simplistic approach for demonstration.
+        // In practice, you'd likely use session management and more secure methods for logout.
+        include 'logout.php'; // Or redirect to logout.php if it's designed to work standalone.
+    }
+    ?>
 </body>
 </html>
