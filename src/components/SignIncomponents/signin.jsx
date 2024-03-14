@@ -38,7 +38,10 @@ function Main() {
     .then(data => {
       // Check if the response contains expected data
       if (data.email && data.sessionID && data.userID) {
-        localStorage.setItem('userData', JSON.stringify(data));
+        // localStorage.setItem('userData', JSON.stringify(data));
+        localStorage.setItem('email', JSON.stringify(data.email));
+        localStorage.setItem('sessionID', JSON.stringify(data.sessionID));
+        localStorage.setItem('userID', JSON.stringify(data.userID));
         // Redirect to '/home' page
         navigate('/homepage');
       } else {

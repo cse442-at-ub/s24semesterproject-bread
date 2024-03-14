@@ -1,9 +1,41 @@
 <?php
-// Include the database configuration file
-require_once '../db_config.php';
+session_start();
+include_once('../db_config.php'); // Adjust the path as needed
+
+// Enforce HTTPS in production environments
+if (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] !== 'on') {
+    header("Location: https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+    exit();
+}
+
+// CORS handling
+if (isset($_SERVER['HTTP_ORIGIN'])) {
+    header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
+    header('Access-Control-Allow-Credentials: true');
+    header('Access-Control-Max-Age: 86400'); // cache for 1 day
+} else {
+    // For non-preflight requests without an origin (e.g., same-origin or when CORS is not in use)
+    header('Access-Control-Allow-Origin: http://localhost:3000');
+}
+
+header("Access-Control-Allow-Methods: POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
+header("Content-Type: application/json");
+
+// Preflight request handling
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']))
+        header("Access-Control-Allow-Methods: POST, OPTIONS");
+
+    if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']))
+        header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
+
+    exit(0);
+}
 
 // Function to establish database connection
-function getDbConnection() {
+function getDbConnection()
+{
     global $servername, $username, $password, $dbname;
     $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -16,52 +48,31 @@ function getDbConnection() {
 }
 
 // Function to sign out a user
-function signOut($email, $sessionID, $userID) {
+function signOut($email, $sessionID, $userID)
+{
     $conn = getDbConnection();
     // Prepare SQL statement to prevent SQL injection
-    $stmt = $conn->prepare("SELECT * FROM sessions WHERE email = ? AND sessionID = ? AND userID = ?");
+    $stmt = $conn->prepare("DELETE FROM sessions WHERE email = ? AND sessionID = ? AND userID = ?");
     $stmt->bind_param("ssi", $email, $sessionID, $userID);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    
-    if ($result->num_rows > 0) {
-        // Session exists; proceed to delete
-        $deleteStmt = $conn->prepare("DELETE FROM sessions WHERE email = ? AND sessionID = ? AND userID = ?");
-        $deleteStmt->bind_param("ssi", $email, $sessionID, $userID);
-        if ($deleteStmt->execute()) {
-            http_response_code(200); // OK
-            // Echo success message with email, sessionID, and userID
-            echo json_encode([
-                "message" => "Successfully signed out",
-                "email" => $email,
-                "sessionID" => $sessionID,
-                "userID" => $userID
-            ]);
-        } else {
-            http_response_code(500); // Server error
-            echo json_encode(["message" => "Failed to delete session"]);
-        }
+    if ($stmt->execute()) {
+        http_response_code(200); // OK
+        echo json_encode(["message" => "Successfully signed out"]);
     } else {
-        // Session not found
-        http_response_code(404); // Not found
-        echo json_encode(["message" => "Session not found"]);
+        http_response_code(500); // Server error
+        echo json_encode(["message" => "Failed to delete session"]);
     }
 
     $stmt->close();
     $conn->close();
 }
 
-// Check if the request is POST and handle JSON input
+// Main
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (isset($_POST['email']) && isset($_POST['sessionID']) && isset($_POST['userID'])) {
-        $email = $_POST['email'];
-        $sessionID = $_POST['sessionID'];
-        $userID = $_POST['userID'];
-        
-        signOut($email, $sessionID, $userID);
+    $data = json_decode(file_get_contents("php://input"), true);
+    if (isset($data['email']) && isset($data['sessionID']) && isset($data['userID'])) {
+        signOut($data['email'], $data['sessionID'], $data['userID']);
     } else {
         http_response_code(400); // Bad request
         echo json_encode(["message" => "Invalid request, email, sessionID, and userID required"]);
     }
 }
-?>

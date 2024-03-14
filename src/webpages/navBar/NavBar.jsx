@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './NavBar.css'; // Ensure this CSS file is properly linked
 import Logo from "../../images/Logo.png";
 import MenuIcon from "../../images/menu(white).png"; // Verify the path to your image
-
+// "proxy": "https://www-student.cse.buffalo.edu",
 function NavBar() {
     const [isMenuVisible, setIsMenuVisible] = useState(false);
 
@@ -10,42 +10,51 @@ function NavBar() {
         setIsMenuVisible(!isMenuVisible);
         console.log("Menu visibility toggled:", isMenuVisible); // Debug: Check menu toggle
     };
-
     const handleLogout = async () => {
         console.log("Initiating logout process"); // Debug: Initiate logout
-        const logoutUrl = 'https://cors-anywhere.herokuapp.com/corsdemo/https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/backend/logout/logout.php'; // Update with your actual URL
-
+        const logoutUrl = 'https://cors-anywhere.herokuapp.com/https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/backend/logout/logout.php'; // Update with your actual URL
+    
         // Retrieve session data from session storage
-        const email = sessionStorage.getItem('email');
-        const sessionID = sessionStorage.getItem('sessionID');
-        const userID = sessionStorage.getItem('userID');
+        const email = localStorage.getItem('email');
+        const sessionID = localStorage.getItem('sessionID');
+        const userID = localStorage.getItem('userID');
         console.log("Retrieved session data:", { email, sessionID, userID }); // Debug: Check retrieved session data
 
+
+    
         if (email && sessionID && userID) {
             console.log("Session data exists. Proceeding with logout."); // Debug: Session data check
             try {
-                
+                console.log("Step 1."); // Debug: Session data check
+
                 const response = await fetch(logoutUrl, {
                     method: 'POST',
+                    
                     headers: {
                         'Content-Type': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest',
                     },
-                    body: JSON.stringify({ email: email, sessionID: sessionID, userID: userID, action: 'logout'}),
+                    body: JSON.stringify({ email, sessionID, userID, action: 'logout'}),
                 });
                 console.log("Raw response:", response); 
-                const data = await response.json(); // Assuming your logout.php returns JSON
-                console.log("Logout response:", data); // Debug: Check logout response
-
+    
+                // Check if the response status is OK before trying to parse the JSON
                 if (response.ok) {
+                    const data = await response.json(); // Parsing JSON from the response
+                    console.log("Logout response:", data); // Debug: Check logout response
+    
                     console.log("Logout successful:", data.message); // Debug: Successful logout
                     // Clear session data from session storage
-                    sessionStorage.removeItem('email');
-                    sessionStorage.removeItem('sessionID');
-                    sessionStorage.removeItem('userID');
+                    localStorage.removeItem('email');
+                    localStorage.removeItem('sessionID');
+                    localStorage.removeItem('userID');
+                    console.log("deleted"); // Debug: Initiate logout
+
                     // Redirect the user or update the UI as needed
                     window.location.href = '/signinpage'; // Use window.location.href for redirection
                 } else {
-                    console.error("Logout failed with response:", data.message); // Debug: Failed logout response
+                    // If response is not ok, logging the status and statusText
+                    console.error("Logout failed with status:", response.status, response.statusText);
                 }
             } catch (error) {
                 console.error('Logout error caught:', error); // Debug: Catch logout error
@@ -54,7 +63,7 @@ function NavBar() {
             console.log("No active session found. Redirecting to login page."); // Debug: No session data
             window.location.href = '/signinpage'; // Use window.location.href for redirection
         }
-    };
+    };    
 
 
     return (
