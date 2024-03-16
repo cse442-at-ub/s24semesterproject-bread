@@ -4,7 +4,10 @@ const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
 
 const signUp = async (email, username, password, confirmPassword) => {
   try {
-    const response = await fetch(apiUrl, {
+    //when u try to connect the signup locally:
+    const response = await fetch(proxyUrl + apiUrl, {
+      //and comment code below
+    //const response = await fetch(apiUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -19,16 +22,13 @@ const signUp = async (email, username, password, confirmPassword) => {
     });
 
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      const responseData = await response.json();
+      console.log('Response data:', responseData);
+      throw new Error(String(responseData.message));
     }
-
-    const responseData = await response.text();
-    console.log('Response data:', responseData);
-
-    return responseData;
   } catch (error) {
     console.error('Error:', error);
-    throw new Error('Failed to sign up. Please try again.');
+    throw new Error(error.message);
   }
 };
 

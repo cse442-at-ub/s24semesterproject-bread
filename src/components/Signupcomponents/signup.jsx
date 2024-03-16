@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './signup.css'; 
 import eyeLogo from './Logo.png';
-import signUp from '../../SignUpLink.jsx';
-import { Link,useNavigate } from 'react-router-dom';
+import signUp from './SignUpLink.jsx';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Main() {
   const navigate= useNavigate();
@@ -33,10 +33,12 @@ function Main() {
         alert(responseData);
       }
     } catch (error) {
-      console.error('Error:', error);
-      alert("The user name is already been used.");
+      // Check if the error message contains specific strings
+        // For other errors, simply display the error message
+        alert(error.message);
+
     }
-  };
+  }
 
   return (
     <div className="main-container">
