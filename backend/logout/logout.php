@@ -1,37 +1,28 @@
 <?php
-session_start();
-include_once('../db_config.php'); // Adjust the path as needed
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+header('X-Content-Type-Options: nosniff');
+require_once '../db_config.php';
 
-// Enforce HTTPS in production environments
-if (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] !== 'on') {
-    header("Location: https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
-    exit();
+$requestOrigin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
+
+// Specify the domains allowed for CORS, including HTTPS
+$allowedDomains = [
+    'https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac', // Your production frontend domain
+    'http://localhost:3000/CSE442-542/2024-Spring/cse-442ac/', // Your development frontend domain, assuming HTTPS is configured locally
+    // Add any other domains you expect requests from, using HTTPS
+];
+
+// Check if the request origin is in the allowed list
+if (in_array($requestOrigin, $allowedDomains)) {
+    header('Access-Control-Allow-Origin: ' . $requestOrigin);
 }
 
-// CORS handling
-if (isset($_SERVER['HTTP_ORIGIN'])) {
-    header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
-    header('Access-Control-Allow-Credentials: true');
-    header('Access-Control-Max-Age: 86400'); // cache for 1 day
-} else {
-    // For non-preflight requests without an origin (e.g., same-origin or when CORS is not in use)
-    header('Access-Control-Allow-Origin: http://localhost:3000');
-}
-
-header("Access-Control-Allow-Methods: POST, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type");
-header("Content-Type: application/json");
-
-// Preflight request handling
-if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-    if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']))
-        header("Access-Control-Allow-Methods: POST, OPTIONS");
-
-    if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']))
-        header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
-
-    exit(0);
-}
+// Set other CORS headers as needed
+header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+header('Access-Control-Allow-Headers: X-Requested-With, Content-Type, Accept, Origin, Authorization');
+header('Access-Control-Max-Age: 3600');
+header('Access-Control-Allow-Credentials: true');
 
 // Function to establish database connection
 function getDbConnection()

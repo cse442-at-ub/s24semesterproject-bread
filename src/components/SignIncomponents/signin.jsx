@@ -19,8 +19,8 @@ function Main() {
       email: email,
       password: password
     };
-
-    fetch('https://cors-anywhere.herokuapp.com/https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/backend/login/login.php', {
+//'https://cors-anywhere.herokuapp.com/https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/backend/login/login.php'
+    fetch('../backend/login/login.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
