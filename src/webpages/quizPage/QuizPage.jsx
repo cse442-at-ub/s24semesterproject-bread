@@ -1,103 +1,114 @@
 import React, { useState } from 'react';
-import NavBar from '../navBar/NavBar';
-import './QuizPage.css'; // Assuming your CSS file is named Quiz.css
+import { useNavigate } from 'react-router-dom'; // Import useHistory
+import './QuizPage.css'; // Make sure this CSS file includes styles for your table
+import questions from './questions.jsx';
 
 const Quiz = () => {
-  // States for tracking quiz answers and results
   const [answers, setAnswers] = useState({});
   const [result, setResult] = useState('');
+  const [showTable, setShowTable] = useState(false); // State to control table visibility
 
-  // Questions array
-  const questions = [
-    {
-        question: "When starting a new topic, you prefer a professor who:",
-        options: [
-          "A. Breaks down complex concepts into understandable parts.",
-          "B. Introduces interactive tools and technologies.",
-          "C. Begins with a comprehensive lecture on the topic.",
-          "D. Encourages group activities to explore the topic.",
-          "E. Presents a challenging problem to solve using the topic."
-        ]
-      },
-      {
-        question: "Your ideal study material format is:",
-        options: [
-          "A. Personalized notes or study guides.",
-          "B. Digital resources and online courses.",
-          "C. Textbooks and academic papers.",
-          "D. Collaborative study groups and forums.",
-          "E. Real-world case studies and examples."
-        ]
-      },
-      {
-        question: "During lectures, you prefer:",
-        options: [
-          "A. Frequent check-ins to ensure understanding.",
-          "B. The use of multimedia presentations and visuals.",
-          "C. Detailed note-taking and traditional lectures.",
-          "D. Interactive discussions and peer feedback.",
-          "E. Debates and critical analysis tasks."
-        ]
-      },
-      {
-        question: "The type of assignments you find most enriching are:",
-        options: [
-          "A. Projects with step-by-step feedback.",
-          "B. Creative assignments using new software or methods.",
-          "C. Standard essays and problem sets.",
-          "D. Group projects with peer evaluations.",
-          "E. Independent research projects with minimal guidance."
-        ]
-      },
-      {
-        question: "Feedback on your work should be:",
-        options: [
-          "A. Supportive, with constructive suggestions.",
-          "B. Innovative, offering creative improvements.",
-          "C. Direct, with clear indications of right or wrong.",
-          "D. Collaborative, including feedback from peers.",
-          "E. Challenging, pushing you to do better."
-        ]
-      }
-  
-    // Add all other questions following the same structure
-  ];
+  const navigate = useNavigate(); // Use the useNavigate hook
 
-   // Function to handle option selection
-   const handleSelectOption = (questionIndex, option) => {
+  const addToProfile = () => {
+    localStorage.setItem('quizResult', result);
+    alert('Result added to profile!');
+    navigate('/homepage'); // Navigate to homepage
+  };
+  // Questions array remains the same...
+
+  const handleSelectOption = (questionIndex, option) => {
     setAnswers({ ...answers, [questionIndex]: option });
   };
 
-  // Function to calculate and set the result
   const calculateResult = () => {
     const counts = { A: 0, B: 0, C: 0, D: 0, E: 0 };
     Object.values(answers).forEach(answer => counts[answer]++);
     const maxCount = Math.max(...Object.values(counts));
     const topCategories = Object.keys(counts).filter(key => counts[key] === maxCount);
-    setResult(`Your best match: ${topCategories.join(' and ')}`);
+    setResult(topCategories.join(' and ')); // Set result to only the top category letters
+    setShowTable(true); // Show the table when results are calculated
   };
+  
+
+// Simple Table Component with Custom CSS Class
+const Table = () => (
+  <table className="customTable">
+    <thead>
+      <tr>
+        <th>Letter</th>
+        <th>Professor Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>A</td>
+        <td>The Mentor</td>
+        <td>Professors who are especially supportive, providing personalized guidance and encouragement.</td>
+
+      </tr>
+      <tr>
+        <td>B</td>
+        <td>The Innovator</td>
+        <td>Instructors who use cutting-edge technology and innovative teaching methods to engage students.</td>
+
+      </tr>
+
+      <tr>
+        <td>C</td>
+        <td>The Traditionalist</td>
+        <td>Educators who prefer structured, lecture-based teaching and traditional assessment methods.</td>
+      </tr>
+
+      <tr>
+        <td>D</td>
+        <td>The Facilitator</td>
+        <td>Teachers who promote an interactive learning environment, encouraging group work and discussions.</td>
+      </tr>
+
+      <tr>
+        <td>E</td>
+        <td>The Challenger</td>
+        <td>Professors known for their rigorous academic standards, challenging students to think critically and independently.
+</td>
+      </tr>
+    </tbody>
+  </table>
+);
+
 
   return (
-    <div className="quiz-container">
-      <NavBar />
-      {questions.map((q, index) => (
-        <div key={index} className="question-block">
-          <div className="question">{q.question}</div>
-          <div className="options">
-            {q.options.map((option, optionIndex) => (
-              <button
-                key={optionIndex}
-                className={`option-button ${answers[index] === option.charAt(0) ? 'selected' : ''}`}
-                onClick={() => handleSelectOption(index, option.charAt(0))}
-              >
-                {option}
-              </button>
-            ))}
+    <div className='quiz-main'>
+      <div className="quiz-container">
+        <div className="quiz-header">Lets find your type of professor!</div>
+
+        {questions.map((q, index) => (
+          <div key={index} className="question-block">
+            <div className="question">{q.question}</div>
+            <div className="options">
+              {q.options.map((option, optionIndex) => (
+                <button
+                  key={optionIndex}
+                  className={`option-button ${answers[index] === option.charAt(0) ? 'selected' : ''}`}
+                  onClick={() => handleSelectOption(index, option.charAt(0))}
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
-      ))}
-      <button className="submit-btn" onClick={calculateResult}>Submit</button>
-      {result && <div className="result">{result}</div>}
+        ))}
+        <button className="submit-btn" onClick={calculateResult}>Submit</button>
+        <button className="submit-btn" onClick={addToProfile}>Add to Profile</button>
+        {result && <div className="result">{result}</div>}
+        {showTable && (
+          <>
+            <h2>If your best match was an...</h2> {/* Title for the table */}
+            <Table />
+          </>
+        )}
+      </div>
     </div>
   );
 };

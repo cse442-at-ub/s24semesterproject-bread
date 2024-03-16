@@ -22,7 +22,7 @@ function Testimonials() {
           letterSpacing: '-0.02em',
           color: '#000000',
         }}>
-          <img src={Comment} alt="Comment" style={{ width: '300px', height: '300px', margin: '0 auto' }} />
+          <img src={Comment} alt="Comment" style={{ width: 'calc(12.5vw + 12.5vh)', height: 'calc(12.5vw + 12.5vh)', margin: '0 auto' }} />
           <p>Stay anonymous<br></br> Manage and edit rating</p>
         </div>
 
@@ -39,7 +39,7 @@ function Testimonials() {
           letterSpacing: '-0.02em',
           color: '#000000',
         }}>
-          <img src={Teach} alt="Teach" style={{ width: '300px', height: '300px', margin: '0 auto' }} />
+          <img src={Teach} alt="Teach" style={{ width: 'calc(12.5vw + 12.5vh)', height: 'calc(12.5vw + 12.5vh)', margin: '0 auto' }} />
           <p>Understand their teaching <br></br>styles</p>
         </div>
 
@@ -56,7 +56,7 @@ function Testimonials() {
           letterSpacing: '-0.02em',
           color: '#000000',
         }}>
-          <img src={Like}alt="Like" style={{ width: '300px', height: '300px', margin: '0 auto' }} />
+          <img src={Like}alt="Like" style={{ width: 'calc(12.5vw + 12.5vh)', height: 'calc(12.5vw + 12.5vh)', margin: '0 auto' }} />
           <p>Like and dislike ratings</p>
         </div>
       </div>

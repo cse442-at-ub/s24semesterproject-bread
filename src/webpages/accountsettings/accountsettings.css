@@ -1,8 +1,31 @@
 /* AccountSettingsPage.css */
+
 .profile-pic-container {
-    margin-top: 10vh ;
-    margin-left:5vh;
+    position: relative; /* Ensure child elements can be positioned relative to this container */
+    margin-top: 10vh;
+    margin-left: 1vh;
+    /* Add your existing styles */
 }
+
+.profile-pic-container:hover .upload-text {
+    opacity: 1;
+}
+
+.upload-text {
+    position: absolute;
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust the centering based on the element's size */
+    opacity: 0; /* Make text invisible by default */
+    transition: opacity 0.3s ease; /* Smooth transition for the opacity */
+    color: white; /* Choose a text color that stands out */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    padding: 5px 10px; /* Padding around the text */
+    border-radius: 5px; /* Optional: rounded corners for the background */
+    pointer-events: none; /* Prevent the text from interfering with the label's click event */
+}
+
+
 .main-container {
     display: flex;
     flex-direction: row; /* Change to row for a side-by-side layout */
@@ -38,7 +61,7 @@
     font-family: "Crimison text";
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-top: 40vh;
+    margin-top: 30vh;
 }
 
 .delete-account-button:hover {
@@ -86,6 +109,7 @@
     flex-direction: column;
     gap: 10px; /* Space between fields */
     margin-top: 20px; /* Space below the profile picture */
+    margin-bottom: 1vh;
 }
 
 .text-field {
@@ -135,5 +159,71 @@
     gap: 10px; /* Adjust space between label and input */
     width: 100%;
 
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it's above other content */
+}
+
+.modal-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 400px; /* Adjust width as necessary */
+}
+
+
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 400px; /* Adjust based on your preference */
+    font-family: 'Crimison Text';
+
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: space-around; /* This separates the buttons */
+    margin-top: 20px;
+}
+
+.modal-button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.confirm {
+    background-color: #ff4d4d; /* Green */
+    color: white;
     
 }
+.confirm:hover {
+    background-color: #cc0000; /* Darker shade for hover effect */
+}
+
+.cancel {
+    background-color: #969696; /* Red */
+    color: white;
+}
+.cancel:hover {
+    background-color: #4e4e4e; /* Darker shade for hover effect */
+}
+
+
