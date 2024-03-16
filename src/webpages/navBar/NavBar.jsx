@@ -27,7 +27,7 @@ function NavBar() {
             try {
                 console.log("Step 1."); // Debug: Session data check
 
-                const response = await fetch(logoutUrl, {
+                const response = await fetch('http://localhost/backend/logout/logout.php', {
                     method: 'POST',
                     
                     headers: {

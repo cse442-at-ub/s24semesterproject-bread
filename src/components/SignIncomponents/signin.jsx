@@ -1,3 +1,5 @@
+//'https://cors-anywhere.herokuapp.com/https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/backend/login/login.php'
+
 import React, { useState } from 'react';
 import './signin.css'; 
 import eyeLogo from './Logo.png';
@@ -19,12 +21,10 @@ function Main() {
       email: email,
       password: password
     };
-//'https://cors-anywhere.herokuapp.com/https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/backend/login/login.php'
-    fetch('../backend/login/login.php', {
+    fetch('http://localhost/backend/login/login.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Origin': 'https://www-student.cse.buffalo.edu/' // Add origin header
       },
       body: JSON.stringify(data)
     })    
