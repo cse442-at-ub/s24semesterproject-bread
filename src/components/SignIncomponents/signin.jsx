@@ -20,7 +20,12 @@ function Main() {
       password: password
     };
 
-    fetch('https://cors-anywhere.herokuapp.com/https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/backend/login/login.php', {
+    const apiUrl = 'https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/backend/login/login.php';
+    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+    //For local
+     fetch (proxyUrl + apiUrl, {
+    //For server
+    //fetch(apiUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
