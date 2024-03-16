@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Account Management</title>
 </head>
+
 <body>
     <h2>User Account Management</h2>
     <!-- Form action updated to point to login.php, removing the registration functionality -->
@@ -22,4 +24,5 @@
         <button type="submit" name="action" value="login">Login</button>
     </form>
 </body>
+
 </html>
