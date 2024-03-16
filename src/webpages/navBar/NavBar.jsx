@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import './NavBar.css'; // Ensure this CSS file is properly linked
 import Logo from "../../images/Logo.png";
 import MenuIcon from "../../images/menu(white).png"; // Verify the path to your image
-// "proxy": "https://www-student.cse.buffalo.edu",
+import { Link,useNavigate } from 'react-router-dom';
+
+
 function NavBar() {
     const [isMenuVisible, setIsMenuVisible] = useState(false);
 
+    const navigate= useNavigate();
     const toggleMenu = () => {
         setIsMenuVisible(!isMenuVisible);
         console.log("Menu visibility toggled:", isMenuVisible); // Debug: Check menu toggle
@@ -29,10 +32,8 @@ function NavBar() {
 
                 const response = await fetch('http://localhost/backend/logout/logout.php', {
                     method: 'POST',
-                    
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-Requested-With': 'XMLHttpRequest',
                     },
                     body: JSON.stringify({ email, sessionID, userID, action: 'logout'}),
                 });
@@ -51,7 +52,7 @@ function NavBar() {
                     console.log("deleted"); // Debug: Initiate logout
 
                     // Redirect the user or update the UI as needed
-                    window.location.href = '/signinpage'; // Use window.location.href for redirection
+                    navigate('/signinpage') // Use window.location.href for redirection
                 } else {
                     // If response is not ok, logging the status and statusText
                     console.error("Logout failed with status:", response.status, response.statusText);
@@ -61,7 +62,7 @@ function NavBar() {
             }
         } else {
             console.log("No active session found. Redirecting to login page."); // Debug: No session data
-            window.location.href = '/signinpage'; // Use window.location.href for redirection
+            navigate('/signin') // Use window.location.href for redirection
         }
     };    
 

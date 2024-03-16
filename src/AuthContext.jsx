@@ -7,8 +7,11 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    const userData = localStorage.getItem('userData');
-    if (userData) {
+    const email = localStorage.getItem('email');
+    const sessionID = localStorage.getItem('sessionID');
+    const userID = localStorage.getItem('userID');
+
+    if (email && sessionID && userID) {
       setIsAuthenticated(true);
     }
   }, []);
