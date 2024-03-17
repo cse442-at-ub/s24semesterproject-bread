@@ -4,9 +4,9 @@ const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
 
 const signUp = async (email, username, password, confirmPassword) => {
   try {
-    //when u try to connect the signup locally:
+    //locally:
     const response = await fetch(proxyUrl + apiUrl, {
-      //and comment code below
+      //server:
     //const response = await fetch(apiUrl, {
       method: 'POST',
       headers: {

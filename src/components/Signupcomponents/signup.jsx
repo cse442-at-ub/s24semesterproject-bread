@@ -26,7 +26,7 @@ function Main() {
       const responseData = await signUp(email, username, password, confirmPassword);
       console.log('Response data:', responseData);
 
-      if (responseData.includes("User registered successfully") || responseData.includes("Email sent successfully")) {
+      if (responseData==null) {
         // Use relative path for navigation
         navigate('/signinpage');
       } else {
