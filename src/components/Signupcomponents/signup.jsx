@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import './signup.css'; 
 import eyeLogo from './Logo.png';
-import signUp from './SignUpLink.jsx';
 import { Link, useNavigate } from 'react-router-dom';
 
-function Main() {
-  const navigate= useNavigate();
+const apiUrl = 'https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/backend/register/register.php';
+const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+
+const Main = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -23,20 +25,31 @@ function Main() {
     }
 
     try {
-      const responseData = await signUp(email, username, password, confirmPassword);
-      console.log('Response data:', responseData);
+      //local
+      const response = await fetch(proxyUrl + apiUrl, {
+      //server:
+      //const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email,
+          username: username,
+          password: password,
+          confirmPassword: confirmPassword,
+          action: 'register',
+        }),
+      });
 
-      if (responseData==null) {
-        // Use relative path for navigation
-        navigate('/signinpage');
+      if (!response.ok) {
+        const responseData = await response.json();
+        throw new Error(String(responseData.message));
       } else {
-        alert(responseData);
+        navigate('/signinpage');
       }
     } catch (error) {
-      // Check if the error message contains specific strings
-        // For other errors, simply display the error message
-        alert(error.message);
-
+      alert(error.message);
     }
   }
 
