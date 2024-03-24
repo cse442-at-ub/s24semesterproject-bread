@@ -1,9 +1,12 @@
 <?php
 // Include the database configuration file
 require_once '../db_config.php';
+$data = json_decode(file_get_contents('php://input'), true);
+
 
 // Function to establish database connection
-function getDbConnection() {
+function getDbConnection()
+{
     global $servername, $username, $password, $dbname;
     $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -16,14 +19,15 @@ function getDbConnection() {
 }
 
 // Function to sign out a user
-function signOut($email, $sessionID, $userID) {
+function signOut($email, $sessionID, $userID)
+{
     $conn = getDbConnection();
     // Prepare SQL statement to prevent SQL injection
     $stmt = $conn->prepare("SELECT * FROM sessions WHERE email = ? AND sessionID = ? AND userID = ?");
     $stmt->bind_param("ssi", $email, $sessionID, $userID);
     $stmt->execute();
     $result = $stmt->get_result();
-    
+
     if ($result->num_rows > 0) {
         // Session exists; proceed to delete
         $deleteStmt = $conn->prepare("DELETE FROM sessions WHERE email = ? AND sessionID = ? AND userID = ?");
@@ -53,15 +57,14 @@ function signOut($email, $sessionID, $userID) {
 
 // Check if the request is POST and handle JSON input
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (isset($_POST['email']) && isset($_POST['sessionID']) && isset($_POST['userID'])) {
-        $email = $_POST['email'];
-        $sessionID = $_POST['sessionID'];
-        $userID = $_POST['userID'];
-        
+    if (isset($data['email']) && isset($data['sessionID']) && isset($data['userID'])) {
+        $email = $data['email'];
+        $sessionID = $data['sessionID'];
+        $userID = $data['userID'];
+
         signOut($email, $sessionID, $userID);
     } else {
         http_response_code(400); // Bad request
         echo json_encode(["message" => "Invalid request, email, sessionID, and userID required"]);
     }
 }
-?>

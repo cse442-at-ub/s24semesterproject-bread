@@ -11,25 +11,33 @@ import QuizPage from './webpages/quizPage/QuizPage';
 import Review from './webpages/Review/Review';
 import Search from './webpages/searchresult/searchresult';
 
+import { AuthProvider } from './AuthContext';
+import ProtectedRoute from './ProtectedRoute';
+
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <Routes>
-          <Route path="/signinpage" element={<LogInPage />} />
-          <Route path="/signuppage" element={<SignUpPage />} />
-          <Route path="/" element={<StartPage />} /> 
-          <Route path="/review" element={<Review />} /> 
-          <Route path="/homepage" element={<Homepage />} /> 
-          <Route path="/accountsettings" element={<AccountSettings />} />
-          <Route path="/professorPage" element={<ProfessorPage />} />
-          <Route path="/quizPage" element={<QuizPage />} />
-          <Route path="/professor/:name" element={<ProfessorPage />} />
-          <Route path="/search" element={<Search />} /> 
-        </Routes>
-      </div>
-    </Router>
+    <AuthProvider> {/* Wrap everything in AuthProvider to provide authentication context */}
+      <Router>
+        <div className="App">
+          <Routes>
+            <Route path="/signinpage" element={<LogInPage />} />
+            <Route path="/signuppage" element={<SignUpPage />} />
+            <Route path="/" element={<StartPage />} /> 
+            {/* Wrap protected routes with ProtectedRoute component */}
+            <Route path="/review" element={<ProtectedRoute><Review /></ProtectedRoute>} />
+            <Route path="/homepage" element={<ProtectedRoute><Homepage /></ProtectedRoute>} />
+            <Route path="/accountsettings" element={<ProtectedRoute><AccountSettings /></ProtectedRoute>} />
+            <Route path="/professorPage" element={<ProtectedRoute><ProfessorPage /></ProtectedRoute>} />
+            <Route path="/quizPage" element={<ProtectedRoute><QuizPage /></ProtectedRoute>} />
+            <Route path="/professor/:name" element={<ProtectedRoute><ProfessorPage /></ProtectedRoute>} />
+            {/* Assuming you want the search feature open to everyone in sprint 2, so it's not wrapped */}
+            <Route path="/search" element={<Search />} />
+          </Routes>
+        </div>
+      </Router>
+    </AuthProvider>
   );
 }
+
 
 export default App;
