@@ -1,37 +1,7 @@
 <?php
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-header('X-Content-Type-Options: nosniff');
-
+// Include the database configuration file
 require_once '../db_config.php';
-
-$requestOrigin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
-
-// Specify the domains allowed for CORS, including HTTPS
-$allowedDomains = [
-    'https://www-student.cse.buffalo.edu', // Your production frontend domain
-    'http://localhost:3000', // Your development frontend domain
-    // Add any other domains you expect requests from
-];
-
-// Check if the request origin is in the allowed list
-if (in_array($requestOrigin, $allowedDomains)) {
-    header('Access-Control-Allow-Origin: ' . $requestOrigin);
-    header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
-    header('Access-Control-Allow-Headers: X-Requested-With, Content-Type, Accept, Origin, Authorization');
-    header('Access-Control-Max-Age: 3600');
-    header('Access-Control-Allow-Credentials: true');
-}
-
-// Specifically handle OPTIONS method for preflight requests
-if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-    // Note: 'Access-Control-Allow-Origin' is already set above based on the request origin
-    // No need to repeat it here unless you're overriding it for a specific reason
-
-    // Confirm preflight configuration with an OK status
-    http_response_code(200);
-    exit;
-}
+$data = json_decode(file_get_contents('php://input'), true);
 
 
 // Function to establish database connection
@@ -84,17 +54,17 @@ function signOut($email, $sessionID, $userID)
     $stmt->close();
     $conn->close();
 }
-$data = json_decode(file_get_contents("php://input"), true);
 
-file_put_contents("php://stderr", print_r($data, true));
+// Check if the request is POST and handle JSON input
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($data['email']) && isset($data['sessionID']) && isset($data['userID'])) {
+        $email = $data['email'];
+        $sessionID = $data['sessionID'];
+        $userID = $data['userID'];
 
-if (isset($data['email']) && isset($data['sessionID']) && isset($data['userID'])) {
-    $email = $data['email'];
-    $sessionID = $data['sessionID'];
-    $userID = $data['userID'];
-
-    signOut($email, $sessionID, $userID);
-} else {
-    http_response_code(400); // Bad request
-    echo json_encode(["message" => "Invalid request, email, sessionID, and userID required"]);
+        signOut($email, $sessionID, $userID);
+    } else {
+        http_response_code(400); // Bad request
+        echo json_encode(["message" => "Invalid request, email, sessionID, and userID required"]);
+    }
 }

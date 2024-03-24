@@ -5,7 +5,6 @@ header('X-Content-Type-Options: nosniff');
 require_once '../db_config.php';
 
 
-$requestOrigin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
 
 // Specify the domains allowed for CORS, including HTTPS
 $allowedDomains = [
@@ -22,6 +21,7 @@ if (in_array($requestOrigin, $allowedDomains)) {
     header('Access-Control-Max-Age: 3600');
     header('Access-Control-Allow-Credentials: true');
 }
+
 
 // Specifically handle OPTIONS method for preflight requests
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {

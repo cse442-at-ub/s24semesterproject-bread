@@ -7,6 +7,8 @@ import { Link,useNavigate } from 'react-router-dom';
 function Main() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  
+
 
   const navigate= useNavigate();
   const handleLogin = () => {
@@ -16,12 +18,16 @@ function Main() {
       return;
     }
 
+    const apiUrl = 'https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/backend/login/login.php'; 
+    const localUrl = 'http://localhost/backend/login/login.php'; 
+    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+
     const data = {
       action: 'login',
       email: email,
       password: password
     };
-    fetch('http://localhost/backend/login/login.php', {
+    fetch(proxyUrl + apiUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -39,9 +45,9 @@ function Main() {
       // Check if the response contains expected data
       if (data.email && data.sessionID && data.userID) {
         // localStorage.setItem('userData', JSON.stringify(data));
-        localStorage.setItem('email', JSON.stringify(data.email));
-        localStorage.setItem('sessionID', JSON.stringify(data.sessionID));
-        localStorage.setItem('userID', JSON.stringify(data.userID));
+        localStorage.setItem('email', data.email);
+        localStorage.setItem('sessionID', data.sessionID);
+        localStorage.setItem('userID', data.userID);
         // Redirect to '/home' page
         navigate('/homepage');
       } else {

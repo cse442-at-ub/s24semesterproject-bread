@@ -15,7 +15,9 @@ function NavBar() {
     };
     const handleLogout = async () => {
         console.log("Initiating logout process"); // Debug: Initiate logout
-        const logoutUrl = 'https://cors-anywhere.herokuapp.com/https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/backend/logout/logout.php'; // Update with your actual URL
+
+        const apiUrl = 'https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/backend/logout/logout.php'; 
+        const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
     
         // Retrieve session data from session storage
         const email = localStorage.getItem('email');
@@ -30,7 +32,7 @@ function NavBar() {
             try {
                 console.log("Step 1."); // Debug: Session data check
 
-                const response = await fetch('http://localhost/backend/logout/logout.php', {
+                const response = await fetch(proxyUrl + apiUrl, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
