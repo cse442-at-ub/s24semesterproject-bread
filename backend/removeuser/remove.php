@@ -26,7 +26,7 @@
             try {
                 // Prepare SQL statements to check if user and session exist
                 $stmtUser = $conn->prepare("SELECT * FROM users WHERE email = ? AND userID = ?");
-                $stmtSession = $conn->prepare("SELECT * FROM sessions WHERE sessionId = ? AND userID = ?");
+                $stmtSession = $conn->prepare("SELECT * FROM sessions WHERE userID = ?");
 
                 // Bind parameters and execute statements
                 $stmtUser->bind_param("si", $email, $userID);
@@ -42,13 +42,13 @@
                     if ($sessionResult->num_rows > 0) {
                         // Prepare delete statements
                         $stmtDeleteUser = $conn->prepare("DELETE FROM users WHERE userID = ?");
-                        $stmtDeleteSession = $conn->prepare("DELETE FROM sessions WHERE sessionId = ?");
+                        $stmtDeleteSession = $conn->prepare("DELETE FROM sessions WHERE userID = ?");
 
                         // Execute delete statements
                         $stmtDeleteUser->bind_param("i", $userID);
                         $stmtDeleteUser->execute();
 
-                        $stmtDeleteSession->bind_param("s", $sessionId);
+                        $stmtDeleteSession->bind_param("s", $userID);
                         $stmtDeleteSession->execute();
 
                         // Add deletion queries for other related tables here
