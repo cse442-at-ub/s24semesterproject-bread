@@ -1,10 +1,10 @@
 // SignUpAPI.jsx
-const apiUrl = 'https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/register/register.php';
+const apiUrl = 'https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/backend/register/register.php';
 const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
 
 const signUp = async (email, username, password, confirmPassword) => {
   try {
-    const response = await fetch(proxyUrl + apiUrl, {
+    const response = await fetch(apiUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
