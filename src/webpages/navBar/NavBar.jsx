@@ -102,16 +102,16 @@ function NavBar() {
                 }}>
                     <ul style={{ listStyle: 'none', padding: 0 }}>
                         <li style={{marginBottom: '0.5rem'}}>
-                            <a href="/homepage" style={{ color: '#005bbb', textDecoration: 'none' }}>
+                            <Link to="/homepage" style={{ color: '#005bbb', textDecoration: 'none' }}>
                                 Homepage
-                            </a>
+                            </Link>
                         </li>
                         <li style={{marginBottom: '0.5rem'}}>Messages</li>
                         <li style={{marginBottom: '0.5rem'}}>Saved</li>
                         <li style={{marginBottom: '0.5rem'}}>
-                            <a href="/accountsettings" style={{ color: '#005bbb', textDecoration: 'none' }}>
+                            <Link to="/accountsettings" style={{ color: '#005bbb', textDecoration: 'none' }}>
                                 Account Settings
-                            </a>
+                            </Link>
                         </li>
                         <li style={{marginBottom: '0.5rem'}}>
                             <button onClick={handleLogout} style={{ color: '#005bbb', backgroundColor: 'transparent', border: 'none', cursor: 'pointer' }}>
