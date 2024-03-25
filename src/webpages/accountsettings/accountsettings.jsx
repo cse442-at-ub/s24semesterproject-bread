@@ -32,23 +32,26 @@ const AccountSettingsPage = () => {
     const navigate = useNavigate(); // Initialize useNavigate
 
 
-
+    
 
     const handleConfirmDelete = () => {
+        const email = localStorage.getItem('email'); // assuming you have email stored
+        const sessionId = localStorage.getItem('sessionId'); // adjust the key according to your storage
+        const userID = localStorage.getItem('userID'); // adjust the key according to your storage
+    
         const data = {
-            username: "bread", // Replace with actual username
-            sessionId: "3c380d31e9884482d33368b425d04d648cf2197a1b1863fe17", // Replace with actual session ID
-            userID: "52", // Replace with actual user ID
+            email, // using the retrieved email
+            sessionId, // using the retrieved sessionID
+            userID // using the retrieved userID
         };
+    
 
         // Use your backend endpoint URL
-        const backendUrl = 'https://cors-anywhere.herokuapp.com/https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/backend/removeuser/remove.php';
-
+        const backendUrl = 'https://cors-anywhere.herokuapp.com/http://localhost/s24semesterproject-bread/backend/removeuser/remove.php';
         fetch(backendUrl, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'Origin': 'https://www-student.cse.buffalo.edu' // Add origin header
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
         })
@@ -58,14 +61,22 @@ const AccountSettingsPage = () => {
             }
             return response.json();
         })
-        .then(() => {
-            alert('Account successfully deleted'); // Inform the user
-            navigate('/signuppage'); // Navigate to the sign-up page or login page
+        .then(data => {
+            // Here, data is the parsed JSON object
+            if (data.status === 'success') {
+                alert('Account successfully deleted');
+                navigate('/signuppage'); // Navigate to the sign-up page or login page
+            } else {
+                // Handle any specific server-sent error messages
+                throw new Error(data.message || 'Unknown error occurred');
+            }
         })
         .catch(error => {
+            // Catch any errors in the fetch or parsing process
             console.error('Delete account error:', error);
-            alert('Failed to delete account. Please try again.');
+            alert(`Failed to delete account: ${error.message}`);
         });
+    
 
         setIsModalOpen(false); // Close the modal after attempting to delete the account
     };
