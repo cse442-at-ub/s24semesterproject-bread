@@ -11,8 +11,12 @@ const Homepage = () => {
   const navigate = useNavigate();
 
   const handleSearch = () => {
+    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
     if (searchTerm.trim() !== '') {
-      fetch(`https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/backend/searchFilter/searchFilter.php?query=${encodeURIComponent(searchTerm)}&filter=${filter}`)
+      //server:
+      //fetch(`https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/backend/searchFilter/searchFilter.php?query=${encodeURIComponent(searchTerm)}&filter=${filter}`)
+      //local:
+      fetch(proxyUrl+`https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/backend/searchFilter/searchFilter.php?query=${encodeURIComponent(searchTerm)}&filter=${filter}`)
         .then(response => {
           if (!response.ok) {
             throw new Error('Network response was not ok');
