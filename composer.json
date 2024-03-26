@@ -1,5 +1,7 @@
 {
     "name": "ibrahimallahbuksh/s24semesterproject-bread",
-    "description": "Composer.json file for php",
-    "require": {}
+    "description": "A PHP project.",
+    "require": {
+        "php": "^8.3"
+    }
 }
