@@ -1,28 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Authentication</title>
-</head>
-<body>
+<?php
 
-<h2>User Authentication</h2>
+// Assuming you're testing this locally or in a controlled environment
+// This PHP script simulates a client sending JSON data to your authentication script
 
-<!-- The form action should point to the PHP script that processes the authentication -->
-<form method="POST" action="authenticate.php">
-    <label for="userID">User ID:</label>
-    <input type="number" id="userID" name="userID" required><br><br>
+// URL of your authentication script
+$url = 'http://localhost/backend/authentication/auth.php'; // Adjust this to the actual path
 
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required><br><br>
+// User data to send in JSON format
+$data = [
+    'userID' => '76', // Sample user ID
+    'email' => 'iallahbu@buffalo.edu', // Sample email address
+    'sessionID' => '2f775edf702cf45f68625092235f78a839bfbb069dcb037791' // Sample session ID
+];
 
-    <label for="sessionID">Session ID:</label>
-    <input type="text" id="sessionID" name="sessionID" required><br><br>
+// Use cURL to simulate a POST request with JSON data
+$curl = curl_init($url);
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($curl, CURLOPT_POST, true);
+curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
+curl_setopt($curl, CURLOPT_HTTPHEADER, [
+    'Content-Type: application/json'
+]);
 
-    <button type="submit">Authenticate</button>
-</form>
+$response = curl_exec($curl);
+$httpStatus = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+curl_close($curl);
 
-</body>
-</html>
+// Display the result of the authentication request
+if ($httpStatus === 200) {
+    // Successfully contacted the authentication script
+    $responseData = json_decode($response, true); // Decode JSON response
+    if ($responseData['status'] === 'success') {
+        echo "Authentication successful: " . htmlspecialchars($responseData['message']);
+    } else {
+        echo "Authentication failed: " . htmlspecialchars($responseData['message']);
+    }
+} else {
+    // Problem contacting the authentication script
+    echo "Error contacting authentication script. HTTP status: $httpStatus";
+}

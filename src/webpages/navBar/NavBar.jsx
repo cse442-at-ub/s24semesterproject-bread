@@ -3,10 +3,14 @@ import './NavBar.css'; // Ensure this CSS file is properly linked
 import Logo from "../../images/Logo.png";
 import MenuIcon from "../../images/menu(white).png"; // Verify the path to your image
 import { Link,useNavigate } from 'react-router-dom';
+import { useAuth } from '../../AuthContext'; // Import useAuth hook
+
 
 
 function NavBar() {
     const [isMenuVisible, setIsMenuVisible] = useState(false);
+    const { setIsAuthenticated } = useAuth();
+
 
     const navigate= useNavigate();
     const toggleMenu = () => {
@@ -54,6 +58,7 @@ function NavBar() {
                     console.log("deleted"); // Debug: Initiate logout
 
                     // Redirect the user or update the UI as needed
+                    setIsAuthenticated(false);
                     navigate('/signinpage') // Use window.location.href for redirection
                 } else {
                     // If response is not ok, logging the status and statusText

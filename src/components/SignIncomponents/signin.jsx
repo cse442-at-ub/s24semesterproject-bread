@@ -4,13 +4,16 @@ import React, { useState } from 'react';
 import './signin.css'; 
 import eyeLogo from './Logo.png';
 import { Link,useNavigate } from 'react-router-dom';
+import { useAuth } from '../../AuthContext'; // Import useAuth hook
+
 function Main() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  
 
-
+  const { checkAuth } = useAuth();
+  const { setIsAuthenticated } = useAuth();
   const navigate= useNavigate();
+
   const handleLogin = () => {
     // Check if the email ends with 'buffalo.edu'
     if (!email.endsWith('buffalo.edu')) {
@@ -51,6 +54,7 @@ function Main() {
         localStorage.setItem('sessionID', data.sessionID);
         localStorage.setItem('userID', data.userID);
         // Redirect to '/home' page
+        setIsAuthenticated(true);
         navigate('/homepage');
       } else {
         // Handle unexpected response
