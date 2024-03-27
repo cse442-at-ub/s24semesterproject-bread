@@ -8,7 +8,7 @@ require_once '../db_config.php';
 function getDbConnection()
 {
     // Check if we are running on Heroku by checking a specific config var
-    if (getenv('HEROKU') !== false) {
+    if (getenv('HEROKU') === 'true') {
         // Heroku environment
         $servername = getenv('servername');
         $username = getenv('username');
