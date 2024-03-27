@@ -11,7 +11,7 @@ switch ($_SERVER['REQUEST_URI']) {
     case '/backend/likedislike/likeDislike':
         require 'backend/likedislike/likeDislike.php';
         break;
-    case '/backend/login/login':
+    case '/backend/login':
         require 'backend/login/login.php';
         break;
     case '/backend/logout/logout':

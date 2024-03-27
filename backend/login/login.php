@@ -7,17 +7,17 @@ header('X-Content-Type-Options: nosniff');
 
 function getDbConnection()
 {
-    // Check if we are running on Heroku by checking a specific config var
-    // if (getenv('HEROKU') === 'true') {
-    // Heroku environment
-    $servername = getenv('servername');
-    $username = getenv('username');
-    $password = getenv('password');
-    $dbname = getenv('dbname');
-    // } else {
-    //     // Non-Heroku environment (use the global variables from db_config.php)
-    //     global $servername, $username, $password, $dbname;
-    // }
+    //Check if we are running on Heroku by checking a specific config var
+    if (getenv('HEROKU') === 'true') {
+        //Heroku environment
+        $servername = getenv('servername');
+        $username = getenv('username');
+        $password = getenv('password');
+        $dbname = getenv('dbname');
+    } else {
+        // Non-Heroku environment (use the global variables from db_config.php)
+        global $servername, $username, $password, $dbname;
+    }
 
     // Rest of the function remains the same
     $conn = new mysqli($servername, $username, $password, $dbname);
