@@ -1,12 +1,12 @@
 /* ReviewForm.css */
 
 .review-page-review-form-container {
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 30px;
     background-color: #f5f5f5;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
   }
   
   .review-page-flex-container {
@@ -39,6 +39,7 @@
   .review-page-form-group {
     display: flex;
     flex-direction: column;
+    padding: 5px;
   }
   
   label {
@@ -69,6 +70,7 @@
     display: flex;
     justify-content: flex-end;
     margin-top: 20px;
+    
   }
   
   button {
@@ -83,4 +85,9 @@
   
   button:hover {
     background-color: #0056b3;
+  }
+  
+  #comment {
+    height: 25vh;
+    padding: 30px;
   }

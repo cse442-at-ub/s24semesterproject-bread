@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './Review.css';
 import ReviewForm from '../../components/Reviewcomponents/ReviewForm';
 import AlternateMain from '../../components/Reviewcomponents/MReviewForm';
-import ReviewSection from '../../components/Reviewcomponents/comment';
-
 function App() {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 

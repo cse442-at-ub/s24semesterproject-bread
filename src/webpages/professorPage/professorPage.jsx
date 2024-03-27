@@ -22,7 +22,6 @@ const ProfessorCard = () => {
         fetchProfessorInfo(name);
     }, [name]);
     
-
     const fetchProfessorInfo = (Data) => {
         const [name, department] = Data.split('+');
         setProfName(name);
@@ -72,7 +71,7 @@ const ProfessorCard = () => {
 
     return (
         <div className='professor-main'>
-            <NavBar />
+            <NavBar/>
             <div className="professor-card">
                 <img src={professorInfo.profilePicture || defaultPic} alt="Professor" className="professor-img" />
                 <div className="professor-info">

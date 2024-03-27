@@ -73,7 +73,7 @@ const MReviewForm = ({ professorImage }) => {
 
   return (
     <div className="review-form-container">
-      <div className="professor-info">
+      <div className="professor-info-">
         <img src={Professor} alt="Professor" className="professor-image" />
         <div className="professor-details">
         <p><strong>Name:</strong> {profName}</p>
