@@ -4,7 +4,6 @@ error_reporting(E_ALL);
 header('X-Content-Type-Options: nosniff');
 require_once '../db_config.php';
 
-require_once '../db_config.php';  // This file will define $servername, $username, $password, $dbname for non-Heroku environments
 
 function getDbConnection()
 {
