@@ -4,18 +4,35 @@ error_reporting(E_ALL);
 header('X-Content-Type-Options: nosniff');
 require_once '../db_config.php';
 
+require_once '../db_config.php';  // This file will define $servername, $username, $password, $dbname for non-Heroku environments
+
 function getDbConnection()
 {
-    global $servername, $username, $password, $dbname;
+    // Check if we are running on Heroku by checking a specific config var
+    if (getenv('HEROKU') !== false) {
+        // Heroku environment
+        $servername = getenv('servername');
+        $username = getenv('username');
+        $password = getenv('password');
+        $dbname = getenv('dbname');
+    } else {
+        // Non-Heroku environment (use the global variables from db_config.php)
+        global $servername, $username, $password, $dbname;
+    }
+
+    // Rest of the function remains the same
     $conn = new mysqli($servername, $username, $password, $dbname);
 
+    // Check connection
     if ($conn->connect_error) {
         http_response_code(500);
         echo json_encode(["message" => "Failed to connect to the database: " . $conn->connect_error]);
         exit;
     }
+
     return $conn;
 }
+
 
 function checkLogin($email, $password)
 {
