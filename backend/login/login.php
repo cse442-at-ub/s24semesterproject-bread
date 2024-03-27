@@ -2,22 +2,22 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 header('X-Content-Type-Options: nosniff');
-require_once '../db_config.php';
+//require_once '../db_config.php';
 
 
 function getDbConnection()
 {
     // Check if we are running on Heroku by checking a specific config var
-    if (getenv('HEROKU') === 'true') {
-        // Heroku environment
-        $servername = getenv('servername');
-        $username = getenv('username');
-        $password = getenv('password');
-        $dbname = getenv('dbname');
-    } else {
-        // Non-Heroku environment (use the global variables from db_config.php)
-        global $servername, $username, $password, $dbname;
-    }
+    // if (getenv('HEROKU') === 'true') {
+    // Heroku environment
+    $servername = getenv('servername');
+    $username = getenv('username');
+    $password = getenv('password');
+    $dbname = getenv('dbname');
+    // } else {
+    //     // Non-Heroku environment (use the global variables from db_config.php)
+    //     global $servername, $username, $password, $dbname;
+    // }
 
     // Rest of the function remains the same
     $conn = new mysqli($servername, $username, $password, $dbname);
