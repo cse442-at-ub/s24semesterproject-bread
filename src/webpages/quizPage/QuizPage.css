@@ -4,71 +4,81 @@
   margin: 0; /* Remove default margin */
   padding: 0; /* Remove default padding */
 }
+
 .quiz-container {
-    width: 50%;
-    margin: auto;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: #ffffff;
-  }
-  
-  .question-block {
-    margin-bottom: 20px;
-  }
-
-  .quiz-header {
-    margin-bottom: 10px;
-    font-weight: bold;
-    font-size: 40px;
-  }
-  
-  .question {
-    margin-bottom: 10px;
-    font-weight: bold;
-  }
-  
-  .options button {
-    display: block; /* Make buttons display vertically */
-    margin-bottom: 5px; /* Add space between buttons */
-    padding: 5px 10px;
-    width: 100%; /* Extend button width to full container width */
-    text-align: left; /* Align text to the left */
-    color:white;
-  }
-  
-  .options button.selected {
-    background-color: #4CAF50; /* Change color to indicate selection */
-    color: white;
-  }
-  .submit-btn {
-    padding: 10px 20px;
-    cursor: pointer;
-    margin:10px;
-  }
-  
-  .result {
-    margin-top: 20px;
-    font-size: 20px;
-    color: green;
-    font-family: 'Crimison Text';
-  }
-  
-
-/* RESULT TABLE CSS */
-
-.customTable {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+  width: 50%;
+  margin: auto;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
 }
 
-.customTable th, .customTable td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-    font-family: 'Crimison Text';
+.question-block {
+  margin-bottom: 20px;
 }
 
-.customTable th {
-    background-color: #f2f2f2;
+.quiz-header {
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 40px;
+}
+
+.question {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.options button {
+  display: block; /* Make buttons display vertically */
+  margin-bottom: 5px; /* Add space between buttons */
+  padding: 5px 10px;
+  width: 100%; /* Extend button width to full container width */
+  text-align: left; /* Align text to the left */
+  color: white;
+}
+
+.options button.selected {
+  background-color: #4CAF50; /* Change color to indicate selection */
+  color: white;
+}
+
+.submit-btn {
+  padding: 10px 20px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.result {
+  margin-top: 20px;
+  font-size: 20px;
+  color: green;
+  font-family: 'Crimison Text';
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%; /* Responsive width */
+  max-width: 600px; /* Max width to accommodate GIF and some padding */
+  padding: 20px;
+  background: white;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  z-index: 1000; /* Ensure popup is on top of other content */
+}
+
+.popup img {
+  max-width: 100%; /* Make sure the image is responsive and fits in the popup */
+  height: auto;
+}
+
+.popup a {
+  color: #005bbb;
+}
+
+.popup button {
+  padding: 10px 20px;
+  margin-top: 20px;
 }
