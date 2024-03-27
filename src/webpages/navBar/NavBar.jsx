@@ -2,36 +2,30 @@ import React, { useState } from 'react';
 import './NavBar.css'; // Ensure this CSS file is properly linked
 import Logo from "../../images/Logo.png";
 import MenuIcon from "../../images/menu(white).png"; // Verify the path to your image
-import { Link,useNavigate } from 'react-router-dom';
-
+import { Link } from 'react-router-dom'; // Import Link
 
 function NavBar() {
     const [isMenuVisible, setIsMenuVisible] = useState(false);
 
-    const navigate= useNavigate();
     const toggleMenu = () => {
         setIsMenuVisible(!isMenuVisible);
         console.log("Menu visibility toggled:", isMenuVisible); // Debug: Check menu toggle
     };
+
     const handleLogout = async () => {
         console.log("Initiating logout process"); // Debug: Initiate logout
 
         const apiUrl = 'https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/backend/logout/logout.php'; 
         const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
     
-        // Retrieve session data from session storage
         const email = localStorage.getItem('email');
         const sessionID = localStorage.getItem('sessionID');
         const userID = localStorage.getItem('userID');
         console.log("Retrieved session data:", { email, sessionID, userID }); // Debug: Check retrieved session data
-
-
     
         if (email && sessionID && userID) {
             console.log("Session data exists. Proceeding with logout."); // Debug: Session data check
             try {
-                console.log("Step 1."); // Debug: Session data check
-
                 const response = await fetch(proxyUrl + apiUrl, {
                     method: 'POST',
                     headers: {
@@ -41,22 +35,17 @@ function NavBar() {
                 });
                 console.log("Raw response:", response); 
     
-                // Check if the response status is OK before trying to parse the JSON
                 if (response.ok) {
-                    const data = await response.json(); // Parsing JSON from the response
+                    const data = await response.json();
                     console.log("Logout response:", data); // Debug: Check logout response
-    
                     console.log("Logout successful:", data.message); // Debug: Successful logout
-                    // Clear session data from session storage
                     localStorage.removeItem('email');
                     localStorage.removeItem('sessionID');
                     localStorage.removeItem('userID');
                     console.log("deleted"); // Debug: Initiate logout
 
-                    // Redirect the user or update the UI as needed
-                    navigate('/signinpage') // Use window.location.href for redirection
+                    window.location.href = '/signinpage'; // Redirect after logout
                 } else {
-                    // If response is not ok, logging the status and statusText
                     console.error("Logout failed with status:", response.status, response.statusText);
                 }
             } catch (error) {
@@ -64,10 +53,9 @@ function NavBar() {
             }
         } else {
             console.log("No active session found. Redirecting to login page."); // Debug: No session data
-            navigate('/signin') // Use window.location.href for redirection
+            window.location.href = '/signin'; // Redirect if no session
         }
     };    
-
 
     return (
         <nav style={{
@@ -98,20 +86,26 @@ function NavBar() {
                     color: '#005bbb',
                     padding: '1.5rem',
                     boxShadow: '0px 8px 16px 0px rgba(0,0,0,0.2)',
-                    zIndex: 1,
+                    zIndex: 1
                 }}>
                     <ul style={{ listStyle: 'none', padding: 0 }}>
                         <li style={{marginBottom: '0.5rem'}}>
-                            <a href="/homepage" style={{ color: '#005bbb', textDecoration: 'none' }}>
+                            <Link to="/homepage" style={{ color: '#005bbb', textDecoration: 'none' }}>
                                 Homepage
-                            </a>
+                            </Link>
                         </li>
+                        <li style={{marginBottom: '0.5rem'}}>
+                            <Link to="/quizPage" style={{ color: '#005bbb', textDecoration: 'none' }}>
+                                Quiz
+                            </Link>
+                        </li>
+
                         <li style={{marginBottom: '0.5rem'}}>Messages</li>
                         <li style={{marginBottom: '0.5rem'}}>Saved</li>
                         <li style={{marginBottom: '0.5rem'}}>
-                            <a href="/accountsettings" style={{ color: '#005bbb', textDecoration: 'none' }}>
+                            <Link to="/accountsettings" style={{ color: '#005bbb', textDecoration: 'none' }}>
                                 Account Settings
-                            </a>
+                            </Link>
                         </li>
                         <li style={{marginBottom: '0.5rem'}}>
                             <button onClick={handleLogout} style={{ color: '#005bbb', backgroundColor: 'transparent', border: 'none', cursor: 'pointer' }}>

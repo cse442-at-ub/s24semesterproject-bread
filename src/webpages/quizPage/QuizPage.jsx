@@ -1,88 +1,34 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useHistory
-import './QuizPage.css'; // Make sure this CSS file includes styles for your table
+import { useNavigate } from 'react-router-dom'; 
+import './QuizPage.css';
 import questions from './questions.jsx';
 
 const Quiz = () => {
   const [answers, setAnswers] = useState({});
-  const [result, setResult] = useState('');
-  const [showTable, setShowTable] = useState(false); // State to control table visibility
-
-  const navigate = useNavigate(); // Use the useNavigate hook
-
-  const addToProfile = () => {
-    localStorage.setItem('quizResult', result);
-    alert('Result added to profile!');
-    navigate('/homepage'); // Navigate to homepage
-  };
-  // Questions array remains the same...
+  const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleSelectOption = (questionIndex, option) => {
     setAnswers({ ...answers, [questionIndex]: option });
   };
 
   const calculateResult = () => {
-    const counts = { A: 0, B: 0, C: 0, D: 0, E: 0 };
-    Object.values(answers).forEach(answer => counts[answer]++);
-    const maxCount = Math.max(...Object.values(counts));
-    const topCategories = Object.keys(counts).filter(key => counts[key] === maxCount);
-    setResult(topCategories.join(' and ')); // Set result to only the top category letters
-    setShowTable(true); // Show the table when results are calculated
+    if (Object.keys(answers).length !== questions.length) {
+      setErrorMessage('Please fill out all the questions');
+      return;
+    }
+
+    setErrorMessage(''); // Clear error message on successful submission
+    alert("Great! We're now in the process of referring you to a professor");
+    navigate('/homepage');
   };
-  
-
-// Simple Table Component with Custom CSS Class
-const Table = () => (
-  <table className="customTable">
-    <thead>
-      <tr>
-        <th>Letter</th>
-        <th>Professor Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>A</td>
-        <td>The Mentor</td>
-        <td>Professors who are especially supportive, providing personalized guidance and encouragement.</td>
-
-      </tr>
-      <tr>
-        <td>B</td>
-        <td>The Innovator</td>
-        <td>Instructors who use cutting-edge technology and innovative teaching methods to engage students.</td>
-
-      </tr>
-
-      <tr>
-        <td>C</td>
-        <td>The Traditionalist</td>
-        <td>Educators who prefer structured, lecture-based teaching and traditional assessment methods.</td>
-      </tr>
-
-      <tr>
-        <td>D</td>
-        <td>The Facilitator</td>
-        <td>Teachers who promote an interactive learning environment, encouraging group work and discussions.</td>
-      </tr>
-
-      <tr>
-        <td>E</td>
-        <td>The Challenger</td>
-        <td>Professors known for their rigorous academic standards, challenging students to think critically and independently.
-</td>
-      </tr>
-    </tbody>
-  </table>
-);
-
 
   return (
     <div className='quiz-main'>
       <div className="quiz-container">
-        <div className="quiz-header">Lets find your type of professor!</div>
-
+        <div className="quiz-header">Let's find your type of professor!</div>
+        <p>Embarking on your educational path is not just about choosing the right courses; it's also about connecting with the right mentors. Understanding your preferences and personality can significantly impact your learning experience and academic success. This quiz is designed to help you navigate the diverse teaching styles and personalities you'll encounter in your academic journey.</p>
+        
         {questions.map((q, index) => (
           <div key={index} className="question-block">
             <div className="question">{q.question}</div>
@@ -99,15 +45,11 @@ const Table = () => (
             </div>
           </div>
         ))}
+        {errorMessage && <div style={{ color: 'red', textAlign: 'center', marginTop: '10px' }}>{errorMessage}</div>}
         <button className="submit-btn" onClick={calculateResult}>Submit</button>
-        <button className="submit-btn" onClick={addToProfile}>Add to Profile</button>
-        {result && <div className="result">{result}</div>}
-        {showTable && (
-          <>
-            <h2>If your best match was an...</h2> {/* Title for the table */}
-            <Table />
-          </>
-        )}
+
+        <button className="submit-btn" >Decline</button>
+
       </div>
     </div>
   );

@@ -33,6 +33,7 @@
     padding: 5px 10px;
     width: 100%; /* Extend button width to full container width */
     text-align: left; /* Align text to the left */
+    color:white;
   }
   
   .options button.selected {
