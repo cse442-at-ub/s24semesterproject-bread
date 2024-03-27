@@ -26,8 +26,15 @@ const ProfessorSearchPage = ({ professors }) => {
           </div>
           <div className="search-right-section">
             <h2 className="search-professor-name">
+            
               {/* Create a Link to the professor's profile page */}
-              <Link to={`/professor/${professor.name}`}>{professor.name}</Link>
+              <Link
+              to={{
+                pathname: `/professor/${professor.name+'+'+professor.department}`,
+                }}
+                >
+                  {professor.name}
+                  </Link>
             </h2>
             <div className="search-info-section">
               <p className="search-professor-department">Department: {professor.department}</p>

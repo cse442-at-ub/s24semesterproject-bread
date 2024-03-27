@@ -24,7 +24,7 @@ function App() {
             <Route path="/signuppage" element={<SignUpPage />} />
             <Route path="/" element={<StartPage />} /> 
             {/* Wrap protected routes with ProtectedRoute component */}
-            <Route path="/review" element={<ProtectedRoute><Review /></ProtectedRoute>} />
+            <Route path="/review/:name" element={<ProtectedRoute><Review /></ProtectedRoute>} />
             <Route path="/homepage" element={<ProtectedRoute><Homepage /></ProtectedRoute>} />
             <Route path="/accountsettings" element={<ProtectedRoute><AccountSettings /></ProtectedRoute>} />
             <Route path="/professorPage" element={<ProtectedRoute><ProfessorPage /></ProtectedRoute>} />
