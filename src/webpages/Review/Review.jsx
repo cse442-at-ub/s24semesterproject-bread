@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Review.css';
-import Main from '../../components/Reviewcomponents/PCReview';
-import AlternateMain from '../../components/Reviewcomponents/MReview';
+import ReviewForm from '../../components/Reviewcomponents/ReviewForm';
+import AlternateMain from '../../components/Reviewcomponents/MReviewForm';
 import ReviewSection from '../../components/Reviewcomponents/comment';
 
 function App() {
@@ -19,8 +19,7 @@ function App() {
 
   return (
     <div className="ReviewApp">
-      {screenWidth <= 540 ? <AlternateMain /> : <Main />}
-      <ReviewSection/>
+      {screenWidth <= 540 ? <AlternateMain /> :<ReviewForm />}
       </div>
   );
 }

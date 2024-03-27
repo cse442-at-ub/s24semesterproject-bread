@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import './ProfessorCard.css';
 import NavBar from '../navBar/NavBar';
 import defaultPic from "../../images/defaultPic.png";
 
 const ProfessorCard = () => {
+    const navigate = useNavigate();
     const { name } = useParams();
+    const [profname, setProfName] = useState('');
+    const [profdepartment, setProfDepartment] = useState('');
+
     const [professorInfo, setProfessorInfo] = useState({
         name: '',
         department: '',
@@ -14,38 +18,34 @@ const ProfessorCard = () => {
         reviews: []
     });
 
-    const [reviews, setReviews] = useState([]);
-
     useEffect(() => {
-        // Simulated fetch request based on professor name
         fetchProfessorInfo(name);
     }, [name]);
+    
 
-    useEffect(() => {
-        console.log("Professor Name:", professorInfo.name);
-        console.log("Professor Department:", professorInfo.department);
-        setReviews(professorInfo.reviews); // Update reviews state with professorInfo.reviews
-    }, [professorInfo]);
-
-    const fetchProfessorInfo = (professorName) => {
-        // Simulated fetch request
+    const fetchProfessorInfo = (Data) => {
+        const [name, department] = Data.split('+');
+        setProfName(name);
+        setProfDepartment(department);
         setTimeout(() => {
-            // Replace with actual fetch request to retrieve professor info based on name
             setProfessorInfo({
-                name: professorName,
-                department: 'Computer Science', // Example department
-                profilePicture: '', // Example profile picture
-                rating: 4.5, // Example rating
-                reviews: [ // Example reviews
+                name: name,
+                department: department,
+                profilePicture: '',
+                rating: 4.5,
+                reviews: [
                     { author: "John Doe", content: "Great professor!", rating: 5, term: "Fall 2023", course: "CS101" },
                     { author: "Jane Smith", content: "Very knowledgeable", rating: 4, term: "Spring 2022", course: "CS202" }
                 ]
             });
-        }, 1000); // Simulate loading delay
+        }, 1000);
     };
 
+    const handleWriteReview = () => {
+        navigate(`/review/${profname+'+'+profdepartment}`);
+    };
     const sortReviews = (sortBy) => {
-        const sortedReviews = [...reviews].sort((a, b) => {
+        const sortedReviews = [...professorInfo.reviews].sort((a, b) => {
             if (sortBy === "rating") {
                 return b.rating - a.rating; // For descending order
             } else if (sortBy === "author") {
@@ -54,7 +54,7 @@ const ProfessorCard = () => {
             return 0;
         });
 
-        setReviews(sortedReviews);
+        setProfessorInfo({ ...professorInfo, reviews: sortedReviews });
     };
 
     const Review = ({ author, content, rating, term, course }) => {
@@ -70,13 +70,9 @@ const ProfessorCard = () => {
         );
     };
 
-    const handleWriteReview = () => {
-        alert("This function will be implemented later");
-    };
-
     return (
         <div className='professor-main'>
-            <NavBar/>
+            <NavBar />
             <div className="professor-card">
                 <img src={professorInfo.profilePicture || defaultPic} alt="Professor" className="professor-img" />
                 <div className="professor-info">
@@ -89,16 +85,16 @@ const ProfessorCard = () => {
             </div>
             <div className='sort-button-container'>
                 <button className='sort-button' onClick={() => sortReviews("rating")}>Sort by Rating</button>
-                <button className='sort-button' onClick={() => sortReviews("author")}>Sort by Author</button> 
+                <button className='sort-button' onClick={() => sortReviews("author")}>Sort by Author</button>
             </div>
 
             {/* Render the sorted reviews */}
             <div className="reviews">
-                {reviews && reviews.map((review, index) => (
-                    <Review 
-                        key={index} 
-                        author={review.author} 
-                        content={review.content} 
+                {professorInfo.reviews.map((review, index) => (
+                    <Review
+                        key={index}
+                        author={review.author}
+                        content={review.content}
                         rating={review.rating}
                         term={review.term}
                         course={review.course}
