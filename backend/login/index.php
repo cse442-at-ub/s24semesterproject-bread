@@ -1,30 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Account Management</title>
 </head>
+
 <body>
     <h2>User Account Management</h2>
-    <!-- Updated form action to handle both login and registration -->
+    <!-- Form action updated to point to login.php, removing the registration functionality -->
     <form action="login.php" method="post">
         <div>
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
+            <!-- Changed from "username" to "email" to match backend changes -->
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
         </div>
         <div>
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
         </div>
-        <div>
-            <!-- Radio buttons for user to select action -->
-            <input type="radio" id="login" name="action" value="login" checked>
-            <label for="login">Login</label><br>
-            <input type="radio" id="register" name="action" value="register">
-            <label for="register">Register</label>
-        </div>
-        <button type="submit">Submit</button>
+        <!-- Removed radio buttons for action selection (login/register) -->
+        <button type="submit" name="action" value="login">Login</button>
     </form>
 </body>
+
 </html>

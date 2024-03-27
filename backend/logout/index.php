@@ -1,51 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Sign Out Form</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout Form</title>
     <script>
-        $(document).ready(function() {
-            $('#signOutForm').submit(function(e) {
-                e.preventDefault(); // Prevent the default form submission behavior
+        // Function to handle the form submission
+        function handleLogout(event) {
+            // Prevent the default form submission
+            event.preventDefault();
 
-                // Gather data from the form
-                var formData = {
-                    username: $('#username').val(),
-                    sessionID: $('#sessionID').val(),
-                    userID: parseInt($('#userID').val())
-                };
+            // Get the form data
+            const email = document.getElementById('email').value;
+            const sessionID = document.getElementById('sessionID').value;
+            const userID = document.getElementById('userID').value;
 
-                // Send the data as JSON
-                $.ajax({
-                    type: 'POST',
-                    url: 'logout.php', // Update to the path of your sign-out PHP script
-                    contentType: 'application/json',
-                    data: JSON.stringify(formData),
-                    success: function(response) {
-                        alert('Sign out successful: ' + JSON.stringify(response));
+            // Construct the JSON payload
+            const data = {
+                email,
+                sessionID,
+                userID
+            };
+
+            // Send the JSON data using fetch
+            fetch('logout', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
                     },
-                    error: function(xhr, status, error) {
-                        alert('Error signing out: ' + xhr.responseText);
+                    body: JSON.stringify({
+                        email,
+                        sessionID,
+                        userID,
+                        action: 'logout'
+                    }),
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok: ' + response.statusText);
                     }
+                    // Check or log the Content-Type
+                    console.log(response.headers.get('Content-Type'));
+                    return response.text(); // Use text() instead of json() to see what's coming back
+                })
+                .then(text => {
+                    try {
+                        const data = JSON.parse(text); // Try to parse text as JSON
+                        console.log('Logout successful:', data);
+                    } catch (err) {
+                        throw new Error('Failed to parse JSON: ' + err.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Logout error:', error);
                 });
-            });
-        });
+        }
     </script>
 </head>
+
 <body>
-
-<h2>Sign Out Test Form</h2>
-
-<form id="signOutForm">
-    <label for="username">Username:</label><br>
-    <input type="text" id="username" name="username" required><br>
-    <label for="sessionID">Session ID:</label><br>
-    <input type="text" id="sessionID" name="sessionID" required><br>
-    <label for="userID">User ID:</label><br>
-    <input type="number" id="userID" name="userID" required><br><br>
-    <input type="submit" value="Sign Out">
-</form>
-
+    <h2>Logout Form</h2>
+    <!-- Display form for user input -->
+    <form id="logout-form" method="POST">
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div>
+            <label for="sessionID">Session ID:</label>
+            <input type="text" id="sessionID" name="sessionID" required>
+        </div>
+        <div>
+            <label for="userID">User ID:</label>
+            <input type="number" id="userID" name="userID" required>
+        </div>
+        <button type="submit" name="logout" value="true">Log Out</button>
+    </form>
 </body>
+
 </html>

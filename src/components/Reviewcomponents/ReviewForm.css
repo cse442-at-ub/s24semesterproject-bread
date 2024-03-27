@@ -1,0 +1,92 @@
+/* ReviewForm.css */
+
+.review-page-review-form-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+
+  }
+  
+  .review-page-flex-container {
+    display: flex;
+  }
+  .review-page-professor-info {
+    flex: 1;
+  }
+  .review-page-comment-section {
+    flex: 2;
+  }
+  .review-page-professor-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
+  
+  .review-page-professor-details p {
+    margin: 5px 0;
+    text-align: center;
+  }
+  
+  .review-page-review-form {
+    display: grid;
+    grid-gap: 10px;
+  }
+  
+  .review-page-form-group {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+  }
+  
+  label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  select,
+  textarea,
+  input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  textarea {
+    height: 100px;
+    resize: vertical;
+  }
+  
+  .review-page-char-count {
+    font-size: 0.8em;
+    color: #666;
+    margin-top: 5px;
+  }
+  
+  .review-page-form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+    
+  }
+  
+  button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  #comment {
+    height: 25vh;
+  }

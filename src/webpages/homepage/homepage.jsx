@@ -1,21 +1,39 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Updated import
+import { useNavigate } from 'react-router-dom';
 import NavBar from '../navBar/NavBar';
 import SearchIcon from '../../images/search_icon.png';
-import './homepage.css'; // Ensure this path is correct
+import './homepage.css';
 
 const Homepage = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const navigate = useNavigate(); // Updated to useNavigate
+  const [filter, setFilter] = useState('professors'); // Default filter by professors
+  const [searchError, setSearchError] = useState('');
+  const navigate = useNavigate();
 
   const handleSearch = () => {
-    // Use navigate to change the URL
-    navigate(`/professor/${searchTerm}`);
-  };
-
-  const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
-      handleSearch();
+    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+    if (searchTerm.trim() !== '') {
+      //server:
+      //fetch(`https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/backend/searchFilter/searchFilter.php?query=${encodeURIComponent(searchTerm)}&filter=${filter}`)
+      //local:
+      fetch(proxyUrl+`https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/backend/searchFilter/searchFilter.php?query=${encodeURIComponent(searchTerm)}&filter=${filter}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(data => {
+          if (data.length > 0) {
+            navigate('/search', { state: { professors: data } });
+          } else {
+            setSearchError('No results found.');
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching search results:', error);
+          setSearchError('Error fetching search results.');
+        });
     }
   };
 
@@ -34,12 +52,20 @@ const Homepage = () => {
             placeholder="Enter a Professor"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            onKeyDown={handleKeyDown} // Add this line
           />
+          <select
+            className="filter-select"
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
+          >
+            <option value="professors">Filter by Professor</option>
+            <option value="classes">Filter by Class</option>
+          </select>
           <button className="search-button" onClick={handleSearch}>
             <img src={SearchIcon} alt="Search" />
           </button>
         </div>
+        {searchError && <p>{searchError}</p>}
       </div>
     </div>
   );

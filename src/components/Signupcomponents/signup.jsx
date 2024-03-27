@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import './signup.css'; 
 import eyeLogo from './Logo.png';
-import signUp from '../../SignUpLink.jsx';
+import { Link, useNavigate } from 'react-router-dom';
 
-function Main() {
+const apiUrl = 'https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/backend/register/register.php';
+const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+
+const Main = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -21,23 +25,33 @@ function Main() {
     }
 
     try {
-      const responseData = await signUp(email, username, password, confirmPassword);
-      console.log('Response data:', responseData);
+      //local
+      const response = await fetch(proxyUrl + apiUrl, {
+      //server:
+      //const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email,
+          username: username,
+          password: password,
+          confirmPassword: confirmPassword,
+          action: 'register',
+        }),
+      });
 
-      if (responseData.includes("User registered successfully") || responseData.includes("Email sent successfully")) {
-        window.location.href = "/signinpage/";
+      if (!response.ok) {
+        const responseData = await response.json();
+        throw new Error(String(responseData.message));
       } else {
-        alert(responseData);
+        navigate('/signinpage');
       }
     } catch (error) {
-      console.error('Error:', error);
-      alert("The user name is already been used.");
+      alert(error.message);
     }
-  };
-
-  const handleSignIn = () => {
-    window.location.href = "/signinpage/";
-  };
+  }
 
   return (
     <div className="main-container">
@@ -71,7 +85,7 @@ function Main() {
           </form>
           <div className="signup-link">
             <div className="link-container">
-              <p className="link">Already on InSight? <a href="/signinpage/" className="link" onClick={handleSignIn}>Sign In</a></p>
+              <p className="link">Already on InSight? <Link to="/signinpage" className="link">Sign In</Link></p>
             </div>
           </div>
         </main>
