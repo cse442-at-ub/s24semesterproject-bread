@@ -1,12 +1,18 @@
 /* Adjust the top margin to create space for the NavBar */
 .professor-main {
-    padding-top: 10vh; /* Adjust this value based on the actual height of your NavBar */
+    padding-top: 10vh;
     margin-left: 20vh;
     margin-right: 5vh;
 }
 
-/* ProfessorCard.css */
+.professor-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .professor-card {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -15,10 +21,24 @@
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     background-color: #ffffff;
-    margin-bottom: 20px; /* Space between cards or to the next content */
-
+    margin-bottom: 20px;
     width: 80%;
 }
+
+.saved-icon {
+    position: absolute;
+    top: 10px;  /* Adjust position as necessary */
+    left: 10px;  /* Adjust position as necessary */
+    width: 50px;  /* Increase width for a bigger icon */
+    height: 50px;  /* Increase height for a bigger icon */
+    cursor: pointer;
+    transition: transform 0.2s;  /* Smooth scaling on hover */
+}
+
+.saved-icon:hover {
+    transform: scale(1.1);  /* Slightly enlarge icon on hover */
+}
+
 
 .professor-img {
     width: 200px;
