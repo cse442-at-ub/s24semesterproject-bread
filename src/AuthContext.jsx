@@ -4,10 +4,14 @@ const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
+  const [isLoading, setIsLoading] = useState(true);
+
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const apiUrl = 'https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/backend/authentication/auth.php';
-  // Assuming CORS is properly handled by your backend, you might eventually remove the proxyUrl.
-  const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+
+  const webServerUrl = process.env.REACT_APP_WEB_SERVER_URL
+  const apiUrl = process.env.REACT_APP_API_BASE_URL;
+
+
 
   const signOut = () => {
     localStorage.clear();
@@ -20,7 +24,7 @@ export const AuthProvider = ({ children }) => {
     const userID = localStorage.getItem('userID');
   
     if (email && sessionID && userID) {
-      fetch(proxyUrl + apiUrl, {
+      fetch(`${apiUrl}/backend/authentication/auth.php`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -32,7 +36,6 @@ export const AuthProvider = ({ children }) => {
         return response.json();
       })
       .then(data => {
-        console.log("Received data:", data); // Temporary logging for debugging
         if (data.status === "success") {
           setIsAuthenticated(true);
         } else {
@@ -42,19 +45,26 @@ export const AuthProvider = ({ children }) => {
       .catch(error => {
         console.error('Authentication check failed:', error);
         signOut();
+      })
+      .finally(() => {
+        setIsLoading(false); // Set loading to false when the check is complete
       });
     } else {
       signOut();
+      setIsLoading(false);
     }
   };
+
+
 
   useEffect(() => {
     checkAuth();
   }, []);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, checkAuth, signOut }}>
+    <AuthContext.Provider value={{ isAuthenticated, isLoading, setIsAuthenticated, checkAuth, signOut }}>
       {children}
     </AuthContext.Provider>
   );
+  
 };

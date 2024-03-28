@@ -1,37 +1,52 @@
 <?php
+header('Content-Type: application/json');
+
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 header('X-Content-Type-Options: nosniff');
-//require_once '../db_config.php';
+require_once '../db_config.php';
+
+// Define an array of allowed origins
+$allowedOrigins = [
+    'http://localhost:3000',
+    'http://localhost:8000',
+    'https://www-student.cse.buffalo.edu'
+];
+
+// Get the origin of the current request
+$requestOrigin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
+
+// Check if the request origin is in the allowed origins list
+if (in_array($requestOrigin, $allowedOrigins)) {
+    // If so, set the Access-Control-Allow-Origin header to the request origin
+    header("Access-Control-Allow-Origin: $requestOrigin");
+    header('Access-Control-Allow-Credentials: true');
+    header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+    header('Access-Control-Allow-Headers: Content-Type, Authorization');
+} else {
+    // Optionally handle requests from disallowed origins, such as logging or sending a specific response
+    // For now, we'll simply exit to prevent further execution for disallowed origins
+    exit('Origin not allowed');
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    // Stop script execution after sending preflight response
+    exit(0);
+}
 
 
 function getDbConnection()
 {
-    //Check if we are running on Heroku by checking a specific config var
-    if (getenv('HEROKU') == 'true') {
-        //Heroku environment
-        $servername = getenv('servername');
-        $username = getenv('username');
-        $password = getenv('password');
-        $dbname = getenv('dbname');
-    } else {
-        // Non-Heroku environment (use the global variables from db_config.php)
-        global $servername, $username, $password, $dbname;
-    }
-
-    // Rest of the function remains the same
+    global $servername, $username, $password, $dbname;
     $conn = new mysqli($servername, $username, $password, $dbname);
 
-    // Check connection
     if ($conn->connect_error) {
         http_response_code(500);
         echo json_encode(["message" => "Failed to connect to the database: " . $conn->connect_error]);
         exit;
     }
-
     return $conn;
 }
-
 
 function checkLogin($email, $password)
 {

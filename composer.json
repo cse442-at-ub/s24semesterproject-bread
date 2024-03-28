@@ -1,7 +1,0 @@
-{
-    "name": "ibrahimallahbuksh/s24semesterproject-bread",
-    "description": "A PHP project.",
-    "require": {
-        "php": "^8.3"
-    }
-}

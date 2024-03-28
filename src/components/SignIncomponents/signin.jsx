@@ -27,12 +27,10 @@ function Main() {
       password: password
     };
 
-    const apiUrl = 'https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/backend/login/login.php';
-    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-    //For local
-     fetch (proxyUrl + apiUrl, {
-    //For server
-    //fetch(apiUrl, {
+    const webServerUrl = process.env.REACT_APP_WEB_SERVER_URL
+    const apiUrl = process.env.REACT_APP_API_BASE_URL;
+    
+    fetch(`${apiUrl}/backend/login/login.php`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -54,7 +52,9 @@ function Main() {
         localStorage.setItem('sessionID', data.sessionID);
         localStorage.setItem('userID', data.userID);
         // Redirect to '/home' page
+        // checkAuth();
         setIsAuthenticated(true);
+
         navigate('/homepage');
       } else {
         // Handle unexpected response
