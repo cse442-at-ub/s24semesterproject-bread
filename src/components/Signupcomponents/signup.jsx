@@ -23,12 +23,13 @@ const Main = () => {
       alert("Please use a buffalo.edu email address to sign up");
       return;
     }
+    const webServerUrl = process.env.REACT_APP_WEB_SERVER_URL
+    const apiUrl = process.env.REACT_APP_API_BASE_URL;
+    
 
+ 
     try {
-      //local
-      const response = await fetch(proxyUrl + apiUrl, {
-      //server:
-      //const response = await fetch(apiUrl, {
+      const response = await fetch(`${apiUrl}/backend/register/register.php`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

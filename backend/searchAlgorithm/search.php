@@ -1,9 +1,35 @@
 <?php
 
- //Database connection variables
+//Database connection variables
 
 require_once '../db_config.php';
 
+// Define an array of allowed origins
+$allowedOrigins = [
+    'http://localhost:3000',
+    'http://localhost:8000',
+    'https://www-student.cse.buffalo.edu'
+];
+
+// Get the origin of the current request
+$requestOrigin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
+
+// Check if the request origin is in the allowed origins list
+if (in_array($requestOrigin, $allowedOrigins)) {
+    // If so, set the Access-Control-Allow-Origin header to the request origin
+    header("Access-Control-Allow-Origin: $requestOrigin");
+    header('Access-Control-Allow-Credentials: true');
+    header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+    header('Access-Control-Allow-Headers: Content-Type, Authorization');
+} else {
+    // Optionally handle requests from disallowed origins, such as logging or sending a specific response
+    // For now, we'll simply exit to prevent further execution for disallowed origins
+    exit('Origin not allowed');
+}
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    // Stop script execution after sending preflight response
+    exit(0);
+}
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -31,7 +57,7 @@ $typoVariations = [];
 foreach ($searchWords as $word) {
     // Add the original word
     $typoVariations[] = $word;
-    
+
     // Example: generate variations by substituting each character with a placeholder '*'
     for ($i = 0; $i < strlen($word); $i++) {
         $variation = substr_replace($word, '_', $i, 1);
@@ -65,7 +91,7 @@ if ($result) {
 }
 
 // Sort the results by exactMatch flag and similarityScore
-usort($matches, function($a, $b) {
+usort($matches, function ($a, $b) {
     if ($a['exactMatch'] == $b['exactMatch']) {
         return $b['similarityScore'] <=> $a['similarityScore'];
     }
@@ -77,4 +103,3 @@ echo json_encode($matches);
 
 
 $conn->close();
-?>

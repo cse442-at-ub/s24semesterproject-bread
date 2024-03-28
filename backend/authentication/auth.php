@@ -1,56 +1,86 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+header('Content-Type: application/json');
 
-session_start();
+require_once '../db_config.php';
+$data = json_decode(file_get_contents('php://input'), true);
 
-require_once 'db_config.php';
+// Define an array of allowed origins
+$allowedOrigins = [
+    'http://localhost:3000',
+    'http://localhost:8000',
+    'https://www-student.cse.buffalo.edu'
+];
 
-function authenticateUser($userId, $username, $sessionId) {
-    // Assuming $conn is a mysqli connection object from db_config.php
-    global $conn;
+// Get the origin of the current request
+$requestOrigin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
 
-    // Prepare the SQL statement
-    $stmt = $conn->prepare("SELECT * FROM sessions WHERE userID = ? AND username = ? AND sessionId = ?");
-    $stmt->bind_param("iss", $userId, $username, $sessionId);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    
-    // If a matching record is found, the user is considered authenticated
-    if ($result->num_rows === 1) {
-        $sessionRecord = $result->fetch_assoc();
-
-        // Here, you can add additional checks if necessary
-        // For example, you might want to check if the session record indicates the user is still logged in
-
-        // Update the session variable to indicate the user is authenticated
-        $_SESSION['authenticated_user_id'] = $userId; 
-        $_SESSION['authenticated_username'] = $username;
-        // You could also update the session record if needed, for instance, to refresh a last_accessed timestamp
-
-        return true;
-    } else {
-        // No matching record found, authentication fails
-        return false;
-    }
-}
-
-// Get the user ID, username, and session ID from POST variables
-$userId = isset($_POST['userID']) ? filter_var($_POST['userID'], FILTER_SANITIZE_NUMBER_INT) : null;
-$username = isset($_POST['username']) ? filter_var($_POST['username'], FILTER_SANITIZE_STRING) : null;
-$sessionId = isset($_POST['sessionID']) ? filter_var($_POST['sessionID'], FILTER_SANITIZE_STRING) : null;
-
-// Authenticate the user
-if (authenticateUser($userId, $username, $sessionId)) {
-    // Authentication successful
-    // Proceed with the privileged operations
-    echo "User authenticated successfully.";
-    // Perform further actions or redirect as needed
+// Check if the request origin is in the allowed origins list
+if (in_array($requestOrigin, $allowedOrigins)) {
+    // If so, set the Access-Control-Allow-Origin header to the request origin
+    header("Access-Control-Allow-Origin: $requestOrigin");
+    header('Access-Control-Allow-Credentials: true');
+    header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+    header('Access-Control-Allow-Headers: Content-Type, Authorization');
 } else {
-    // Authentication failed
-    echo "Authentication failed.";
-    // Handle the error, such as prompting for re-login, logging the attempt, etc.
-    // Redirect to the login page or show an error message
+    // Optionally handle requests from disallowed origins, such as logging or sending a specific response
+    // For now, we'll simply exit to prevent further execution for disallowed origins
+    exit('Origin not allowed');
 }
 
-$conn->close();
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    // Stop script execution after sending preflight response
+    exit(0);
+}
 
-?>
+// Function to establish database connection, reused from your logout script
+function getDbConnection()
+{
+    global $servername, $username, $password, $dbname;
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    if ($conn->connect_error) {
+        http_response_code(500); // Server error
+        echo json_encode(["message" => "Failed to connect to the database: " . $conn->connect_error]);
+        exit;
+    }
+    return $conn;
+}
+
+
+function authenticateUser($email, $sessionId, $userId)
+{
+    $conn = getDbConnection();
+
+    if ($stmt = $conn->prepare("SELECT * FROM sessions WHERE email = ? AND sessionID = ? AND userID = ?")) {
+        $stmt->bind_param("ssi", $email, $sessionId, $userId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows == 1) {
+            return true; // The user is authenticated successfully
+        }
+        $stmt->close();
+    }
+    $conn->close();
+    return false; // Authentication failed or statement preparation failed
+}
+
+// Extracting data from the request
+$sessionId = $data['sessionID'] ?? null;
+$email = $data['email'] ?? null;
+$userId = $data['userID'] ?? null;
+
+// Attempt to authenticate the user with the provided credentials
+if (!is_null($sessionId) && !is_null($email) && !is_null($userId)) {
+    if (authenticateUser($email, $sessionId, $userId)) {
+        echo json_encode(["status" => "success", "message" => "User authenticated successfully."]);
+    } else {
+        http_response_code(401); // Unauthorized
+        echo json_encode(["status" => "error", "message" => "Authentication failed. No matching record found."]);
+    }
+} else {
+    http_response_code(400); // Bad Request
+    echo json_encode(["status" => "error", "message" => "Invalid input data provided."]);
+}

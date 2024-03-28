@@ -3,10 +3,13 @@ import './NavBar.css'; // Ensure this CSS file is properly linked
 import Logo from "../../images/Logo.png";
 import MenuIcon from "../../images/menu(white).png"; // Verify the path to your image
 import { Link,useNavigate } from 'react-router-dom';
+import { useAuth } from '../../AuthContext'; // Import useAuth hook
+
 
 
 function NavBar() {
     const [isMenuVisible, setIsMenuVisible] = useState(false);
+    const { setIsAuthenticated , checkAuth} = useAuth();        
 
     const navigate= useNavigate();
     const toggleMenu = () => {
@@ -15,24 +18,23 @@ function NavBar() {
     };
     const handleLogout = async () => {
         console.log("Initiating logout process"); // Debug: Initiate logout
-
-        const apiUrl = 'https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac/backend/logout/logout.php'; 
-        const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
     
         // Retrieve session data from session storage
         const email = localStorage.getItem('email');
         const sessionID = localStorage.getItem('sessionID');
         const userID = localStorage.getItem('userID');
         console.log("Retrieved session data:", { email, sessionID, userID }); // Debug: Check retrieved session data
-
-
     
+        const webServerUrl = process.env.REACT_APP_WEB_SERVER_URL
+        const apiUrl = process.env.REACT_APP_API_BASE_URL;
+    
+
         if (email && sessionID && userID) {
             console.log("Session data exists. Proceeding with logout."); // Debug: Session data check
             try {
                 console.log("Step 1."); // Debug: Session data check
 
-                const response = await fetch(proxyUrl + apiUrl, {
+                const response = await fetch(`${apiUrl}/backend/logout/logout.php`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -45,7 +47,7 @@ function NavBar() {
                 if (response.ok) {
                     const data = await response.json(); // Parsing JSON from the response
                     console.log("Logout response:", data); // Debug: Check logout response
-    
+                    
                     console.log("Logout successful:", data.message); // Debug: Successful logout
                     // Clear session data from session storage
                     localStorage.removeItem('email');
@@ -54,6 +56,7 @@ function NavBar() {
                     console.log("deleted"); // Debug: Initiate logout
 
                     // Redirect the user or update the UI as needed
+                    setIsAuthenticated(false);
                     navigate('/signinpage') // Use window.location.href for redirection
                 } else {
                     // If response is not ok, logging the status and statusText
