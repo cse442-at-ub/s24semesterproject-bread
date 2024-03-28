@@ -10,7 +10,7 @@
 <body>
     <h2>User Account Management</h2>
     <!-- Form action updated to point to login.php, removing the registration functionality -->
-    <form action="login.php" method="post">
+    <form action="https://sleepy-sierra-61460-1f7514fadab7.herokuapp.com/backend/login/login.php" method="post">
         <div>
             <!-- Changed from "username" to "email" to match backend changes -->
             <label for="email">Email:</label>
