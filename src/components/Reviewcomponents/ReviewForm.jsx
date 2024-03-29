@@ -1,9 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams,useNavigate} from 'react-router-dom';
 import './ReviewForm.css';
-import Professor from './Unknown.jpeg';
+import defaultPic from './Unknown.jpeg';
+
+const importProfessorImage = (imagePath) => {
+  try {
+    const images = require.context('../../images/professorpfp', false, /\.(png|jpe?g|svg)$/);
+    return images(`./${imagePath}`);
+  } catch (error) {
+    return defaultPic;
+  }
+};
 
 const ReviewForm = ({ professorImage }) => {
+  const navigate = useNavigate();
   const { name } = useParams();
   const [formData, setFormData] = useState({
     course: '',
@@ -18,11 +28,13 @@ const ReviewForm = ({ professorImage }) => {
   const [charCount, setCharCount] = useState(0);
   const [profName, setProfName] = useState('');
   const [department, setDepartment] = useState('');
+  const [pfppath, setPfppath] = useState('');
 
   useEffect(() => {
-    const [profNameParam, departmentParam] = name.split('+');
+    const [profNameParam, departmentParam,path] = name.split('+');
     setProfName(profNameParam);
     setDepartment(departmentParam);
+    setPfppath(path);
   }, [name]);
 
   const handleInputChange = (e) => {
@@ -38,37 +50,29 @@ const ReviewForm = ({ professorImage }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.course || !formData.term || !formData.difficulty || !formData.helpfulness || !formData.clarity || !formData.feedback || !formData.professorType || !formData.comment) {
+    if (!formData.course || !formData.term || !formData.difficulty || !formData.helpfulness || !formData.clarity || !formData.feedback || !formData.comment) {
       alert('You must fill out all fields.');
       return;
     }
-    console.log('Form submitted:', formData);
-    alert('Form submitted successfully!');
-    setFormData({
-      course: '',
-      term: '',
-      difficulty: '',
-      helpfulness: '',
-      clarity: '',
-      feedback: '',
-      professorType: '',
-      comment: ''
-    });
-    setCharCount(0);
+    navigate(`/professor/${profName+'+'+department+'+'+pfppath}`);
   };
 
   const handleCancel = () => {
-    setFormData({
-      course: '',
-      term: '',
-      difficulty: '',
-      helpfulness: '',
-      clarity: '',
-      feedback: '',
-      professorType: '',
-      comment: ''
-    });
-    setCharCount(0);
+    const confirmation = window.confirm("This review will not save. Are you sure you want to cancel?");
+    if (confirmation) {
+      setFormData({
+        course: '',
+        term: '',
+        difficulty: '',
+        helpfulness: '',
+        clarity: '',
+        feedback: '',
+        professorType: '',
+        comment: ''
+      });
+      setCharCount(0);
+      navigate(`/professor/${profName+'+'+department+'+'+pfppath}`);
+    }
   };
 
   return (
@@ -143,7 +147,7 @@ const ReviewForm = ({ professorImage }) => {
           </form>
         </div>
         <div className="review-page-professor-info">
-          <img src={Professor} alt="Professor" className="review-page-professor-image" />
+          <img src={importProfessorImage(pfppath)} alt="Professor" className="review-page-professor-image" />
           <div className="review-page-professor-details">
             <p><strong>Name:</strong> {profName}</p>
             <p><strong>Department:</strong> {department}</p>
@@ -157,8 +161,9 @@ const ReviewForm = ({ professorImage }) => {
           <div className="review-page-char-count">Character count: {charCount}/500</div>
         </div>
         <div className="review-page-form-buttons">
-          <button type="submit">Submit</button>
           <button type="button" onClick={handleCancel}>Cancel</button>
+          <button type="submit">Submit</button>
+      
         </div>
       </form>
     </div>

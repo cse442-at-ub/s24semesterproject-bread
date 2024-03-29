@@ -1,19 +1,25 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link } from 'react-router-dom';
 import SearchIcon from './search_icon.png';
 import './Search.css';
 import './ProfessorSearchResult.css';
+import defaultPic from './defaultPic.png';
+
+const importProfessorImage = (imagePath) => {
+  try {
+    const images = require.context('../../images/professorpfp', false, /\.(png|jpe?g|svg)$/);
+    return images(`./${imagePath}`);
+  } catch (error) {
+    return defaultPic;
+  }
+};
 
 const ProfessorSearchPage = ({ professors }) => {
   return (
     <div className="search-app">
       <p className="search-intro-text">I want to get to know ...</p>
       <div className="search-container">
-        <input
-          type="text"
-          placeholder="Enter a Professor"
-          className="search-search-input"
-        />
+        <input type="text" placeholder="Enter a Professor" className="search-search-input" />
         <button className="search-search-button">
           <img src={SearchIcon} alt="Search" />
         </button>
@@ -22,19 +28,19 @@ const ProfessorSearchPage = ({ professors }) => {
       {professors.map((professor, index) => (
         <div key={index} className="search-professor-search-result">
           <div className="search-left-section">
-            <img src={professor.pfppath} alt={professor.name} className="search-professor-photo" />
+            {professor.pfppath && (
+              <img
+                src={importProfessorImage(professor.pfppath.split('/').pop())}
+                alt={professor.name}
+                className="search-professor-photo"
+              />
+            )}
           </div>
           <div className="search-right-section">
             <h2 className="search-professor-name">
-            
-              {/* Create a Link to the professor's profile page */}
-              <Link
-              to={{
-                pathname: `/professor/${professor.name+'+'+professor.department}`,
-                }}
-                >
-                  {professor.name}
-                  </Link>
+              <Link to={{ pathname: `/professor/${ professor.name + '+' + professor.department +'+'+professor.pfppath.split('/').pop()}` }}>
+                {professor.name}
+              </Link>
             </h2>
             <div className="search-info-section">
               <p className="search-professor-department">Department: {professor.department}</p>

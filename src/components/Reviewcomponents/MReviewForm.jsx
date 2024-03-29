@@ -1,9 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams,useNavigate} from 'react-router-dom';
 import './MReviewForm.css';
-import Professor from './Unknown.jpeg';
+import defaultPic from './Unknown.jpeg';
+
+const importProfessorImage = (imagePath) => {
+  try {
+    const images = require.context('../../images/professorpfp', false, /\.(png|jpe?g|svg)$/);
+    return images(`./${imagePath}`);
+  } catch (error) {
+    return defaultPic;
+  }
+};
 
 const MReviewForm = ({ professorImage }) => {
+  const navigate = useNavigate();
   const { name } = useParams();
   const [formData, setFormData] = useState({
     course: '',
@@ -18,11 +28,13 @@ const MReviewForm = ({ professorImage }) => {
   const [charCount, setCharCount] = useState(0);
   const [profName, setProfName] = useState('');
   const [department, setDepartment] = useState('');
+  const [pfppath, setPfppath] = useState('');
 
   useEffect(() => {
-    const [profNameParam, departmentParam] = name.split('+');
+    const [profNameParam, departmentParam,path] = name.split('+');
     setProfName(profNameParam);
     setDepartment(departmentParam);
+    setPfppath(path);
   }, [name]);
 
   const handleInputChange = (e) => {
@@ -38,43 +50,36 @@ const MReviewForm = ({ professorImage }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.course || !formData.term || !formData.difficulty || !formData.helpfulness || !formData.clarity || !formData.feedback || !formData.professorType || !formData.comment) {
+    if (!formData.course || !formData.term || !formData.difficulty || !formData.helpfulness || !formData.clarity || !formData.feedback || !formData.comment) {
       alert('You must fill out all fields.');
       return;
     }
-    console.log('Form submitted:', formData);
-    alert('Form submitted successfully!');
-    setFormData({
-      course: '',
-      term: '',
-      difficulty: '',
-      helpfulness: '',
-      clarity: '',
-      feedback: '',
-      professorType: '',
-      comment: ''
-    });
-    setCharCount(0);
+    navigate(`/professor/${profName+'+'+department+'+'+pfppath}`);
   };
 
   const handleCancel = () => {
-    setFormData({
-      course: '',
-      term: '',
-      difficulty: '',
-      helpfulness: '',
-      clarity: '',
-      feedback: '',
-      professorType: '',
-      comment: ''
-    });
-    setCharCount(0);
+    const confirmation = window.confirm("This review will not save. Are you sure you want to cancel?");
+    if (confirmation) {
+      setFormData({
+        course: '',
+        term: '',
+        difficulty: '',
+        helpfulness: '',
+        clarity: '',
+        feedback: '',
+        professorType: '',
+        comment: ''
+      });
+      setCharCount(0);
+      navigate(`/professor/${profName+'+'+department+'+'+pfppath}`);
+    }
   };
+
 
   return (
     <div className="review-form-container">
       <div className="professor-info-">
-        <img src={Professor} alt="Professor" className="professor-image" />
+        <img src={importProfessorImage(pfppath)}  alt="Professor" className="professor-image" />
         <div className="professor-details">
         <p><strong>Name:</strong> {profName}</p>
             <p><strong>Department:</strong> {department}</p>
@@ -145,17 +150,7 @@ const MReviewForm = ({ professorImage }) => {
             <option value="5">5</option>
           </select>
         </div>
-        <div className="form-group">
-          <label htmlFor="professorType">Professor Type:</label>
-          <select id="professorType" name="professorType" value={formData.professorType} onChange={handleInputChange}>
-            <option value="">-- Select Professor Type --</option>
-            <option value="A">A</option>
-            <option value="B">B</option>
-            <option value="C">C</option>
-            <option value="D">D</option>
-            <option value="E">E</option>
-          </select>
-        </div>
+
         <div className="form-group">
           <label htmlFor="comment">Comment:</label>
           <textarea id="comment" name="comment" value={formData.comment} onChange={handleInputChange} />
