@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Search for Professors or Classes</title>
@@ -11,44 +12,46 @@
         }
     </style>
 </head>
+
 <body>
-<h2>Search for Professors or Classes</h2>
-<form id="searchForm">
-    <label for="query">Search:</label>
-    <input type="text" id="query" name="query" required>
-    
-    <label for="filter">Filter by:</label>
-    <select id="filter" name="filter">
-        <option value="professors">Professors</option>
-        <option value="classes">Classes</option>
-    </select>
-    
-    <button type="submit">Search</button>
-</form>
+    <h2>Search for Professors or Classes</h2>
+    <form id="searchForm">
+        <label for="query">Search:</label>
+        <input type="text" id="query" name="query" required>
 
-<div id="searchResults"></div> <!-- Container for displaying search results -->
+        <label for="filter">Filter by:</label>
+        <select id="filter" name="filter">
+            <option value="professors">Professors</option>
+            <option value="classes">Classes</option>
+        </select>
 
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    document.getElementById("searchForm").addEventListener("submit", function(event) {
-        event.preventDefault(); // Prevent the form from submitting the traditional way
-        const query = document.getElementById("query").value;
-        const filter = document.getElementById("filter").value;
+        <button type="submit">Search</button>
+    </form>
 
-        fetch(`searchFilter.php?query=${encodeURIComponent(query)}&filter=${encodeURIComponent(filter)}`)
-            .then(response => response.json())
-            .then(data => {
-                const resultsContainer = document.getElementById("searchResults");
-                resultsContainer.innerHTML = ''; // Clear previous results
+    <div id="searchResults"></div> <!-- Container for displaying search results -->
 
-                if (data.length > 0) {
-                    data.forEach(item => {
-                        const div = document.createElement('div');
-                        div.className = 'result-item';
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("searchForm").addEventListener("submit", function(event) {
+                event.preventDefault(); // Prevent the form from submitting the traditional way
+                const query = document.getElementById("query").value;
+                const filter = document.getElementById("filter").value;
 
-                        if(filter === 'professors') {
-                            // Create a more detailed display for professor information
-                            div.innerHTML = `<strong>${item.professors}</strong><br>
+                fetch(`searchFilter.php?query=${encodeURIComponent(query)}&filter=${encodeURIComponent(filter)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const resultsContainer = document.getElementById("searchResults");
+                        resultsContainer.innerHTML = ''; // Clear previous results
+
+                        if (data.length > 0) {
+                            data.forEach(item => {
+                                const div = document.createElement('div');
+                                div.className = 'result-item';
+
+                                if (filter === 'professors') {
+                                    // Create a more detailed display for professor information
+                                    div.innerHTML = `<strong>${item.professors}</strong><br>
+                                            professorID: ${item.professorID}<br>
                                              Department: ${item.department}<br>
                                              Education: ${item.education}<br>
                                              Research: ${item.research}<br>
@@ -57,20 +60,21 @@ document.addEventListener("DOMContentLoaded", function() {
                                              Phone: ${item.phone}<br>
                                              Classes: ${item.classes}<br>
                                              Difficulty: ${item.difficulty}, Helpfulness: ${item.helpfulness}, Clarity: ${item.clarity}, Feedback Quality: ${item['Feedback Quality']}, Accessibility: ${item.accessibility}`;
-                        } else {
-                            // Assuming you'd adjust to handle class-specific information similarly
-                            div.textContent = `${item.class_title} by ${item.professor_name}`;
-                        }
+                                } else {
+                                    // Assuming you'd adjust to handle class-specific information similarly
+                                    div.textContent = `${item.class_title} by ${item.professor_name}`;
+                                }
 
-                        resultsContainer.appendChild(div);
-                    });
-                } else {
-                    resultsContainer.textContent = 'No results found.';
-                }
-            })
-            .catch(error => console.error('Error fetching search results:', error));
-    });
-});
-</script>
+                                resultsContainer.appendChild(div);
+                            });
+                        } else {
+                            resultsContainer.textContent = 'No results found.';
+                        }
+                    })
+                    .catch(error => console.error('Error fetching search results:', error));
+            });
+        });
+    </script>
 </body>
+
 </html>
