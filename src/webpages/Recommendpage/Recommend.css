@@ -1,7 +1,7 @@
 /* RecommendedProfessorsPage.css */
 
 .recommended-professors-page-content {
-    padding: 2rem;
+    padding: 3rem;
     background-color: #f5f5f5;
   }
   
@@ -15,7 +15,7 @@
   .recommended-professors-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-gap: 5rem;
+    grid-gap: 4rem;
   }
   
   .recommended-professor-cards {
