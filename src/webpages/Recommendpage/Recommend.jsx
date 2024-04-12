@@ -74,7 +74,7 @@ const RecommendedProfessorsPage = () => {
                             <div className="recommended-professor-infos">
                                 <h2 className="recommended-professor-name">{professor.name}</h2>
                                 <p className="recommended-professor-department">{professor.department}</p>
-                                <p className="recommended-professor-rating">Rating: {professor.rating || '-/5'}</p>
+                                <p className="recommended-professor-rating">Rating: {professor.rating+'/5' || '-/5'}</p>
                                 <p className="recommended-professor-rating">Fitrate: {professor.fitrate +'%'|| '-%/100%'}</p>
                             </div>
                         </div>
