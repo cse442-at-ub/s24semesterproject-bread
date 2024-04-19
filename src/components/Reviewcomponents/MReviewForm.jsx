@@ -216,6 +216,8 @@ const MReviewForm = ({ professorImage }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("Form Data on submission:", formData);
+
     if (
       (formData.course === 'add' && (!formData.coursePrefix||!formData.newCourse || formData.newCourse.trim() === '')) ||
       !formData.course ||
@@ -225,7 +227,8 @@ const MReviewForm = ({ professorImage }) => {
       !formData.clarity ||
       !formData.feedback ||
       !formData.accessibility ||
-      !formData.comment
+      !formData.comment ||
+      !formData.grade 
     ) {
       alert('You must fill out all fields.');
       return;
@@ -430,7 +433,23 @@ const MReviewForm = ({ professorImage }) => {
                 <option value="5">5</option>
               </select>
             </div>
-
+            <div className="review-page-form-group">
+              <label htmlFor="grade">Final Grade:</label>
+              <select id="grade" name="grade" value={formData.grade} onChange={handleInputChange}>
+                <option value="">-- Select Final Grade: --</option>
+                <option value="A">A</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B">B</option>
+                <option value="B-">B-</option>
+                <option value="C+">C+</option>
+                <option value="C">C</option>
+                <option value="C-">C-</option>
+                <option value="D+">D+</option>
+                <option value="D">D</option>
+                <option value="F">F</option>
+              </select>
+            </div>
         <div className="review-page-form-group">
           <label htmlFor="comment">Comment:</label>
           <textarea id="comment" name="comment" value={formData.comment} onChange={handleInputChange} />

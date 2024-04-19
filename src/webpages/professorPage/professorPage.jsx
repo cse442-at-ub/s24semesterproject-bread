@@ -234,12 +234,14 @@ const ProfessorCard = () => {
         setProfessorInfo({ ...professorInfo, reviews: sortedReviews });
     };
 
-    const Review = ({ author, comment, rating, term, course }) => {
+    const Review = ({ author, comment, rating, term, course, grade }) => {
         return (
             <div className="profile-page-review">
                 <div className="profile-page-review-header">
                     <h4>Anonymous</h4>
                     <span>{term} - {course}</span>
+                    <span>Grade: {grade}</span>
+
                     <span>Rating: {rating}</span>
                 </div>
                 <p>{comment}</p>
@@ -283,6 +285,8 @@ const ProfessorCard = () => {
                             rating={review.rating}
                             term={review.term}
                             course={review.course}
+                            grade={review.grade} 
+
                         />
                     ))
                 )}

@@ -26,7 +26,7 @@ const ReviewForm = ({ professorImage }) => {
     comment: '',
     coursePrefix: '',
     courseNumber: '',
-    finalGrade:''
+    grade:''
   });
   const [charCount, setCharCount] = useState(0);
   const [profName, setProfName] = useState('');
@@ -210,10 +210,19 @@ const ReviewForm = ({ professorImage }) => {
         [name]: value
       }));
     }
-    setFormData({
-      ...formData,
-      [name]: value
-    });
+    if (name === 'finalGrade') {
+      setFormData(prevFormData => ({
+        ...prevFormData,
+        [name]: value
+      }));
+    }
+
+    if (name === 'grade') {
+      setFormData(prevFormData => ({
+        ...prevFormData,
+        [name]: value
+      }));
+    }
   };
   
 
@@ -230,6 +239,7 @@ const ReviewForm = ({ professorImage }) => {
       !formData.clarity ||
       !formData.feedback ||
       !formData.accessibility ||
+      !formData.grade ||
       !formData.comment
     ) {
       alert('You must fill out all fields.');
@@ -244,6 +254,7 @@ const ReviewForm = ({ professorImage }) => {
       clarity: formData.clarity,
       Feedback_Quality: formData.feedback, // Assuming it's Feedback_Quality in PHP
       accessibility: formData.accessibility, // You need to handle this in your form
+      grade: formData.grade,
       comment: formData.comment,
       course: formData.course === 'add' ? `${formData.coursePrefix} ${formData.newCourse}` : formData.course,
       term: formData.term === 'add' ? formData.newTerm : formData.term // If term is 'add', use newTerm, otherwise use term
@@ -251,7 +262,7 @@ const ReviewForm = ({ professorImage }) => {
     const webServerUrl = 'https://www-student.cse.buffalo.edu/CSE442-542/2024-Spring/cse-442ac';
     const apiUrl = 'http://localhost:8000';
 
-    fetch(`${webServerUrl}/backend/createReview/createReview.php`, {
+    fetch(`${apiUrl}/backend/createReview/createReview.php`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -291,7 +302,8 @@ const ReviewForm = ({ professorImage }) => {
         clarity: '',
         feedback: '',
         professorType: '',
-        comment: ''
+        comment: '',
+        grade:''
       });
       setCharCount(0);
       navigate(`/professor/${profName + '+' + department + '+' + pfppath + '+' + ID}`);
@@ -431,13 +443,8 @@ const ReviewForm = ({ professorImage }) => {
               </select>
             </div>
             <div className="review-page-form-group">
-              <label htmlFor="finalGrade">Final Grade:</label>
-              <select
-                id="finalGrade"
-                name="finalGrade"
-                value={formData.finalGrade}
-                onChange={handleInputChange}
-              >
+            <label htmlFor="grade">Final Grade:</label>
+              <select id="grade" name="grade" value={formData.grade} onChange={handleInputChange}>
                 <option value="">-- Select Final Grade --</option>
                 <option value="A">A</option>
                 <option value="A-">A-</option>
