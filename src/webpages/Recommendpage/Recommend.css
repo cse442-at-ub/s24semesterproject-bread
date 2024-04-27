@@ -135,7 +135,7 @@
 }
 
 /* Responsive Styles */
-@media (max-width: 768px) {
+@media (max-width: 850px) {
   .recommended-professors-page-title {
     font-size: 2rem;
   }
@@ -232,7 +232,7 @@
 }
 
 /* Responsive Styles */
-@media (max-width: 768px) {
+@media (max-width: 850px) {
   .recommended-professors-page-content {
     padding: 2rem;
   }
